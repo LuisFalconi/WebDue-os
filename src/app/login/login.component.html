@@ -1,0 +1,160 @@
+<div class="divCenter">
+    <mat-card *ngIf="estadoLogin">
+        <div class="titulo">
+            <mat-card-header>
+                <mat-card-title>Iniciar Sesión</mat-card-title>
+            </mat-card-header>
+        </div>
+        <mat-card-content>
+            <div class="login-content">
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Email" [(ngModel)]="usuario" autocomplete="off" required>
+                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <mat-hint *ngIf="!usuario">Ingresa tu usuario</mat-hint>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Contraseña" [(ngModel)]="clave" [type]="hide ? 'password' : 'text'"  required width="240px;">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-hint *ngIf="!clave">Ingresa la contraseña</mat-hint>
+                </mat-form-field><br><br><br>
+                <a style="cursor: pointer; padding-left: 40px;" (click)="irRecuperar()"><b>¿Olvidaste tu contraseña?</b></a>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button class="iniciarS" (click)="login()"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Iniciar Sesión</span></button>
+            <!-- <button mat-raised-button class="crear" (click)="irCrear()"><mat-icon svgIcon="cuenta-up"></mat-icon><span>&nbsp; ¿Aun no tienes una cuenta?</span></button> -->
+            <br><br><br><br>
+            <button mat-raised-button class="social-g" (click)="loginGoogle()"><mat-icon svgIcon="google-up"></mat-icon><span>&nbsp; Google</span></button><br>
+            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><mat-icon svgIcon="facebook-up"></mat-icon><span>&nbsp; Facebook</span></button><br>
+            <button mat-raised-button class="inicio" routerLink="/inicio"><mat-icon svgIcon="food-up"></mat-icon><span>&nbsp; Regresar</span></button>
+        </mat-card-actions>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <mat-list>
+                <div style="font-size: 12px; text-align: center;">
+                    <a style="cursor: pointer" (click)="irCrear()"><b>¿Aun no tienes una cuenta?</b></a>
+                    <p>Registrate y se parte de MuertosDeHambre.com</p>
+                </div>
+            </mat-list>
+        </mat-list-item>
+    </mat-card>
+
+    <mat-card *ngIf="estadoRecuperar">
+        <mat-card-header>
+            <mat-card-title>Restablecer Contraseña</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Usuario" [(ngModel)]="usuario" autocomplete="off" required>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td *ngIf=""></td>
+                </tr>
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="irLogin()" color="default">Atrás</button>
+            <button mat-raised-button (click)="restablecerClave()" color="primary">Enviar Correo</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card *ngIf="estadoCrear">
+
+        <div class="titulo-Crear">
+            <mat-card-header style="text-align: center;">
+                <mat-card-title>Registrate</mat-card-title>
+            </mat-card-header>
+        </div>
+        <mat-card-content>
+            <form [formGroup]="nuevoUsuario" (ngSubmit)="agregarUsuario(nuevoUsuario.value)">
+            <div class="login-content">
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Nombre"  autocomplete="off" formControlName="nombre" required maxlength="20">
+                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <mat-hint *ngIf="!nombre">Ingresa tu nombre</mat-hint>
+                    <div *ngIf="nuevoUsuario.get('nombre').errors && nuevoUsuario.get('nombre').dirty " >
+                        <p class="e" *ngIf="nuevoUsuario.get('nombre').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="nuevoUsuario.get('nombre').hasError('minlength')">Minimo 3 caracteres</p>
+                    </div>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Teléfono"  autocomplete="off" formControlName="numero" required maxlength="10">
+                    <mat-icon matSuffix>phone_android</mat-icon>
+                    <mat-hint *ngIf="!numero">Ingresa tu número celular</mat-hint>
+                    <div *ngIf="nuevoUsuario.get('numero').errors && nuevoUsuario.get('numero').dirty " >
+                        <p class="e" *ngIf="nuevoUsuario.get('numero').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="nuevoUsuario.get('numero').hasError('pattern')">El campo debe contener números</p>
+                        <p class="e" *ngIf="nuevoUsuario.get('nombre').hasError('minlength')">Minimo 10 caracteres</p>
+                    </div>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="e-mail"  autocomplete="off" formControlName="email" required maxlength="30">
+                    <mat-icon matSuffix>mail</mat-icon>
+                    <mat-hint *ngIf="!usuario">Ingresa tu email</mat-hint>
+                    <div *ngIf="nuevoUsuario.get('email').errors && nuevoUsuario.get('email').dirty " >
+                        <p class="e" *ngIf="nuevoUsuario.get('email').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="nuevoUsuario.get('email').hasError('email')">e-mail Incorrecto</p>
+                    </div>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Contraseña"  autocomplete="off" formControlName="clave" [type]="hide ? 'password' : 'text'"   required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-hint *ngIf="!clave">Ingresa la contraseña</mat-hint>
+                    <div *ngIf="nuevoUsuario.get('clave').errors && nuevoUsuario.get('clave').dirty " >
+                        <p class="e" *ngIf="nuevoUsuario.get('clave').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="nuevoUsuario.get('clave').hasError('minlength')">La contraseña debe contar con mínimo 8 caracteres</p>
+                    </div>
+                </mat-form-field><br>
+                <!-- <mat-form-field>
+                    <input matInput placeholder="Nombre" [(ngModel)]="nombre" autocomplete="off" ngModel required maxlength="5" minlength="3">
+                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <mat-hint *ngIf="!nombre">Ingresa tu nombre</mat-hint>
+                    <div *ngIf="!f.value.nombre.invalid">
+                        <div *ngIf="nombre">El nombre es requerido</div>
+                    </div>
+                </mat-form-field><br> -->
+                <!-- <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Teléfono" [(ngModel)]="numero" autocomplete="off" required>
+                    <mat-icon matSuffix>phone_android</mat-icon>
+                    <mat-hint *ngIf="!numero">Ingresa tu número celular</mat-hint>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Email" [(ngModel)]="usuario" autocomplete="off" required>
+                    <mat-icon matSuffix>mail</mat-icon>
+                    <mat-hint *ngIf="!usuario">Ingresa tu email</mat-hint>
+                </mat-form-field><br>
+                <mat-form-field style="width: 250px;">
+                    <input matInput placeholder="Contraseña" [(ngModel)]="clave" [type]="hide ? 'password' : 'text'"  required width="240px;">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-hint *ngIf="!clave">Ingresa la contraseña</mat-hint>
+                </mat-form-field><br><br> -->
+            </div>
+            <mat-card-actions>
+                <button mat-raised-button class="iniciarS" [disabled]="nuevoUsuario.invalid"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Crear Cuenta</span></button>
+            </mat-card-actions>
+        </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <!-- <button mat-raised-button class="iniciarS" (click)="crearUsuario()"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Crear Cuenta</span></button> -->
+            <!-- <button mat-raised-button class="crear" (click)="irCrear()"><mat-icon svgIcon="cuenta-up"></mat-icon><span>&nbsp; ¿Aun no tienes una cuenta?</span></button> -->
+            <br><br>
+            <button mat-raised-button class="social-g" (click)="loginGoogle()"><mat-icon svgIcon="google-up"></mat-icon><span>&nbsp; Google</span></button><br>
+            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><mat-icon svgIcon="facebook-up"></mat-icon><span>&nbsp; Facebook</span></button><br>
+            <button mat-raised-button class="inicio" routerLink="/inicio"><mat-icon svgIcon="food-up"></mat-icon><span>&nbsp; Regresar</span></button>
+        </mat-card-actions>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+            <mat-list>
+                <div style="font-size: 12px; text-align: center;">
+                    <a style="cursor: pointer" (click)="irLogin()"><b>¿Ya tienes una cuenta?</b></a>
+                    <p>Inicia sesión para continuar.</p>
+                </div>
+            </mat-list>
+        </mat-list-item>
+    </mat-card>
+
+</div>

@@ -1,0 +1,90 @@
+.divCenter{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+
+.element.style {
+    padding-left: 83px;
+    padding-right: 50px;
+}
+
+.mat-form-field{
+    margin-top: 10px;
+}
+button.mat-primary {
+    background-color: #473ab7;
+}
+
+.social-g{
+    text-align: center;
+    padding: 0 35% 0 38%;
+}
+
+.social-f{
+    padding: 0 34% 0 34%;
+}
+
+.social-crear{
+    padding: 0 34% 0 34%;
+}
+
+.inicio{
+    background-color:gray;
+    padding: 0 35% 0 35%;
+}
+
+.iniciarS{
+    background-color:#b53f3f;
+    color: #fff;
+    padding: 0 30% 0 30%;
+}
+
+.crear{
+    background-color:#b53f3f;
+    color: #fff;
+
+}
+
+.e{
+    color: red;
+    font-size: 10px;
+    margin: 0%;
+    padding: 0%;
+}
+
+.mat-card{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.mat-card-content{
+    padding-left: 22px;
+}
+
+.div .mat-form-field-flex{
+    width: 240px;
+}
+
+.mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+    /* margin: 0 8px; */
+    margin: 5px 8px;
+}
+
+.login-content{
+    display: inline;
+    text-align: center;
+}
+.titulo{
+    margin-left: 25%;
+}
+
+.titulo-Crear{
+    margin-left: 25%;
+}
+
+
+
+

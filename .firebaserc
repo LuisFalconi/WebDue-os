@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "muertosdehambre": {
+      "hosting": {
+        "material-dashboard-angular": [
+          "muertosdehambre"
+        ]
+      }
+    }
+  }
+}

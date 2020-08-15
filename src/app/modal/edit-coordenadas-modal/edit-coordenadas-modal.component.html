@@ -1,0 +1,7 @@
+<h2>{{datos.mensaje}}</h2>
+<mat-dialog-content class="dialog-content">
+      <!-- Si [perfil] que es el @input en edit component tiene datos me muestra, si no me muetra el nuevoComponet  -->
+      <div *ngIf="datos.contenido">   
+            <app-edit-coordenadas-restaurant [perfil]= "datos.contenido"></app-edit-coordenadas-restaurant>
+      </div>
+</mat-dialog-content>

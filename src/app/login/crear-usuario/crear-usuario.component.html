@@ -1,0 +1,32 @@
+<div class="divCenter">
+    <mat-card style="padding:65px;">
+        <mat-card-header style="padding:5px;">
+          <mat-card-title>Crear Usuario</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="padding:5px;">
+          <table cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field style="width: 280px;">
+                  <input matInput placeholder="Usuario" [(ngModel)]="usuario" autocomplete="off" type="text" required>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field style="width: 280px;">
+                  <input matInput placeholder="Contraseña" [(ngModel)]="clave" type="password" required>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td ></td>
+            </tr>
+          </table>
+        </mat-card-content>
+        <!-- <mat-card-actions style="margin-left: 35px;">
+            <button mat-raised-button routerLink='/inicio' color="default">Atrás</button>
+          <button mat-raised-button (click)="crearUsuario()" color="primary">Crear</button>
+        </mat-card-actions> -->
+      </mat-card>
+</div>
