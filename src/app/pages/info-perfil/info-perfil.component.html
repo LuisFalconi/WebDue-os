@@ -1,0 +1,40 @@
+<div class="container" *ngIf="user$ | async as usuarios; else userSocial">
+    <div class="infoPerfil" *ngFor="let u of usuarios" >
+      <mat-card class="example-card" *ngIf="usuarioLogueado === u.uid">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title *ngIf="u.nombre">{{u.nombre}}</mat-card-title>
+            <mat-card-subtitle>{{u.email}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="'https://i.pinimg.com/originals/5f/87/61/5f8761590f4c651c8383dd58fce5dbf0.png'">
+            <mat-card-content>
+              <p>Contacto:</p>
+              <mat-card-subtitle *ngIf="u.numero">{{u.numero}}</mat-card-subtitle>
+              </mat-card-content>
+              <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+</div>
+<ng-template #userSocial>
+    <div class="infoPerfil">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{usuario}}</mat-card-title>
+              <mat-card-subtitle>{{userEmail}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="'https://i.pinimg.com/originals/5f/87/61/5f8761590f4c651c8383dd58fce5dbf0.png'">
+            <mat-card-content>
+              <p>Descripcon Opcional</p>
+              <p>Telefono</p>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+          </mat-card>
+    </div>
+
+</ng-template>
+
+
+

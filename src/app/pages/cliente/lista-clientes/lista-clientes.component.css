@@ -1,0 +1,23 @@
+.container{
+    margin: 5%;
+}
+.example-header-image {
+    background-image: url('https://i.pinimg.com/originals/5f/87/61/5f8761590f4c651c8383dd58fce5dbf0.png');
+    background-size: cover;
+}
+.mat-card{
+    border-radius: 5%;
+}
+
+.mat-card-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.imagen-card{
+    width:"15px";
+    height:"15px";
+    border-radius: 8px;
+}

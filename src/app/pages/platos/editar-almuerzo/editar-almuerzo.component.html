@@ -1,0 +1,25 @@
+<!-- <router-outlet></router-outlet> -->
+<div style="margin: 45px; padding: 10px;">
+    <p>Almuerzo del Día</p>
+    <mat-table [dataSource]= "dataSource" matSort >
+
+        <ng-container matColumnDef="acciones">
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell> 
+            <mat-cell *matCellDef="let row">
+                 <div *ngIf="usuarioLog == row.userUID">   <!--Valido si el usuario logueado es el que edito el plato-->
+                      <button mat-icon-button color="primary" (click)="editarAlmuerzo(row)">
+                          <mat-icon arial-label="Actualizar">edit</mat-icon>
+                      </button>
+                  </div>
+                <div *ngIf="usuarioLog == row.userUID">
+                  <button mat-icon-button color="accent" (click)="eliminar(row)">
+                      <mat-icon arial-label="Eliminar">highlight_off</mat-icon>
+                  </button> 
+                </div>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>   
+</div>

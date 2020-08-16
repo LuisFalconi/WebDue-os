@@ -1,0 +1,105 @@
+<div class="restaurante-container">
+    <form [formGroup]="newPostForm" (ngSubmit)="addPerfil(newPostForm.value)" class="container">
+
+        <div [hidden]="true">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="id" [value]="id">
+            </mat-form-field>
+        </div>
+        <!-- Mostrar el uid del usuario logueado -->
+        <!-- formControlName: Nombre que se le da en el componete ts -->
+        <div [hidden]="true">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="userUID" [value]="usuarioLogeado">
+            </mat-form-field>
+        </div>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre del Restaurante"  autocomplete="off" formControlName="nombreRestaurante">
+            <div *ngIf="newPostForm.get('nombreRestaurante').errors && newPostForm.get('nombreRestaurante').dirty " >
+                <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field>
+        
+        <mat-form-field class="example-full-width">
+            <mat-select placeholder="Tipo de Restaurante" formControlName="tipoRestaurante">
+                <mat-option value="Restaurante">Restaurante</mat-option>
+                <mat-option value="Comida Rapida">Comida Rapida</mat-option>
+            </mat-select>
+            <div *ngIf="newPostForm.get('tipoRestaurante').errors && newPostForm.get('tipoRestaurante').dirty " >
+                <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput type="time" placeholder="Horario de apertura" formControlName="horaApertura">
+            <div *ngIf="newPostForm.get('horaApertura').errors && newPostForm.get('horaApertura').dirty " >
+                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('required')">El campo no puede estar app-validacion</p>
+                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('maxlength')">Maximo 20 caracteres</p>
+                <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
+            </div><span class="validity"></span>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput type="time" placeholder="Horario de cierre" formControlName="horaCierre">
+            <div *ngIf="newPostForm.get('horaCierre').errors && newPostForm.get('horaCierre').dirty">
+                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('maxlength')">Maximo 20 caracteres</p>
+                <!-- <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">Hora de Apertura: 12:00 - 23.59 PM</p> -->
+            </div><span class="validity"></span>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Dirección del Restaurante" autocomplete="off" formControlName="direccionRestaurante">
+            <div *ngIf="newPostForm.get('direccionRestaurante').errors && newPostForm.get('direccionRestaurante').dirty " >
+                <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Capacidad del Restaurante" autocomplete="off" formControlName="capacidadRestaurante">
+            <div *ngIf="newPostForm.get('capacidadRestaurante').errors && newPostForm.get('capacidadRestaurante').dirty " >
+                <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('minlength')">Minimo 1 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('maxlength')">Maximo 3 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+        
+
+        <!-- <img mat-card-image [src]="urlImage" *ngIf="urlImage" style="width: 200px;"> -->
+        
+        <!-- Boton para subir archivos con el estilo de Angular Material -->
+        <!-- <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+        <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
+         -->
+        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+        <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
+
+        <!-- <label class="custom-file">
+            <input type="file" formControlName="imagePost" (change)="seleccionar($event)" />
+            <mat-icon>cloud_upload</mat-icon><span>CHOOSE IMAGE</span>
+        </label> -->
+
+        <p>{{labelFile}}</p>
+        <button mat-raised-button color="primary" type="submit"   [disabled]="newPostForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span> 
+        </button>
+        <br><mat-divider>
+        </mat-divider>
+    
+        <button mat-raised-button color="accent" routerLink='/perfil' type="button" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+     
+    </form>
+</div>

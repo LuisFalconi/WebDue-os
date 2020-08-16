@@ -1,0 +1,65 @@
+<form [formGroup]="form" (ngSubmit)="operar()" class="container">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="id" formControlName="id">
+        </mat-form-field>
+    </div>
+    <!-- Mostrar el uid del usuario logueado -->
+    <!-- formControlName: Nombre que se le da en el componete ts -->
+    <div [hidden]="false">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="userUID" [value]="usuarioLogeado">
+        </mat-form-field>
+    </div>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Desayuno" formControlName="platoDes">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Detalle/Ingredientes" formControlName="detalleDes">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Precio" formControlName="precioDes" type="number">
+    </mat-form-field>
+    <p>Almuerzo</p>
+
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Entrada" formControlName="entradaAlm" type="text">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Segundo" formControlName="segundoAlm">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Jugo" formControlName="jugoAlm">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Precio" formControlName="precioAlm" type="number">
+    </mat-form-field>
+    <p>Plato Especial</p>
+    <mat-card class="example-card">
+        <mat-card-header>
+            <img mat-card-image [src]="urlImage" *ngIf="urlImage" style="width: 200px;">
+        </mat-card-header>
+    </mat-card>    
+    <!-- Boton para subir archivos con el estilo de Angular Material -->
+    <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button">Examinar</button>
+    <input id="input_subida" type="file" style="display: none" (change)="seleccionar($event)">
+    <p>{{labelFile}}</p>
+
+    <button mat-raised-button color="primary" type="submit">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+
+    <button mat-raised-button color="accent" routerLink='/plato' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

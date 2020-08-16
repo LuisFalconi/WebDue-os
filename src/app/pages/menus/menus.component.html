@@ -1,0 +1,145 @@
+<router-outlet></router-outlet>
+<div style="margin: 45px; padding: 10px;">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let r of restaurante" hideToggle>
+      <mat-expansion-panel-header *ngIf="r.resVerificado && r.resVerificado.toString() === 'Aprobado'">
+        <mat-panel-title>{{r.nombreRestaurante}}</mat-panel-title>
+        <mat-panel-description>
+            {{r.tipoRestaurante}}
+            <mat-icon>menu_book</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <div *ngFor="let m of menu">
+            <div *ngIf="m.userUID == r.userUID" >
+              <h3>Desayuno</h3>
+                <mat-list-item> {{m.platoDesayuno}}</mat-list-item>
+                <mat-list-item> {{m.detalleDesayuno}}</mat-list-item>
+                <mat-list-item>{{m.precioDesayuno}} &nbsp; $</mat-list-item>
+              <h3>Almuerzo</h3>
+                <mat-list-item> {{m.entradaAlmuerzo}}</mat-list-item>
+                <mat-list-item>{{m.segundoAlmuerzo}}</mat-list-item>
+                <mat-list-item> {{m.jugoAlmuerzo}}</mat-list-item>
+                <mat-list-item> {{m.precioAlmuerzo}} &nbsp; $ </mat-list-item>
+            </div>
+        </div>
+      </mat-expansion-panel>
+    <mat-divider></mat-divider>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+    </mat-expansion-panel>
+  </mat-accordion>
+<!--      
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel *ngFor="let u of usuario" hideToggle>
+          <mat-expansion-panel-header *ngIf="u.roles && u.roles.toString() === 'dueño'">
+            <mat-panel-title>{{u.roles}}</mat-panel-title>
+            <mat-panel-description>
+                {{u.email}}
+                <mat-icon>menu_book</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+            <mat-list-item>{{u.uid}}</mat-list-item>
+            <div *ngFor="let p of restaurante">
+                <div *ngIf="p.userUID == u.uid" >
+                    <mat-list-item><h3>Nombre del Restaurante</h3> {{p.nombreRestaurante}}</mat-list-item>
+                    <mat-list-item><h3>Tipo del Restaurante</h3> {{p.tipoRestaurante}}</mat-list-item>
+                </div>
+            </div>
+            <div *ngFor="let m of menu">
+                <div *ngIf="m.userUID == u.uid" >
+                    <mat-list-item> <h3>Desayuno</h3> {{m.platoDesayuno}}</mat-list-item>
+                    <mat-list-item><h3>Detalle Desayuno {{m.detalleDesayuno}}</h3></mat-list-item>
+                    <mat-list-item><h3>Precio Desayuno {{m.precioDesayuno}}</h3></mat-list-item>
+                </div>
+            </div>
+          </mat-expansion-panel>
+        <mat-divider></mat-divider>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+        </mat-expansion-panel>
+      </mat-accordion> -->
+ 
+</div>
+
+
+
+ <!-- <p>Desayuno del Día</p>
+      <mat-table [dataSource]= "dataSource" matSort >
+        <div>
+            <ng-container matColumnDef="platoDes">
+                <mat-header-cell *matHeaderCellDef>Desayuno</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.platoDesayuno}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="detalleDes">
+                <mat-header-cell *matHeaderCellDef>Detalle/Ingredientes</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.detalleDesayuno}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="precioDes">
+              <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell> 
+              <mat-cell *matCellDef="let row"> {{row.precioDesayuno | currency}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userUid">
+              <mat-header-cell *matHeaderCellDef>Usuario Logueado</mat-header-cell> 
+              <mat-cell *matCellDef="let row">{{row.userUID}}</mat-cell>
+          </ng-container>
+        </div>
+          <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns1"></mat-row>
+      </mat-table>  
+       <mat-paginator [pageSize]="3" [pageSizeOptions]="[3,10,25,100]"></mat-paginator> 
+
+      <p>Almuerzo del Día</p>
+      <mat-table [dataSource]= "dataSource2" matSort >
+        <div>
+            <ng-container matColumnDef="platoAlm">
+                <mat-header-cell *matHeaderCellDef>Almuerzo</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.platoAlmuerzo}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="detalleAlm">
+                <mat-header-cell *matHeaderCellDef>Detalle/Ingredientes</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.detalleAlmuerzo}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="precioAlm">
+              <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell> 
+              <mat-cell *matCellDef="let row"> {{row.precioAlmuerzo | currency}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userUid">
+              <mat-header-cell *matHeaderCellDef>Usuario Logueado</mat-header-cell> 
+              <mat-cell *matCellDef="let row">{{row.userUID}}</mat-cell>
+          </ng-container>
+        </div>
+          <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+      </mat-table> 
+      
+      <!-<mat-paginator [pageSize]="3" [pageSizeOptions]="[3,10,25,100]"></mat-paginator> --
+
+      <p>Especial del Día</p>
+
+      <mat-table [dataSource]= "dataSource3" matSort >
+        <div>
+            <ng-container matColumnDef="platoEsp">
+                <mat-header-cell *matHeaderCellDef>Especial</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.platoEspecial}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="detalleEsp">
+                <mat-header-cell *matHeaderCellDef>Detalle/Ingredientes</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.detalleEspecial}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="precioEsp">
+              <mat-header-cell *matHeaderCellDef>Precio</mat-header-cell> 
+              <mat-cell *matCellDef="let row"> {{row.precioEspecial | currency}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userUid">
+              <mat-header-cell *matHeaderCellDef>Usuario Logueado</mat-header-cell> 
+              <mat-cell *matCellDef="let row">{{row.userUID}}</mat-cell>
+          </ng-container>
+        </div>
+          <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
+      </mat-table>
+      
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+ -->

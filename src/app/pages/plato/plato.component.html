@@ -1,0 +1,85 @@
+<router-outlet></router-outlet>
+<div style="margin: 45px; padding: 10px;">
+      <p>Desayuno del Día</p>
+      <mat-table [dataSource]= "dataSource" matSort >
+        <div>
+            <ng-container matColumnDef="platoDes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Desayuno</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.platoDesayuno}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="detalleDes">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Detalle/Ingredientes</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.detalleDesayuno}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="precioDes">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell> 
+              <mat-cell *matCellDef="let row"> {{row.precioDesayuno | currency}}</mat-cell>
+          </ng-container>
+        </div>
+
+          <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell> 
+              <mat-cell *matCellDef="let row">
+                   <div *ngIf="usuarioLog == row.userUID">   <!--Valido si el usuario logueado es el que edito el plato-->
+                        <button mat-icon-button color="primary" (click)="editarMenu(row)">
+                            <mat-icon arial-label="Actualizar">edit</mat-icon>
+                        </button>
+                    </div>
+                  <div *ngIf="usuarioLog == row.userUID">
+                    <button mat-icon-button color="accent" (click)="eliminar(row)">
+                        <mat-icon arial-label="Eliminar">highlight_off</mat-icon>
+                    </button> 
+                  </div>
+              </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
+      </mat-table>
+      
+    <p>Almuerzo del Día</p>
+      <mat-table [dataSource]= "dataSource2" matSort >
+        <div>
+            <ng-container matColumnDef="entradaAlm">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Entrada</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.entradaAlmuerzo}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="segundoAlm">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Segundo</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.segundoAlmuerzo}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="jugoAlm">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Jugos</mat-header-cell> 
+                <mat-cell *matCellDef="let row"> {{row.jugoAlmuerzo}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="precioAlm">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell> 
+              <mat-cell *matCellDef="let row"> {{row.precioAlmuerzo | currency}}</mat-cell>
+          </ng-container>
+        </div>
+          <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell> 
+              <mat-cell *matCellDef="let row">
+                   <div *ngIf="usuarioLog == row.userUID">
+                        <!-- <button mat-icon-button color="primary" [routerLink]="['edicion', row.id]">
+                        <mat-icon arial-label="Actualizar">assignment</mat-icon>
+                        </button>   -->
+                        <button mat-icon-button color="primary" (click)="editarMenu(row)">
+                            <mat-icon arial-label="Actualizar">edit</mat-icon>
+                        </button>
+                    </div>
+                  <div *ngIf="usuarioLog == row.userUID">
+                    <button mat-icon-button color="accent" (click)="eliminar(row)">
+                        <mat-icon arial-label="Eliminar">highlight_off</mat-icon>
+                    </button> 
+                  </div>
+              </mat-cell>
+          </ng-container> 
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+      </mat-table>       
+</div>

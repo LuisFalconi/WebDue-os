@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.example-full-width{
+    width: 300px;
+
+}

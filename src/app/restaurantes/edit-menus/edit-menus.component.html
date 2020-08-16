@@ -1,0 +1,85 @@
+<div class="restaurante-container">
+    <form [formGroup]="editMenuForm" (ngSubmit)="editMenu(editMenuForm.value)" class="container">
+        <!-- De esta manera uso el input -->
+        <!-- {{perfil | json}} -->
+        <h3>Desayuno</h3>
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Desayuno</mat-label>
+            <mat-select placeholder="Tags" formControlName="platoDesayuno">
+                <mat-option value="Americano">Desayuno Americano</mat-option>
+                <mat-option value="Continental">Desayuno Continental</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Detalle/Ingredientes" formControlName="detalleDesayuno" autocomplete="off">
+            <div *ngIf="editMenuForm.get('detalleDesayuno').errors && editMenuForm.get('detalleDesayuno').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('detalleDesayuno').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('detalleDesayuno').hasError('minlength')">Minimo 5 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('detalleDesayuno').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Precio" formControlName="precioDesayuno" type="number" autocomplete="off" >
+            <div *ngIf="editMenuForm.get('precioDesayuno').errors && editMenuForm.get('precioDesayuno').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('precioDesayuno').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('precioDesayuno').hasError('minlength')">Minimo 1 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('precioDesayuno').hasError('maxlength')">Maximo 3 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('precioDesayuno').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+    
+        <h3>Almuerzo</h3>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Entrada" formControlName="entradaAlmuerzo" type="text" autocomplete="off" >
+            <div *ngIf="editMenuForm.get('entradaAlmuerzo').errors && editMenuForm.get('entradaAlmuerzo').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('entradaAlmuerzo').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('entradaAlmuerzo').hasError('minlength')">Minimo 5 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('entradaAlmuerzo').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Segundo" formControlName="segundoAlmuerzo" type="text" autocomplete="off">
+            <div *ngIf="editMenuForm.get('segundoAlmuerzo').errors && editMenuForm.get('segundoAlmuerzo').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('segundoAlmuerzo').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('segundoAlmuerzo').hasError('minlength')">Minimo 5 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('segundoAlmuerzo').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Jugo" formControlName="jugoAlmuerzo" autocomplete="off" >
+            <div *ngIf="editMenuForm.get('jugoAlmuerzo').errors && editMenuForm.get('jugoAlmuerzo').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('jugoAlmuerzo').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('jugoAlmuerzo').hasError('minlength')">Minimo 5 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('jugoAlmuerzo').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Precio" formControlName="precioAlmuerzo" type="number" autocomplete="off" >
+            <div *ngIf="editMenuForm.get('precioAlmuerzo').errors && editMenuForm.get('precioAlmuerzo').dirty " >
+                <p class="e" *ngIf="editMenuForm.get('precioAlmuerzo').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editMenuForm.get('precioAlmuerzo').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editMenuForm.get('precioDesayuno').hasError('pattern')">El campo debe contener numeros</p>
+                <p class="e" *ngIf="editMenuForm.get('precioAlmuerzo').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="editMenuForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+            
+        </button>
+    
+        <button mat-raised-button color="accent" type="button" [mat-dialog-close]="true"  (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+     
+    </form>
+</div>

@@ -1,0 +1,112 @@
+<div>
+
+  <ng-template [ngIf] ="emailVerificado == false">
+    <p>
+        Tu correo electrónico aun no ha sido verificado
+        revisa tu bandeja de entrada o el correo no deseado o vuelve a enviar el mail
+    </p><br>
+    <button mat-button (click)="enviarEmail()">Enviar</button>
+</ng-template>
+
+<ng-template [ngIf] ="emailVerificado == true">
+    <div *ngIf="validacionRestauranteExiste(valorRestaurante) == false; else validacionRestaurante">
+        <p>Debes Agregar un restaurante primero</p>
+    </div>
+</ng-template>
+
+    
+
+<!-- Una vez agregado un restaurante valida si tiene ya subio el documento de verificacion -->
+<ng-template #validacionRestaurante>
+    <div *ngIf="validacionDocRestauranteExiste(validacionR) == false; else verificacionRes">
+        <h1>Un paso mas antes de Visualizar tus Promociones :) </h1>
+        <app-validacion></app-validacion>
+    </div> 
+
+    <ng-template #verificacionRes>
+        <div *ngFor="let perfil of perfil$ | async ">
+            <div *ngIf="usuarioLog == perfil.userUID">
+                <ng-template [ngIf]="perfil.resVerificado.toString() === 'En revision'">
+                    <p>Tu restaurante esta siendo verificado por el Administrador</p>
+                    <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                </ng-template>
+                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado'">
+                    <div>
+                        <p>Restaurante Aprobado</p>
+                        <h1 style="text-align: center;"> Promociones</h1>
+  
+                  <div class="container" *ngIf="promociones$ | async as promocion; else loading">
+                    <!-- {{ perfil$ | async | json}} -->
+                    
+                      <div  class="example-card" *ngFor="let promo of promocion">
+                        <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado ==='verdadero'">
+                          <mat-card>
+                            <mat-card-header>
+                              <div mat-card-avatar class="example-header-image"></div>
+                            </mat-card-header>
+                              <img matCardImage [src]="promo.fotosPromocion" *ngIf="promo.fotosPromocion" width="500px" height="300px"/>
+                              <mat-card-actions>
+                                <button mat-button color="warm" (click)="deshabilitarPromo(promo)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Deshabilitar</button>
+                                <button mat-button color="warm" (click)="eliminarPromo(promo)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Eliminar</button>
+                              </mat-card-actions>
+                          </mat-card>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="position: static;">
+                      <app-promociones></app-promociones>
+                    </div>  
+                    <mat-divider></mat-divider>
+                    
+                      <p>Promociones Deshabilitadas</p>
+                      <div class="container" *ngIf="promociones$ | async as promocion; else loading">
+                        <!-- {{ perfil$ | async | json}} -->
+                          <div  class="example-card" *ngFor="let promo of promocion">
+                            <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado ==='falso'">
+                              <mat-card >
+                                <mat-card-header>
+                                  <div mat-card-avatar class="example-header-image"></div>
+                                </mat-card-header>
+                                  <img matCardImage [src]="promo.fotosPromocion" *ngIf="promo.fotosPromocion" width="500px" height="300px"  />
+                                  <mat-card-actions>
+                                    <button mat-button color="warm" (click)="habilitarPromo(promo)"><mat-icon arial-label="Eliminar">check</mat-icon>Habilitar</button>
+                                    <button mat-button color="warm" (click)="eliminarPromo(promo)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Eliminar</button>
+                                  </mat-card-actions>
+                              </mat-card>
+                            </div>
+                          </div>
+                        </div>
+                      
+
+
+          <ng-template #loading>
+            <div class="spinner">
+              <p>Cargando ....</p>
+              <mat-spinner></mat-spinner>
+            </div>
+          </ng-template>
+
+        </div>
+          </ng-template>
+                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado'">
+                    <div>
+                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
+                        <p>La información de tu restaurante será eliminado por el administrador.</p>
+                        <br>
+                        <app-validacion></app-validacion>         
+                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
+                    </div> 
+                </ng-template>
+            </div>
+        </div>
+    </ng-template>
+</ng-template>
+
+
+  
+</div>
+
+
+
+
+  

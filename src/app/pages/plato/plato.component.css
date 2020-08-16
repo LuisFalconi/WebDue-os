@@ -1,0 +1,9 @@
+table {
+    width: 10%;
+  }
+.example-card {
+    max-width: 400px;
+    display: inline-block;  
+    border-radius: 21px;
+    margin: 10px;
+  } 

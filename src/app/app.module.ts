@@ -1,3 +1,5 @@
+import { CrearMenuComponent } from './pages/crear-menu/crear-menu.component';
+import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,29 +45,103 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ModalComponent } from './modal/modal/modal.component';
+import { PlatoComponent } from './pages/plato/plato.component';
+import { PlatoEdicionComponent } from './pages/plato/plato-edicion/plato-edicion.component';
+import { ClienteComponent } from './pages/cliente/cliente.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { Not403Component } from './pages/not403/not403.component';
+import { CrearUsuarioComponent } from './login/crear-usuario/crear-usuario.component';
+import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.component';
+import { AgregarPerfilComponent } from './pages/editar-perfil/agregar-perfil/agregar-perfil.component';
+import { MiMenuComponent } from './pages/mi-menu/mi-menu.component';
+import { CrearRestauranteComponent } from './pages/crear-restaurante/crear-restaurante.component';
+import { MenusComponent } from './pages/menus/menus.component';
+import { ListaRestaurantesComponent } from './restaurantes/lista-restaurantes/lista-restaurantes.component';
+import { ListaClientesComponent } from './pages/cliente/lista-clientes/lista-clientes.component';
+import { NuevoRestauranteComponent } from './restaurantes/nuevo-restaurante/nuevo-restaurante.component';
+import { EditRestauranteComponent } from './restaurantes/edit-restaurante/edit-restaurante.component';
+import { PromocionesComponent } from './pages/promociones/promociones.component';
+import { EditMenusComponent } from './restaurantes/edit-menus/edit-menus.component';
+import { ListaPromocionesComponent } from './pages/promociones/lista-promociones/lista-promociones.component';
+import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
+import { ValidacionComponent } from './pages/validacion/validacion.component';
+import { VerificacionRestaurantesComponent } from './usuarios/verificacion-restaurantes/verificacion-restaurantes.component';
+import { EditRestauranteDuenoComponent } from './restaurantes/edit-restaurante-dueno/edit-restaurante-dueno.component';
+import { InfoPerfilComponent } from './pages/info-perfil/info-perfil.component';
+import { EditCoordenadasRestaurantComponent } from './restaurantes/edit-coordenadas-restaurant/edit-coordenadas-restaurant.component';
+import { PromocionesInicioComponent } from './pages/promociones/promociones-inicio/promociones-inicio.component';
+import { VerficacionEmailComponent } from './pages/verficacion-email/verficacion-email.component';
+import { CrearDesayunoComponent } from './pages/platos/crear-desayuno/crear-desayuno.component';
+import { EditarDesayunoComponent } from './pages/platos/editar-desayuno/editar-desayuno.component';
+import { EditDesayunoComponent } from './restaurantes/edit-desayuno/edit-desayuno.component';
+import { CrearAlmuerzoComponent } from './pages/platos/crear-almuerzo/crear-almuerzo.component';
+import { EditarAlmuerzoComponent } from './pages/platos/editar-almuerzo/editar-almuerzo.component';
+import { EditAlmuerzoComponent } from './restaurantes/edit-almuerzo/edit-almuerzo.component';
+import { EditarMeriendaComponent } from './pages/platos/editar-merienda/editar-merienda.component';
+import { CrearMeriendaComponent } from './pages/platos/crear-merienda/crear-merienda.component';
+import { EditMeriendaComponent } from './restaurantes/edit-merienda/edit-merienda.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
 
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ModalComponent, 
-    NuevoResComponent, 
+    PlatoComponent,
+    PlatoEdicionComponent,
+    ClienteComponent,
+    PerfilComponent,
+    LoginComponent,
+    Not403Component,
+    CrearUsuarioComponent,
+    EditarPerfilComponent,
+    AgregarPerfilComponent,
+    MiMenuComponent,
+    CrearMenuComponent,
+    CrearRestauranteComponent,
+    MenusComponent,
+    ModalComponent,
+    ListaRestaurantesComponent,
+    ListaClientesComponent,
+    NuevoRestauranteComponent,
+    NuevoResComponent,
+    EditRestauranteComponent,
     ModalEditRestautanteComponent,
+    PromocionesComponent,
     AddMenuModalComponent,
     EditMenuModalComponent,
+    EditMenusComponent,
+    ListaPromocionesComponent,
+    ListaUsuariosComponent,
+    ValidacionComponent,
+    VerificacionRestaurantesComponent,
     ModalEditRestaurantDuenoComponent,
+    EditRestauranteDuenoComponent,
+    InfoPerfilComponent,
     EditCoordenadasModalComponent,
+    EditCoordenadasRestaurantComponent,
+    PromocionesInicioComponent,
+    VerficacionEmailComponent,
     ModalDesayunoComponent,
+    CrearDesayunoComponent,
+    EditarDesayunoComponent,
     ModalEditarDesayunoComponent,
-    ModalAlmuerzoComponent,
+    EditDesayunoComponent,
+    CrearAlmuerzoComponent,
+    EditarAlmuerzoComponent,
     ModalEditarAlmuerzoComponent,
-    ModalMeriendaComponent,
-    ModalEditarMeriendaComponent
+    EditAlmuerzoComponent,
+    ModalAlmuerzoComponent,
+    EditarMeriendaComponent,
+    CrearMeriendaComponent,
+    ModalEditarMeriendaComponent,
+    EditMeriendaComponent,
+    ModalMeriendaComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,

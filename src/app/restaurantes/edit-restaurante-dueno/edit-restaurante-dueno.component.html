@@ -1,0 +1,93 @@
+<div class="restaurante-container">
+    <form [formGroup]="editResForm" (ngSubmit)="editPerfil(editResForm.value)" class="container" >
+        <!-- De esta manera uso el input -->
+        <!-- {{perfil | json}} -->
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre del Restaurante" formControlName="nombreRestaurante">
+            <div *ngIf="editResForm.get('nombreRestaurante').errors && editResForm.get('nombreRestaurante').dirty " >
+                <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <!-- <mat-form-field class="example-full-width">
+            <input matInput placeholder="Tipo de Restaurante" formControlName="tipoRestaurante">
+            <div *ngIf="editResForm.get('tipoRestaurante').errors && editResForm.get('tipoRestaurante').dirty " >
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('email')">Debe ser un email valido</p> PRUEBA DE EMAIL
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo Restaurante</mat-label>
+            <mat-select placeholder="Tags" formControlName="tipoRestaurante">
+                <mat-option value="Restaurante">Restaurante</mat-option>
+                <mat-option value="Comida Rapida">Comida Rapida</mat-option>
+            </mat-select>
+            <div *ngIf="editResForm.get('tipoRestaurante').errors && editResForm.get('tipoRestaurante').dirty " >
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <!-- <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('email')">Debe ser un email valido</p> PRUEBA DE EMAIL-->
+                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Hora de Apertura" type="time" min="00:01" max="11:59"  formControlName="horaApertura" required>
+            <div *ngIf="editResForm.get('horaApertura').errors && editResForm.get('horaApertura').dirty " >
+                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('required')">El campo no puede estar app-validacion</p>
+                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('maxlength')">Maximo 20 caracteres</p>
+                <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
+            </div><span class="validity"></span>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Hora de Cierre" type="time" min="12:00" max="23:59" formControlName="horaCierre" required>
+            <div *ngIf="editResForm.get('horaCierre').errors && editResForm.get('horaCierre').dirty">
+                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('maxlength')">Maximo 20 caracteres</p>
+                <!-- <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">Hora de Apertura: 12:00 - 23.59 PM</p> -->
+            </div><span class="validity"></span>
+            
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Dirección del Restaurante" formControlName="direccionRestaurante">
+            <div *ngIf="editResForm.get('direccionRestaurante').errors && editResForm.get('direccionRestaurante').dirty " >
+                <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('maxlength')">Maximo 50 caracteres</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput  placeholder="Capacidad del Restaurante" formControlName="capacidadRestaurante">
+            <div *ngIf="editResForm.get('capacidadRestaurante').errors && editResForm.get('capacidadRestaurante').dirty " >
+                <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('minlength')">Minimo 1 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('maxlength')">Maximo 3 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+
+        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+        <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar($event)">
+
+        <p>{{labelImage}}</p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="editResForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+
+    
+        <button mat-raised-button color="accent" type="button" [mat-dialog-close]="true" (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+     
+    </form>
+</div>

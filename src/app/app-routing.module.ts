@@ -33,8 +33,9 @@ import { Routes, RouterModule } from '@angular/router';
 // import { PromocionesInicioComponent } from './pages/promociones/promociones-inicio/promociones-inicio.component';
 // import { EditarDesayunoComponent } from './pages/platos/editar-desayuno/editar-desayuno.component';
 
-const routes: Routes = [
-    {path:  '', redirectTo: 'inicio', pathMatch: 'full'}
+const routes: Routes =[
+
+
 ];
  
 @NgModule({

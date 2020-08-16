@@ -1,0 +1,37 @@
+.infPerfil{
+    margin-bottom: 20%;
+}
+.material-icons-n{
+    display: inline-block;
+    width: 89px;
+    height: 24px;
+    font-size: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.icon-white {
+    -webkit-filter: contrast(4) invert(1);
+    -moz-filter: contrast(4) invert(1);
+    -o-filter: contrast(4) invert(1);
+    -ms-filter: contrast(4) invert(1);
+    filter: contrast(4) invert(1);
+}
+
+.example-card {
+    max-width: 300px;
+    display: inline-block;
+    border-radius: 21px;
+    margin: 10px;
+    /* grid-template-columns: repeat(4,24%); */
+    /* grid-column-gap: 10px; */
+    /* grid-row-gap: 15px;
+    justify-content: center; */
+    
+  }
+
+.mat-card-image {
+    width: calc(71% + 40px);
+    margin: 0 -16px 16px -16px;
+}
+

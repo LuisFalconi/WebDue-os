@@ -1,0 +1,44 @@
+<form [formGroup]="desayunoForm" (ngSubmit)="addMenu(desayunoForm.value)" class="container">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="id" formControlName="id">
+        </mat-form-field>
+    </div>
+    <!-- Mostrar el uid del usuario logueado -->
+    <!-- formControlName: Nombre que se le da en el componete ts -->
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Nombre del Plato" formControlName="platoMerienda" ></textarea>
+        <div *ngIf="desayunoForm.get('platoMerienda').errors && desayunoForm.get('platoMerienda').dirty" >
+            <p class="e" *ngIf="desayunoForm.get('platoMerienda').hasError('required')">El campo no puede estar vacio</p>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Detalle/Ingredientes" formControlName="detalleMerienda" ></textarea>
+        <div *ngIf="desayunoForm.get('detalleMerienda').errors && desayunoForm.get('detalleMerienda').dirty" >
+            <p class="e" *ngIf="desayunoForm.get('detalleMerienda').hasError('required')">El campo no puede estar vacio</p>
+        </div>
+    </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Precio" formControlName="precioMerienda" type="number" autocomplete="off" >
+            <div *ngIf="desayunoForm.get('precioMerienda').errors && desayunoForm.get('precioMerienda').dirty " >
+                <p class="e" *ngIf="desayunoForm.get('precioMerienda').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="desayunoForm.get('precioMerienda').hasError('minlength')">Minimo 1 caracteres</p>
+                <p class="e" *ngIf="desayunoForm.get('precioMerienda').hasError('maxlength')">Maximo 3 caracteres</p>
+                <p class="e" *ngIf="desayunoForm.get('precioMerienda').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true"  [disabled]="desayunoForm.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button"  [mat-dialog-close]="true" (click)="cancelar($event)">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

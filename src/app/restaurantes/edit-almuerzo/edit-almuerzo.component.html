@@ -1,0 +1,50 @@
+<form [formGroup]="almuerzoForm" (ngSubmit)="editMenu(almuerzoForm.value)" class="container">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="id" formControlName="id">
+        </mat-form-field>
+    </div>
+    <!-- Mostrar el uid del usuario logueado -->
+    <!-- formControlName: Nombre que se le da en el componete ts -->
+
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Entrada" formControlName="entradaAlmuerzo" ></textarea>
+        <div *ngIf="almuerzoForm.get('entradaAlmuerzo').errors && almuerzoForm.get('entradaAlmuerzo').dirty" >
+            <p class="e" *ngIf="almuerzoForm.get('entradaAlmuerzo').hasError('required')">El campo no puede estar vacio</p>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Segundo" formControlName="segundoAlmuerzo" ></textarea>
+        <div *ngIf="almuerzoForm.get('segundoAlmuerzo').errors && almuerzoForm.get('segundoAlmuerzo').dirty" >
+            <p class="e" *ngIf="almuerzoForm.get('segundoAlmuerzo').hasError('required')">El campo no puede estar vacio</p>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Jugos" formControlName="jugoAlmuerzo"></textarea>
+        <div *ngIf="almuerzoForm.get('jugoAlmuerzo').errors && almuerzoForm.get('jugoAlmuerzo').dirty" >
+            <p class="e" *ngIf="almuerzoForm.get('jugoAlmuerzo').hasError('required')">El campo no puede estar vacio</p>
+        </div>
+    </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Precio" formControlName="precioAlmuerzo" type="number" autocomplete="off" >
+            <div *ngIf="almuerzoForm.get('precioAlmuerzo').errors && almuerzoForm.get('precioAlmuerzo').dirty " >
+                <p class="e" *ngIf="almuerzoForm.get('precioAlmuerzo').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="almuerzoForm.get('precioAlmuerzo').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true" [disabled]="almuerzoForm.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button"  [mat-dialog-close]="true" (click)="cancelar($event)">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

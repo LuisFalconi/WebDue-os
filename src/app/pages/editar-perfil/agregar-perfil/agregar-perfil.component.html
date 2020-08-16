@@ -1,0 +1,69 @@
+<form [formGroup]="form" (ngSubmit)="operar()" class="container">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="id" [value]="id">
+        </mat-form-field>
+    </div>
+    <!-- Mostrar el uid del usuario logueado -->
+    <!-- formControlName: Nombre que se le da en el componete ts -->
+    <div [hidden]="false">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="userUID" [value]="usuarioLogeado">
+        </mat-form-field>
+    </div>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombre del Restaurante" formControlName="nombreR">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Tipo de Restaurante" formControlName="tipoR">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Hora de Apertura" formControlName="horarioA">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Hora de Cierre" formControlName="horarioC">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Dirección del Restaurante" formControlName="direccionR">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Capacidad del Restaurante" formControlName="capacidadR">
+    </mat-form-field>
+
+     <img mat-card-image [src]="urlImage" *ngIf="urlImage" style="width: 200px;"> 
+    
+
+
+    <!-- <img mat-card-image [src]="urlImage" *ngIf="urlImage" style="width: 200px;"> -->
+    
+    <!-- Boton para subir archivos con el estilo de Angular Material -->
+    <!-- <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+    <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
+     -->
+    <!-- <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+    <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
+     -->
+    <label class="custom-file">
+        <input type="file" (change)="seleccionar($event)" />
+        <mat-icon>cloud_upload</mat-icon><span>CHOOSE IMAGE</span>
+      </label>
+
+    <p>{{labelFile}}</p>
+
+    <button mat-raised-button color="primary" type="submit">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>   
+    </button>
+
+    <button mat-raised-button color="accent" routerLink='/editar' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+    </button>
+
+</form>

@@ -1,0 +1,35 @@
+<router-outlet></router-outlet>
+
+      <div sclass="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]= "dataSource" matSort >
+            <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef>
+                    <h3>Actualizar Información</h3>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" style="padding-left: 40%;">
+                  <div *ngIf="usuarioLog == row.userUID">
+                          <button mat-icon-button color="primary" (click)="editarRestaurante(row)">
+                              <mat-icon arial-label="Actualizar">edit</mat-icon>
+                          </button>
+                  </div>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+<!-- 
+    <div  *ngFor="let p of perfil$ | async ">
+        <div *ngIf="usuarioLog == p.userUID && p.imagenRes" >
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <h3>Foto Restaurante</h3>
+                </mat-card-header>
+                    <mat-card-content>
+                        <img matCardImage [src]="p.imagenRes" *ngIf="p.imagenRes" width="50px" height="400px"/>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div> -->

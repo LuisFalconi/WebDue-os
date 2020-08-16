@@ -1,0 +1,31 @@
+<div class="container" *ngIf="perfil$ | async as perfil; else loading">
+    <h1>Perfil Restaurante</h1>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{perfil.nombreRestaurante}}</mat-card-title>
+        <mat-card-subtitle>{{perfil.tipoRestaurante}}</mat-card-subtitle>
+      </mat-card-header>
+      <img matCardImage class="imagen-card" [src]="perfil.imagenRes" *ngIf="perfil.imagenRes ; else logo" />
+      <mat-card-content>
+        <h3>Dirección: </h3> {{perfil.direccionRestaurante}}  
+        <h3>Capacidad: </h3>{{perfil.capacidadRestaurante}} &nbsp;Personas
+        <h3>Hora de Apertura:</h3> {{perfil.horaApertura}} &nbsp; A.M
+        <h3>Hora de Cierre: </h3>{{perfil.horaCierre}} &nbsp; P.M
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button color="warn" ><a routerLink="/inicio"><mat-icon>reply</mat-icon></a></button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+
+ 
+  <ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+  <ng-template #logo>
+    <img matCardImage class="imagen-card" src="assets/perfil.png" alt="logo" #logo>
+  </ng-template>

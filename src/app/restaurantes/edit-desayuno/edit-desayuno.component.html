@@ -1,0 +1,44 @@
+<div class="restaurante-container">
+    <form [formGroup]="editDesayunoForm" (ngSubmit)="editMenu(editDesayunoForm.value)" class="container">
+        <!-- De esta manera uso el input -->
+        <!-- {{perfil | json}} -->
+        <h3>Desayuno</h3>
+        <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Desayuno</mat-label>
+            <mat-select placeholder="Tags" formControlName="platoDesayuno">
+                <mat-option value="Americano">Desayuno Americano</mat-option>
+                <mat-option value="Continental">Desayuno Continental</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Detalle/Ingredientes" formControlName="detalleDesayuno" ></textarea>
+            <div *ngIf="editDesayunoForm.get('detalleDesayuno').errors && editDesayunoForm.get('detalleDesayuno').dirty" >
+                <p class="e" *ngIf="editDesayunoForm.get('detalleDesayuno').hasError('required')">El campo no puede estar vacio</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Precio" formControlName="precioDesayuno" type="number" maxlength="10"  autocomplete="off" >
+            <div *ngIf="editDesayunoForm.get('precioDesayuno').errors && editDesayunoForm.get('precioDesayuno').dirty " >
+                <p class="e" *ngIf="editDesayunoForm.get('precioDesayuno').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="editDesayunoForm.get('precioDesayuno').hasError('minlength')">Minimo 1 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('precioDesayuno').hasError('maxlength')">Maximo 3 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('precioDesayuno').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-divider></mat-divider>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="editDesayunoForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+    
+        <button mat-raised-button color="accent" type="button" [mat-dialog-close]="true"  (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+     
+    </form>
+</div>
