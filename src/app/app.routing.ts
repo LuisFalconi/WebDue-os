@@ -2,7 +2,7 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { GuardsGuard } from './guards.guard';
@@ -25,6 +25,7 @@ import { EditarPerfilComponent } from './pages/editar-perfil/editar-perfil.compo
 import { CrearUsuarioComponent } from './login/crear-usuario/crear-usuario.component';
 import { AgregarPerfilComponent } from './pages/editar-perfil/agregar-perfil/agregar-perfil.component';
 import { NologinGuard } from './_service/noLogin-guard.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes =[
 
@@ -33,40 +34,46 @@ const routes: Routes =[
     component: LoginComponent, canActivate: [NologinGuard]
   },
   {
-    path: 'login',
+    path: 'loging',
     component: LoginComponent, canActivate: [NologinGuard]
   },
   {
     path: '',
-    component: AdminLayoutComponent, canActivate:[GuardsGuard],
+    component: AdminLayoutComponent,  canActivate: [LoginGuardService],
     children: [{
       path: '',
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
     }]},
-    {path: 'clientesHome', component: ListaClientesComponent},
-    {path: 'listaR', component: ListaRestaurantesComponent, canActivate: [LoginGuardService]},
-    {path: 'listaU', component: ListaUsuariosComponent, canActivate: [LoginGuardService]},
-    {path: 'verificacionR', component: VerificacionRestaurantesComponent, canActivate: [LoginGuardService]},
-    {path: 'verificacionE', component: VerficacionEmailComponent},
-    {path: 'cliente/:id', component: ListaClientesComponent},
-    {path: 'cliente', component: ClienteComponent},
-    {path: 'menus', component: MenusComponent},
-    {path: 'promociones', component: PromocionesComponent},
-    {path: 'listaPromociones', component: ListaPromocionesComponent, canActivate: [LoginGuardService]},
-    {path: 'promocionesInicio', component: PromocionesInicioComponent},
-    {path: 'menuInicio', component: MenusComponent},
-    {path: 'perfil', component: PerfilComponent, canActivate: [LoginGuardService]},
-    {path: 'infoPerfil', component: InfoPerfilComponent, canActivate: [LoginGuardService]},
-    {path: 'miMenu', component: MiMenuComponent, canActivate: [LoginGuardService]},
-    // {path: 'crearRestaurante', component: CrearRestauranteComponent, canActivate: [LoginGuardService]},
-    {path: 'not-403', component: Not403Component},
-    {path: 'editar', component: EditarPerfilComponent, children: [
-      {path: 'nuevo', component: AgregarPerfilComponent},
-      {path: 'edicion/:id', component: AgregarPerfilComponent},
-      ],canActivate: [LoginGuardService] 
-    },
-    {path: 'crearUsuario', component: CrearUsuarioComponent, canActivate: [NologinGuard]},
+    
+  { path: 'verificacionE',      component: VerficacionEmailComponent},
+
   {path:"**", pathMatch:"full", redirectTo:""},
+  
+  //   {path: 'clientesHome', component: ListaClientesComponent},
+  //   {path: 'dashboard', component: DashboardComponent},
+  //   {path: 'listaR', component: ListaRestaurantesComponent, canActivate: [LoginGuardService]},
+  //   {path: 'listaU', component: ListaUsuariosComponent, canActivate: [LoginGuardService]},
+  //   {path: 'verificacionR', component: VerificacionRestaurantesComponent, canActivate: [LoginGuardService]},
+  //   {path: 'verificacionE', component: VerficacionEmailComponent},
+  //   {path: 'cliente/:id', component: ListaClientesComponent},
+  //   {path: 'cliente', component: ClienteComponent},
+  //   {path: 'menus', component: MenusComponent},
+  //   {path: 'promociones', component: PromocionesComponent},
+  //   {path: 'listaPromociones', component: ListaPromocionesComponent, canActivate: [LoginGuardService]},
+  //   {path: 'promocionesInicio', component: PromocionesInicioComponent},
+  //   {path: 'menuInicio', component: MenusComponent},
+  //   {path: 'perfil', component: PerfilComponent, canActivate: [LoginGuardService]},
+  //   {path: 'infoPerfil', component: InfoPerfilComponent, canActivate: [LoginGuardService]},
+  //   {path: 'miMenu', component: MiMenuComponent, canActivate: [LoginGuardService]},
+  //   // {path: 'crearRestaurante', component: CrearRestauranteComponent, canActivate: [LoginGuardService]},
+  //   {path: 'not-403', component: Not403Component},
+  //   {path: 'editar', component: EditarPerfilComponent, children: [
+  //     {path: 'nuevo', component: AgregarPerfilComponent},
+  //     {path: 'edicion/:id', component: AgregarPerfilComponent},
+  //     ],canActivate: [LoginGuardService] 
+  //   },
+  //   {path: 'crearUsuario', component: CrearUsuarioComponent, canActivate: [NologinGuard]},
+  // {path:"**", pathMatch:"full", redirectTo:""},
 
 ];
 

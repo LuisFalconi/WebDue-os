@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Menu } from '../../_model/menu';
+import { Subject } from 'rxjs';
+import { LoginService } from '../../_service/login.service';
+import { MenuService } from '../../_service/menu.service';
+import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -6,16 +12,25 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    rol:string;
+
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+  { path: '/dueño/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '', rol:'dueño' },
+  { path: '/dueño/perfil', title: 'Contacto',  icon:'settings_phone', class: '',rol:'dueño' },
+  { path: '/admin/perfil', title: 'Contacto',  icon:'settings_phone', class: '',rol:'admin' },
+  { path: '/admin/listaU', title: 'Contacto',  icon:'settings_phone', class: '',rol:'admin' },
+ // { path: '/sadmin/credenciales', title: 'Credenciales',  icon:'assignment_ind', class: '',rol:'super' },
+
+ 
+ 
+ /*
+ { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
+ { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
+ { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
+ { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
+ { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },*/
+ 
 ];
 
 @Component({
@@ -23,13 +38,38 @@ export const ROUTES: RouteInfo[] = [
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   menuItems: any[];
+  rol:string;
+  name:string;
 
-  constructor() { }
+  menus: Menu[] = [];
+
+  // Se crear la variable para liberar recursos
+  private ngUnsubscribe: Subject<void> = new Subject();
+
+  constructor(public loginService: LoginService, private menuService: MenuService, 
+    private router: Router) { }
 
   ngOnInit() {
+
+    // console.log("paso aqui");
+    
+    // this.menuService.menuCambio.pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
+    //   this.menus = data;
+    //   console.log("menus?", this.menus);
+    // })
+
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.rol=localStorage.getItem('rol');
+    if(this.rol === 'dueño'){
+        console.log("dueño");
+    }else{
+      console.log("admin");
+    }
+
+
+    //this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {
       if ($(window).width() > 1) {
@@ -37,4 +77,9 @@ export class SidebarComponent implements OnInit {
       }
       return true;
   };
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

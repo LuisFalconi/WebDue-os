@@ -61,7 +61,9 @@ export class PromocionService {
       );
   }
 
-  public eliminarPromo(promo: Promocion){
+  
+  
+ public eliminarPromo(promo: Promocion){
     return this.promocionCollection.doc(promo.id).delete();
   }
 

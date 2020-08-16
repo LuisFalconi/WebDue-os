@@ -19,12 +19,17 @@ export class NologinGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+      const rol = localStorage.getItem('rol');
       
       return this.AFauth.authState.pipe(map(auth => {
         if(isNullOrUndefined(auth)){
           return true
         }else{
-          this.router.navigate(['/infoPerfil'])
+          if(rol === 'dueño'){
+          this.router.navigate(['dueño/perfil'])
+          }else if (rol === 'admin'){
+          this.router.navigate(['admin/perfil'])
+          }
           return false
         }
       }))

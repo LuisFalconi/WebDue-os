@@ -37,7 +37,7 @@
   
                   <div class="container" *ngIf="promociones$ | async as promocion; else loading">
                     <!-- {{ perfil$ | async | json}} -->
-                    
+                    {{promociones$ | async | json}}
                       <div  class="example-card" *ngFor="let promo of promocion">
                         <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado ==='verdadero'">
                           <mat-card>

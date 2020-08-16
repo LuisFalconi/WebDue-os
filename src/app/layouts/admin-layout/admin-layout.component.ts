@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -6,20 +6,40 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
+import { LoginService } from '../../_service/login.service';
+import { MenuService } from '../../_service/menu.service';
+import { takeUntil } from 'rxjs/operators';
+import { Menu } from '../../_model/menu';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+  menus: Menu[] = [];
+
+  // Se crear la variable para liberar recursos
+  private ngUnsubscribe: Subject<void> = new Subject();
+
+  constructor( public location: Location, 
+            public loginService: LoginService, 
+            private menuService: MenuService, 
+            private router: Router) {}
 
   ngOnInit() {
+
+    this.menuService.menuCambio.pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
+        this.menus = data;
+        console.log("aaa", this.menus);
+        
+    });
+
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
@@ -154,6 +174,11 @@ export class AdminLayoutComponent implements OnInit {
           bool = true;
       }
       return bool;
+  }
+
+  ngOnDestroy(){
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

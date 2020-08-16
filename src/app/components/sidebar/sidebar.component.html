@@ -1,3 +1,4 @@
+
 <div class="logo">
     <a href="/" class="simple-text">
         <img src="./../../../assets/img/logoMH.png" width="150px" height="150x" alt="">
@@ -17,12 +18,41 @@
         </li>
     </ul>
   </div>
-    <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
+  <ul class="nav">
+    <div *ngFor="let menuItem of menuItems" >
+        <li *ngIf="menuItem.rol === rol" routerLinkActive="active" class="{{menuItem.class}} nav-item">
+            <a class="nav-link" [routerLink]="[menuItem.path]" >
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
+    </div>
     </ul>
+    
+
+    <!-- <div *ngIf="loginService.userData | async">
+        <mat-sidenav-container class="all-wrap" fullscream [hasBackdrop]="false">
+            <mat-sidenav [mode]="'push'" style="width: 300px;" opened>
+                <div *ngFor="let m of menus">
+                    <button mat-menu-item routerLink="{{m.url}}" style="cursor: pointer">
+                        <mat-icon>{{m.icono}}</mat-icon>
+                        <span>{{m.nombre}}</span>
+                    </button>
+                </div>
+            </mat-sidenav>
+    
+            <mat-sidenav-content>
+    
+            <div class="page-wrap">
+                <mat-menu #menu="matMenu"></mat-menu>
+    
+                <main class="conteqnt" style="margin: 40px; margin-bottom: 50%;">
+                    <div class="div-scrollable">
+                        <router-outlet></router-outlet>
+                    </div>
+                </main>
+            </div>
+                </mat-sidenav-content>
+            </mat-sidenav-container>
+        </div> -->
 </div>

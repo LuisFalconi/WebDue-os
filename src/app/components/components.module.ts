@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    MatIconModule
   ],
   declarations: [
     FooterComponent,
@@ -19,7 +21,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    MatIconModule
   ]
 })
 export class ComponentsModule { }

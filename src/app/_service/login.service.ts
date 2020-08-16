@@ -1,11 +1,12 @@
-import { Usuario } from './../_model/usuario';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { Observable, EMPTY, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { Usuario } from '../_model/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,22 @@ export class LoginService {
   // otra variable para validar el estado del usario
   userData: Observable<firebase.User>
 
+  userList:AngularFireList<any>;
+
+
   // Se crear la variable para liberar recursos
   //private ngUnsubscribe: Subject<void> = new Subject();
 
-  constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private route: Router) {
+  constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private route: Router,
+    private _firebase:AngularFireDatabase) {
     // authState: Devolver el estado si alguein acaba de iniciar sesion
     this.user = this.afa.authState.pipe(
       switchMap( user => {
-        // console.log("Usuario??" , user);
+        console.log("Usuario??" , user);
+        this.getTipoUser();
+        console.log("C", this.getTipoUser());
+        
+
         if(user){
           return this.afs.doc<Usuario>(`usuarios/${user.uid}`).valueChanges();
         }else {
@@ -37,9 +46,31 @@ export class LoginService {
 
     // otra forma de validar si hay un usuario logueado
     this.userData = afa.authState;
+
    }
 
+   recuperarUsuarios(): Observable<Usuario[]>{
+    return this.afs
+      .collection('usuarios')
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a =>{
+          const data = a.payload.doc.data() as Usuario;
+          const id = a.payload.doc.id;
+          return {id, ...data}; //SPREAD OPERATOR
+        }))
+      );
+  }
 
+  
+   getTipoUser(){
+    
+    return this.userList = this._firebase.list('usuarios');
+  }
+
+  listar() {
+    return this.afs.collection<Usuario>('usuarios').valueChanges();
+  }
 
   // Login con correo
   login(usuario: string, clave: string){
@@ -88,12 +119,12 @@ export class LoginService {
          numero: numero,
          nombre: nombre,
          estado: "verdadero",
-         roles: ['dueño']
+         rol: 'dueño'
         });
       if(res.user.emailVerified){
-        this.route.navigate(['infoPerfil']);
+        this.route.navigate(['dueño/perfil']);
       }else{
-        this.route.navigate(['verificacionE']);
+        this.route.navigate(['dueño/verificacionE']);
       }
     });
   }
@@ -121,7 +152,8 @@ export class LoginService {
           nombre: data.nombre,
           numero: data.numero,
           email: usuario.email,
-          roles: data.roles
+          // estado: usuario.estado,
+          rol: data.rol
         }
         return userRef.set(datos); // Esta insertando datos, por ellos se crear la variable para liberar recursos al final
       } else {
@@ -131,7 +163,7 @@ export class LoginService {
           numero: usuario.numero,
           nombre: usuario.nombre,
           estado: "verdadero",
-          roles: ['dueño']
+          rol: 'dueño'
         }
         return userRef.set(datos);
       }
@@ -156,7 +188,8 @@ export class LoginService {
           nombre: usuario.displayName,
           numero: usuario.phoneNumber,
           email: usuario.email,
-          roles: data.roles
+          // estado: usuario.estado,
+          rol: data.rol
         }
         return userRef.set(datos); // Esta insertando datos, por ellos se crear la variable para liberar recursos al final
       } else {
@@ -166,7 +199,7 @@ export class LoginService {
           numero: usuario.phoneNumber,
           nombre: usuario.displayName,
           estado: "verdadero",
-          roles: ['dueño']
+          rol: 'dueño'
         }
         return userRef.set(datos);
       }
@@ -177,7 +210,7 @@ export class LoginService {
   cerrarSesion(){
     return this.afa.auth.signOut().then( ()=> {
       window.location.reload() // Esto permite recargar la pagina al cerrar sesion, y asi simular que se esta liberando recursos
-      this.route.navigate(['inicio']);
+      this.route.navigate(['login']);
     });
   }
 

@@ -20,6 +20,7 @@ export class ListaPromocionesComponent implements OnInit {
 
   promociones$: Observable<Promocion[]>;
   usuarioLog: string;
+  public jsonObject: any;
 
   emailVerificado: boolean;
 
@@ -117,6 +118,7 @@ export class ListaPromocionesComponent implements OnInit {
     this.plato$ = this.platoService.recuperarMenus(); // recuperamos esta data con ASYNC
     this.perfil$ = this.perfilService.recuperarDatos(); // recuperamos esta data con ASYNC
 
+    // this.jsonObject = JSON.parse(this.promociones$);
   }
 
   deshabilitarPromo(promo: Promocion){    

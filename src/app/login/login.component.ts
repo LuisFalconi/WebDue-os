@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import { MenuService } from '../_service/menu.service';
 import { Menu } from '../_model/menu';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   estadoRecuperar: boolean;
   estadoCrear: boolean;
 
+  usuario$: Observable<Usuario[]>;
+
+
   // Se crear la variable para liberar recursos
   private ngUnsubscribe: Subject<void> = new Subject();
 
@@ -37,7 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
               private route : Router,
               private menuService: MenuService,
               private iconRegistry: MatIconRegistry,
-              private sanitizer: DomSanitizer) { 
+              private sanitizer: DomSanitizer
+            ) { 
 
     this.iconRegistry.addSvgIcon('facebook-up', this.sanitizer.bypassSecurityTrustResourceUrl("assets/facebook.svg"));
     this.iconRegistry.addSvgIcon('google-up', this.sanitizer.bypassSecurityTrustResourceUrl("assets/google.svg"));
@@ -57,6 +61,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    // this.recuperarRol();
+    this.usuario$ = this.LoginService.recuperarUsuarios();
+
   }
 
   
@@ -64,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(){
     // Al momento de iniciar sesion se redirige al component "Plato"
     this.LoginService.login(this.usuario, this.clave).then( data =>{  
+      
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -71,6 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         showConfirmButton: false,
         timer: 1500
       });
+      this.getTipoUser();
     }).catch(err =>{
       if(err.code === 'auth/argument-error'){
         Swal.fire({
@@ -110,8 +119,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginFacebook() {
     this.LoginService.loginFacebook().then(() => {
-      this.listarMenus();
-      this.route.navigate(['/infoPerfil']);
+      // this.listarMenus();
+      this.route.navigate(['dueño/perfil']);
     }).catch(err => {
 
       // manejo de error en caso que un usuario tenga el mismo correo con facebook y google
@@ -129,9 +138,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginGoogle() {
     this.LoginService.loginGoogle().then(() => {
-
-      this.listarMenus();
-      this.route.navigate(['/infoPerfil']);
+      this.route.navigate(['dueño/perfil']);
     }).catch(err => console.log("Error??", err));
   }
 
@@ -222,37 +229,95 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  listarMenus() {
-    // .pipe(takeUntil(this.ngUnsubscribe)): Vas hacer esto hasta que el subscribe sea necesaria para librerar recursos
-    this.menuService.listar().pipe(takeUntil(this.ngUnsubscribe)).subscribe(menus => {
+  // listarMenus() {
+  //   this.menuService.listar().pipe(takeUntil(this.ngUnsubscribe)).subscribe(menus => {
 
-      this.LoginService.user.pipe(takeUntil(this.ngUnsubscribe)).subscribe(userData => {
-        if (userData) {
-          //console.log(userData);
-          let user_roles: string[] = userData.roles
-          let final_menus: Menu[] = [];
+  //     this.LoginService.user.pipe(takeUntil(this.ngUnsubscribe)).subscribe(userData => {
+  //       if (userData) {
+  //         console.log("estoy pasando pr aqui?", userData);
+  //         let user_roles: string[] = userData.roles
+  //         let final_menus: Menu[] = [];
 
-          for (let menu of menus) {
-            n2: for (let rol of menu.roles) {
-              for (let urol of user_roles) {
-                if (rol === urol) {
-                  let m = new Menu();
-                  m.nombre = menu.nombre;
-                  m.icono = menu.icono;
-                  m.url = menu.url;
-                  final_menus.push(m);
-                  break n2;
-                }
-              }
-            }
+  //         for (let menu of menus) {
+  //           n2: for (let rol of menu.roles) {
+  //             for (let urol of user_roles) {
+  //               if (rol === urol) {
+  //                 let m = new Menu();
+  //                 m.nombre = menu.nombre;
+  //                 m.icono = menu.icono;
+  //                 m.url = menu.url;
+  //                 final_menus.push(m);
+  //                 console.log("final menu", final_menus);
+                  
+  //                 break n2;
+  //               }
+  //             }
+  //           }
 
-            this.menuService.menuCambio.next(final_menus);
-            this.route.navigate(['/infoPerfil']);
-          }
+  //           this.menuService.menuCambio.next(final_menus);
+  //           this.route.navigate(['/infoPerfil']);
+  //         }
+  //       }
+  //     });
+  //   });
+  // }
+
+  recuperarRol(){
+    this.usuario$ = this.LoginService.recuperarUsuarios();
+
+    console.log("que es esto", this.usuario$);
+
+    this.usuario$.subscribe(data =>{
+      for(let rol of data){
+        console.log(this.usuario);
+        console.log(rol.email);
+        if(rol.email === this.usuario){
+          console.log("este usuario", rol.email);
+          console.log("rol?", rol.rol);
+        }else{
+          console.log("no es");
+          
         }
-      });
-    });
+        break;
+      }
+    } );
   }
+
+  onLoginRedirect(){
+    console.log('onLoginRedirect');
+    const rol = localStorage.getItem('rol');
+    if(rol==='dueño'){
+      this.route.navigate(['/dueño/dashboard']);
+    }else if(rol==='admin'){
+      this.route.navigate(['/admin/perfil']);
+    }
+
+    //this.isInvalid=false;
+  }
+
+  getTipoUser(){
+    let long=0;
+    this.LoginService.listar().subscribe(x =>{
+      console.log("ssss", x);
+      x.forEach(element => {
+        long++;
+        if(element['email'] == this.usuario){
+          console.log(element['rol']);  
+          localStorage.setItem('rol', element['rol']);
+          this.onLoginRedirect();
+        }
+
+      });
+      if(x.length==long){
+        let msg='No tiene Acceso al sistema';
+        console.log("no tiene acceso");
+            
+      }
+    })
+  }
+
+
+ 
 
   ngOnDestroy(){
     this.ngUnsubscribe.next();
