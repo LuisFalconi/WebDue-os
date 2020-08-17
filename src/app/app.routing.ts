@@ -35,7 +35,7 @@ const routes: Routes =[
   },
   {
     path: 'loging',
-    component: LoginComponent, canActivate: [NologinGuard]
+    component: LoginComponent, 
   },
   {
     path: '',

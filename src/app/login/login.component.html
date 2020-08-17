@@ -10,7 +10,7 @@ login
             <div class="login-content">
                 <mat-form-field style="width: 250px;">
                     <input matInput placeholder="Email" [(ngModel)]="usuario" autocomplete="off" required>
-                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <!-- <mat-icon matSuffix>person_pin</mat-icon> -->
                     <mat-hint *ngIf="!usuario">Ingresa tu usuario</mat-hint>
                 </mat-form-field><br>
                 <mat-form-field style="width: 250px;">
@@ -22,12 +22,12 @@ login
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button class="iniciarS" (click)="login()"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Iniciar Sesión</span></button>
+            <button mat-raised-button class="iniciarS" (click)="login()"><span>&nbsp; Iniciar Sesión</span></button>
             <!-- <button mat-raised-button class="crear" (click)="irCrear()"><mat-icon svgIcon="cuenta-up"></mat-icon><span>&nbsp; ¿Aun no tienes una cuenta?</span></button> -->
             <br><br><br><br>
-            <button mat-raised-button class="social-g" (click)="loginGoogle()"><mat-icon svgIcon="google-up"></mat-icon><span>&nbsp; Google</span></button><br>
-            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><mat-icon svgIcon="facebook-up"></mat-icon><span>&nbsp; Facebook</span></button><br>
-            <button mat-raised-button class="inicio" routerLink="/inicio"><mat-icon svgIcon="food-up"></mat-icon><span>&nbsp; Regresar</span></button>
+            <button mat-raised-button class="social-g" (click)="loginGoogle()"><span>&nbsp; Google</span></button><br>
+            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><span>&nbsp; Facebook</span></button><br>
+            <button mat-raised-button class="inicio" routerLink="/inicio"><span>&nbsp; Regresar</span></button>
         </mat-card-actions>
         <mat-divider></mat-divider>
         <mat-list-item>
@@ -135,7 +135,7 @@ login
                 </mat-form-field><br><br> -->
             </div>
             <mat-card-actions>
-                <button mat-raised-button class="iniciarS" [disabled]="nuevoUsuario.invalid"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Crear Cuenta</span></button>
+                <button mat-raised-button class="iniciarS" [disabled]="nuevoUsuario.invalid"><span>&nbsp; Crear Cuenta</span></button>
             </mat-card-actions>
         </form>
         </mat-card-content>
@@ -143,9 +143,9 @@ login
             <!-- <button mat-raised-button class="iniciarS" (click)="crearUsuario()"><mat-icon svgIcon="iniciar-up"></mat-icon><span>&nbsp; Crear Cuenta</span></button> -->
             <!-- <button mat-raised-button class="crear" (click)="irCrear()"><mat-icon svgIcon="cuenta-up"></mat-icon><span>&nbsp; ¿Aun no tienes una cuenta?</span></button> -->
             <br><br>
-            <button mat-raised-button class="social-g" (click)="loginGoogle()"><mat-icon svgIcon="google-up"></mat-icon><span>&nbsp; Google</span></button><br>
-            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><mat-icon svgIcon="facebook-up"></mat-icon><span>&nbsp; Facebook</span></button><br>
-            <button mat-raised-button class="inicio" routerLink="/inicio"><mat-icon svgIcon="food-up"></mat-icon><span>&nbsp; Regresar</span></button>
+            <button mat-raised-button class="social-g" (click)="loginGoogle()"><span>&nbsp; Google</span></button><br>
+            <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary">   <span>&nbsp; Facebook</span></button><br>
+            <button mat-raised-button class="inicio" routerLink="/inicio"><span>&nbsp; Regresar</span></button>
         </mat-card-actions>
         <mat-divider></mat-divider>
         <mat-list-item>

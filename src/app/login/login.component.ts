@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   clave: string;
   nombre: string;
   numero: string;
+  rol: "dueño";
   hide = true;
 
   // Validar cajas activas
@@ -148,7 +149,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });  
   }
   crearUsuario() {
-    this.LoginService.registrarUsuario(this.usuario, this.clave, this.nombre, this.numero).then( login =>{
+    this.LoginService.registrarUsuario(this.usuario, this.clave, this.nombre, this.numero, this.rol).then( login =>{
       console.log("login", login);
     }).catch(err => console.log(err));
     //window.location.reload();
@@ -157,7 +158,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   agregarUsuario(data: Usuario) {
     console.log('New usuario', data);
-    this.LoginService.registrarUsuario(data.email, data.clave, data.nombre, data.numero).then(login =>{
+    this.LoginService.registrarUsuario(data.email, data.clave, data.nombre, data.numero, data.rol).then(login =>{
       //console.log(login);
     }).catch(err =>{
       console.log(err);
@@ -273,7 +274,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(rol.email);
         if(rol.email === this.usuario){
           console.log("este usuario", rol.email);
-          console.log("rol?", rol.rol);
+          console.log("rol???", rol.rol);
         }else{
           console.log("no es");
           
@@ -287,9 +288,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     console.log('onLoginRedirect');
     const rol = localStorage.getItem('rol');
     if(rol==='dueño'){
-      this.route.navigate(['/dueño/dashboard']);
+      this.route.navigate(['dueño/dashboard']);
     }else if(rol==='admin'){
-      this.route.navigate(['/admin/perfil']);
+      this.route.navigate(['admin/perfil']);
     }
 
     //this.isInvalid=false;

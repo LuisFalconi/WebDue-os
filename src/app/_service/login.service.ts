@@ -77,12 +77,12 @@ export class LoginService {
     return this.afa.auth.signInWithEmailAndPassword(usuario, clave).then(res =>{
       console.log("mailverificado??", res.user.emailVerified);
       this.actualizarUsuarioData(res.user);
-      if(res.user.emailVerified){
-        this.actualizarUsuarioData(res.user);
-        this.route.navigate(['/infoPerfil']);
-      }else if(res.user.emailVerified === false){
-        this.route.navigate(['verificacionE']);
-      }
+      // if(res.user.emailVerified){
+      //   this.actualizarUsuarioData(res.user);
+      //   this.route.navigate(['/dueño/perfil']);
+      // }else if(res.user.emailVerified === false){
+      //   this.route.navigate(['/dueño/verificacionE']);
+      // }
     });
   }
 
@@ -107,7 +107,7 @@ export class LoginService {
     return (this.afa.auth.currentUser).sendEmailVerification();
   }
 
-  registrarUsuario(usuario: string, clave: string, nombre: string, numero:string) {
+  registrarUsuario(usuario: string, clave: string, nombre: string, numero:string, rol:string) {
     return this.afa.auth.createUserWithEmailAndPassword(usuario, clave).then( res =>{
       //this.enviarVerificacionEmail();
       const uid = res.user.uid;
@@ -121,11 +121,14 @@ export class LoginService {
          estado: "verdadero",
          rol: 'dueño'
         });
-      if(res.user.emailVerified){
         this.route.navigate(['dueño/perfil']);
-      }else{
-        this.route.navigate(['dueño/verificacionE']);
-      }
+
+      // if(res.user.emailVerified){
+      //   this.route.navigate(['dueño/perfil']);
+      // }else{
+      //   this.route.navigate(['dueño/verificacionE']);
+      // }
+      // this.cerrarSesion();
     });
   }
 
@@ -152,8 +155,8 @@ export class LoginService {
           nombre: data.nombre,
           numero: data.numero,
           email: usuario.email,
-          // estado: usuario.estado,
-          rol: data.rol
+          //estado: usuario.estado,
+          rol: usuario.rol
         }
         return userRef.set(datos); // Esta insertando datos, por ellos se crear la variable para liberar recursos al final
       } else {
