@@ -1,4 +1,4 @@
-<div class="container" *ngIf="user$ | async as usuarios; else userSocial">
+<!-- <div class="container" *ngIf="user$ | async as usuarios; else userSocial">
     <div class="infoPerfil" *ngFor="let u of usuarios" >
       <mat-card class="example-card" *ngIf="usuarioLogueado === u.uid">
         <mat-card-header>
@@ -34,7 +34,62 @@
           </mat-card>
     </div>
 
-</ng-template>
+</ng-template> -->
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-info">
+                      <h4 class="card-title">Perfil</h4>
+                  </div>
+                  <div class="card-body">
+
+                      <div class="card mb-3">
+                          <div class="row no-gutters">
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <div *ngIf="user$ | async as usuarios">
+                                  <div *ngFor="let u of usuarios" >
+                                    <div  *ngIf="usuarioLogueado === u.uid">
+                                      <div class="col-md-4">
+                                        <div class="card card-profile">
+                                          <div class="card-avatar">
+                                            <a>
+                                              <img class="img" [src]="'https://i.pinimg.com/originals/5f/87/61/5f8761590f4c651c8383dd58fce5dbf0.png'" />
+                                            </a>
+                                          </div>
+                                          <div class="card-body">
+                                            <h6 class="card-category text-gray">Dueño de Restaurante</h6>
+                                            <h4 class="card-title">{{u.nombre}}</h4>
+                                            <p class="card-description">
+                                              {{u.email}}
+                                            </p><hr>
+                                            <p class="card-description" *ngIf="u.numero">
+                                              {{u.numero}}
+                                            </p>
+                                            <!--<a href="#pablo" class="btn btn-primary btn-round">Follow</a>-->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                          
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 
 
 

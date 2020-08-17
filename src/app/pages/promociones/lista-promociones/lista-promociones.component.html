@@ -1,16 +1,73 @@
 <div>
 
   <ng-template [ngIf] ="emailVerificado == false">
-    <p>
-        Tu correo electrónico aun no ha sido verificado
-        revisa tu bandeja de entrada o el correo no deseado o vuelve a enviar el mail
-    </p><br>
-    <button mat-button (click)="enviarEmail()">Enviar</button>
+    <div class="main-content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header card-header-info">
+                          <h4 class="card-title">Validar e-mail</h4>
+                      </div>
+                      <div class="card-body">
+    
+                          <div class="card mb-3">
+                              <div class="row no-gutters">
+                                <div class="col-md-4">
+                                   <img src="../../../assets/img/mail.png" class="card-img" alt="about.id">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                      <p>Tu correo electrónico aun no ha sido verificado
+                                      revisa tu bandeja de entrada o el correo no deseado o vuelve a enviar el mail</p>
+                                      <hr>
+                                      <p class="card-text"><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#dataModal" (click)="enviarEmail()"><i class="fas fa-edit"></i>enviar mail</a></p>
+                                  
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                    
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </ng-template>
 
 <ng-template [ngIf] ="emailVerificado == true">
     <div *ngIf="validacionRestauranteExiste(valorRestaurante) == false; else validacionRestaurante">
-        <p>Debes Agregar un restaurante primero</p>
+      <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title">Agregar Restaurante</h4>
+                        </div>
+                        <div class="card-body">
+      
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                  <div class="col-md-4">
+                                     <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3>Debes agregar información de tu restaurante primero</h3>
+                                        <hr>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </ng-template>
 
@@ -27,17 +84,102 @@
         <div *ngFor="let perfil of perfil$ | async ">
             <div *ngIf="usuarioLog == perfil.userUID">
                 <ng-template [ngIf]="perfil.resVerificado.toString() === 'En revision'">
-                    <p>Tu restaurante esta siendo verificado por el Administrador</p>
-                    <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                  <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-info">
+                                        <h4 class="card-title">Validar e-mail</h4>
+                                    </div>
+                                    <div class="card-body">
+                  
+                                        <div class="card mb-3">
+                                            <div class="row no-gutters">
+                                              <div class="col-md-4">
+                                                 <img src="../../../assets/img/mail.png" class="card-img" alt="about.id">
+                                              </div>
+                                              <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <p>Tu restaurante esta siendo verificado por el Administrador</p>
+                                                    <hr>
+                                                      <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                                                
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  
                 </ng-template>
                 <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado'">
                     <div>
-                        <p>Restaurante Aprobado</p>
-                        <h1 style="text-align: center;"> Promociones</h1>
+                      <div class="main-content">
+                        <div class="container-fluid">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="card">
+                                <div class="card-header card-header-info">
+                                  <h4 class="card-title ">Listado de Recetas</h4>
+                                </div>
+                                <div class="row" style="text-align: center;">
+                                  <div class="col-md-4">                                   
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="card-body">
+                                  
+                                      <div class="row" *ngIf="promociones$ | async as promocion">
+                                        <div *ngFor="let promo of promocion; let i = index">
+                                          <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.fotosPromocion">
+                                            <a>
+                                              <div class="card" class="img-contenedor">
+                                                <img class="card-img-top text-center" [src]="promo.fotosPromocion" alt="Card image cap">
+                                                <div class="card-body cardTitle">
+                                                  <h5 class="card-title text-center" *ngIf="promo.estado ==='falso'">Promoción Deshabilitada</h5>
+                                                  <div style="text-align: center;">
+                                                    <button mat-button color="warm" *ngIf="promo.estado === 'verdadero'" (click)="deshabilitarPromo(promo)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Deshabilitar</button>
+                                                    <button mat-button color="info" *ngIf="promo.estado === 'falso'" (click)="habilitarPromo(promo)"><mat-icon arial-label="habilitar">check_circle</mat-icon>Habilitar</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </a>
+                                          </div>
+                                          <hr>
+                                        </div>
+                          
+                                      </div>
+                                      <div style="text-align: center;">
+                                      <app-promociones></app-promociones>
+    
+                                      </div>
+                          
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4"></div>
+                                </div>
+
+                                
+                              </div>
+                            </div>
+         
+                              
   
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+<!-- 
+
+                  
                   <div class="container" *ngIf="promociones$ | async as promocion; else loading">
-                    <!-- {{ perfil$ | async | json}} -->
-                    {{promociones$ | async | json}}
+
                       <div  class="example-card" *ngFor="let promo of promocion">
                         <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado ==='verdadero'">
                           <mat-card>
@@ -56,11 +198,11 @@
                     <div style="position: static;">
                       <app-promociones></app-promociones>
                     </div>  
-                    <mat-divider></mat-divider>
+                    <mat-divider></mat-divider> -->
                     
-                      <p>Promociones Deshabilitadas</p>
+                      <!-- <p>Promociones Deshabilitadas</p>
                       <div class="container" *ngIf="promociones$ | async as promocion; else loading">
-                        <!-- {{ perfil$ | async | json}} -->
+       
                           <div  class="example-card" *ngFor="let promo of promocion">
                             <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado ==='falso'">
                               <mat-card >
@@ -75,16 +217,14 @@
                               </mat-card>
                             </div>
                           </div>
-                        </div>
-                      
-
-
-          <ng-template #loading>
+                        </div> -->
+                    
+          <!-- <ng-template #loading>
             <div class="spinner">
               <p>Cargando ....</p>
               <mat-spinner></mat-spinner>
             </div>
-          </ng-template>
+          </ng-template> -->
 
         </div>
           </ng-template>

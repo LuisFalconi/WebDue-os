@@ -10,6 +10,12 @@
     background-size: contain;
 }
 
+.file_p{
+    margin-bottom: 0px;
+    margin-top: -15px;
+    padding: 0px;
+  }
+
 .icon-white {
     -webkit-filter: contrast(4) invert(1);
     -moz-filter: contrast(4) invert(1);

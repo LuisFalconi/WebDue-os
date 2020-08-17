@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule  } from '@angular/material/chips';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
@@ -53,7 +54,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatChipsModule
     
   ],
   exports: [
@@ -80,7 +82,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatChipsModule
 
     
   ],

@@ -2,93 +2,190 @@
         <ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == true">
                 
             <div *ngIf="validacionRestauranteExiste(valorRestaurante) == false; else validacionRestaurante">
-                <p>Debes Agregar un restaurante primero</p>
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-info">
+                                        <h4 class="card-title">Agregar Restaurante</h4>
+                                    </div>
+                                    <div class="card-body">
+                  
+                                        <div class="card mb-3">
+                                            <div class="row no-gutters">
+                                              <div class="col-md-4">
+                                                 <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                              </div>
+                                              <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h3>Debes agregar información de tu restaurante primero</h3>
+                                                    <hr>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
                 <ng-template #validacionRestaurante>
 
                     <div *ngIf="validacionDocRestauranteExiste(validacionR) == false; else verificacionRes">
-                        <h1>Un paso mas antes de agregar tu menu :) </h1>
-                        <app-validacion></app-validacion>
+                        <div class="main-content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header card-header-info">
+                                                <h4 class="card-title">Restaurante</h4>
+                                            </div>
+                                            <div class="card-body">
+                          
+                                                <div class="card mb-3">
+                                                    <div class="row no-gutters">
+                                                      <div class="col-md-4">
+                                                         <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                                      </div>
+                                                      <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h3>Un paso mas antes de agregar tu menu :) </h3>
+                                                            <hr>
+                                                                <app-validacion></app-validacion>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <ng-template #verificacionRes>
                         <div *ngFor="let perfil of perfil$ | async ">
                             <div *ngIf="usuarioLog == perfil.userUID">
                                 <ng-template [ngIf]="perfil.resVerificado.toString() === 'En revision'">
-                                    <p>Tu restaurante esta siendo verificado por el Administrador</p>
-                                    <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Restaurante</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h3>Tu restaurante esta siendo verificado por el Administrador</h3>
+                                                                        <hr>
+                                                                        <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ng-template>
                                 <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado'">
-                                    <p>Ingresa tu menu del Dia!</p>
-                                        <button *ngIf="validacionDes(valorD) === false" mat-stroked-button (click)="nuevoDesayuno()">
-                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Desayuno
-                                        </button>&nbsp;&nbsp;&nbsp;
-                                        <button *ngIf="validacionAlm(valorA) === false" mat-stroked-button (click)="nuevoAlmuerzo()">
-                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Almuerzo
-                                        </button>&nbsp;&nbsp;&nbsp;
-                                        <button *ngIf="validacionMer(valorM) === false" mat-stroked-button (click)="nuevaMerienda()">
-                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Merienda
-                                        </button>
-                                </ng-template>
-                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado'">
-                                    <div *ngIf="validacionDocRestauranteExiste(validacionR) == true">
-                        
-                                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
-                                        <p>La información de tu restaurante será eliminado por el administrador.</p>
-                                        <br>
-                                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
-                                    </div> 
-                                </ng-template>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-template>
-
-
-                <ng-template [ngIf]="validacionDes(valorD) === true">
-                    <div  *ngFor="let platoD of platoDes$ | async ">
-                        <div *ngIf="usuarioLog == platoD.userUID">
-                            <mat-card-title>Menu del Dia</mat-card-title>
-                            <mat-card class="example-card" >
-                                <mat-card-header>
-                                    <div mat-card-avatar class="example-header-image"></div>
-                                    <mat-card-title *ngIf="platoD.platoDesayuno">Desayuno</mat-card-title>
-                                    <mat-card-subtitle>Tipo Desayuno: {{platoD.platoDesayuno}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Detalles / Ingredientes: {{platoD.detalleDesayuno}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Precio : {{platoD.precioDesayuno}} $</mat-card-subtitle>
-                                </mat-card-header>
-                                    <mat-card-actions>
-                                        <button mat-button>
-                                            <app-editar-desayuno></app-editar-desayuno>
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
-                        </div>
-                    </div> 
-                </ng-template>
-                <ng-template [ngIf]="validacionAlm(valorA) === true">
-                    <div  *ngFor="let platoA of platoAlm$ | async ">
-                        <div *ngIf="usuarioLog == platoA.userUID">
-                            <mat-card-title>Menu del Dia</mat-card-title>
-                            <mat-card class="example-card" >
-                                <mat-card-header>
-                                    <div mat-card-avatar class="example-header-image"></div>
-                                    <mat-card-title *ngIf="platoA.entradaAlmuerzo">Almuerzo</mat-card-title>
-                                    <mat-card-subtitle>Entrada: {{platoA.entradaAlmuerzo}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Segundo: {{platoA.segundoAlmuerzo}}</mat-card-subtitle>
-                                    <mat-card-subtitle>Jugo: {{platoA.jugoAlmuerzo}} $</mat-card-subtitle>
-                                    <mat-card-subtitle>Precio : {{platoA.precioAlmuerzo}} $</mat-card-subtitle>
-                                </mat-card-header>
-                                    <mat-card-actions>
-                                        <button mat-button>
-                                            <app-editar-almuerzo></app-editar-almuerzo>
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
-                        </div>
-                    </div>
-                </ng-template>
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Menú del día </h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                  </div>
+                                                                  <div class="col-md-6">
+                                                                    <div class="card-body">
+                                                                        <button *ngIf="validacionDes(valorD) === false" mat-stroked-button (click)="nuevoDesayuno()">
+                                                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Desayuno
+                                                                        </button>&nbsp;&nbsp;&nbsp;
+                                                                        <button *ngIf="validacionAlm(valorA) === false" mat-stroked-button (click)="nuevoAlmuerzo()">
+                                                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Almuerzo
+                                                                        </button>&nbsp;&nbsp;&nbsp;
+                                                                        <button *ngIf="validacionMer(valorM) === false" mat-stroked-button (click)="nuevaMerienda()">
+                                                                            <mat-icon>note_add</mat-icon>&nbsp; Agregar Merienda
+                                                                        </button>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <ng-template [ngIf]="validacionDes(valorD) === true">
+                                                                        <div  *ngFor="let platoD of platoDes$ | async ">
+                                                                            <div *ngIf="usuarioLog == platoD.userUID">
+                                                                                <mat-card-title>Menu del Dia</mat-card-title>
+                                                                                <mat-card class="example-card" >
+                                                                                    <mat-card-header>
+                                                                                        <div mat-card-avatar class="example-header-image"></div>
+                                                                                        <mat-card-title *ngIf="platoD.platoDesayuno">Desayuno</mat-card-title>
+                                                                                        <mat-card-subtitle>Tipo Desayuno: {{platoD.platoDesayuno}}</mat-card-subtitle>
+                                                                                        <mat-card-subtitle>Detalles / Ingredientes: {{platoD.detalleDesayuno}}</mat-card-subtitle>
+                                                                                        <mat-card-subtitle>Precio : {{platoD.precioDesayuno}} $</mat-card-subtitle>
+                                                                                    </mat-card-header>
+                                                                                        <mat-card-actions>
+                                                                                            <button mat-button>
+                                                                                                <app-editar-desayuno></app-editar-desayuno>
+                                                                                            </button>
+                                                                                        </mat-card-actions>
+                                                                                    </mat-card>
+                                                                            </div>
+                                                                        </div> 
+                                                                    </ng-template>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <ng-template [ngIf]="validacionAlm(valorA) === true">
+                                                                        <div  *ngFor="let platoA of platoAlm$ | async ">
+                                                                            <div *ngIf="usuarioLog == platoA.userUID">
+                                                                                <mat-card-title>Menu del Dia</mat-card-title>
+                                                                                <mat-card class="example-card" >
+                                                                                    <mat-card-header>
+                                                                                        <div mat-card-avatar class="example-header-image"></div>
+                                                                                        <mat-card-title *ngIf="platoA.entradaAlmuerzo">Almuerzo</mat-card-title>
+                                                                                        <mat-card-subtitle>Entrada: {{platoA.entradaAlmuerzo}}</mat-card-subtitle>
+                                                                                        <mat-card-subtitle>Segundo: {{platoA.segundoAlmuerzo}}</mat-card-subtitle>
+                                                                                        <mat-card-subtitle>Jugo: {{platoA.jugoAlmuerzo}} $</mat-card-subtitle>
+                                                                                        <mat-card-subtitle>Precio : {{platoA.precioAlmuerzo}} $</mat-card-subtitle>
+                                                                                    </mat-card-header>
+                                                                                        <mat-card-actions>
+                                                                                            <button mat-button>
+                                                                                                <app-editar-almuerzo></app-editar-almuerzo>
+                                                                                            </button>
+                                                                                        </mat-card-actions>
+                                                                                    </mat-card>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ng-template>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                                    
+  
                 <ng-template [ngIf]="validacionMer(valorM) === true">
                     <div  *ngFor="let platoM of platoMer$ | async ">
                         <div *ngIf="usuarioLog == platoM.userUID">
@@ -110,11 +207,69 @@
                         </div>
                     </div>
                 </ng-template>
+                                                                </div>
+                                                              </div>
+
+                                                            
+                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                          
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado'">
+                                    <div *ngIf="validacionDocRestauranteExiste(validacionR) == true">
+                        
+                                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
+                                        <p>La información de tu restaurante será eliminado por el administrador.</p>
+                                        <br>
+                                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
+                                    </div> 
+                                </ng-template>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-template>
+
+
+
         </ng-template>
 
                         
         <ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == false">
-            <h3>Tu restaurante esta deshabilitado, no puedes agregar un menu</h3>
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info">
+                                    <h4 class="card-title">Restaurante</h4>
+                                </div>
+                                <div class="card-body">
+              
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                          <div class="col-md-4">
+                                             <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h3>Tu restaurante esta deshabilitado, no puedes agregar un menu</h3>
+                                                <hr>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ng-template>
 
 
