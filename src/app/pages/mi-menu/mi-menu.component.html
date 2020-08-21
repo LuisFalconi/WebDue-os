@@ -221,13 +221,41 @@
                                           
                                 </ng-template>
                                 <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado'">
-                                    <div *ngIf="validacionDocRestauranteExiste(validacionR) == true">
-                        
-                                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
-                                        <p>La información de tu restaurante será eliminado por el administrador.</p>
-                                        <br>
-                                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
-                                    </div> 
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Restaurante rechazado</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/mail.png" class="card-img" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                      <div>
+                                                                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
+                                                                        <p>La información de tu restaurante será eliminado por el administrador.</p>
+                                                                        <br>
+                                                                        <app-validacion></app-validacion>         
+                                                                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
+                                                                    </div> 
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ng-template>
                             </div>
                         </div>

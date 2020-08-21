@@ -28,9 +28,6 @@ export class RolGuardGuard implements CanActivate {
       //navigate to not found page
       console.log('no entro');
       
-      //console.log('roter navigate')
-      //console.log(rol);
-      //this.router.navigate(['/inicio']);
       return false;
       
     }

@@ -169,7 +169,15 @@ export class PerfilComponent implements OnInit {
   }
 
   enviarEmail(){
-    this.route.navigate(['/verificacionE']);
+    this.loginService.enviarVerificacionEmail();
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'mail enviado!',
+      text: "Revisa tu bandeja de entrada",
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
   
     onNewPost() {

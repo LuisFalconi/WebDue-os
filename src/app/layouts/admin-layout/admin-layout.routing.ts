@@ -21,6 +21,8 @@ import { Not403Component } from '../../pages/not403/not403.component';
 import { PerfilComponent } from '../../pages/perfil/perfil.component';
 import { ListaRestaurantesComponent } from '../../restaurantes/lista-restaurantes/lista-restaurantes.component';
 import { VerificacionRestaurantesComponent } from '../../usuarios/verificacion-restaurantes/verificacion-restaurantes.component';
+import { AfiliadosComponent } from '../../usuarios/afiliados/afiliados.component';
+import { NoAfiliadosComponent } from '../../usuarios/no-afiliados/no-afiliados.component';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -32,6 +34,8 @@ export const AdminLayoutRoutes: Routes = [
             {path: 'miMenu', component: MiMenuComponent},
             {path: 'promociones', component: PromocionesComponent},
             {path: 'listaPromociones', component: ListaPromocionesComponent},
+            {path: 'afiliados', component: AfiliadosComponent},
+            {path: 'noAfiliados', component: NoAfiliadosComponent},
             { path: 'verificacionE',      component: VerficacionEmailComponent},
             {path: 'not-403', component: Not403Component},
             { path: 'perfil', component: InfoPerfilComponent},

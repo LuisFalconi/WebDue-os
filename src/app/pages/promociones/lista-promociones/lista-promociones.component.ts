@@ -10,6 +10,7 @@ import { PerfilService } from '../../../_service/perfil.service';
 import { Plato } from '../../../_model/plato'
 import { PlatoService } from '../../../_service/plato.service'
 import { ValidacionService } from '../../../_service/validacion.service';
+import { LoginService } from '../../../_service/login.service';
 
 @Component({
   selector: 'app-lista-promociones',
@@ -29,6 +30,8 @@ export class ListaPromocionesComponent implements OnInit {
   valorRestaurante: boolean=true;
   validacionR: boolean=true;
   valor: boolean=true;
+  estadoRestaurante: boolean=true;
+
   menuLog : Plato[];
 
   plato$: Observable<Plato[]>;
@@ -39,7 +42,8 @@ export class ListaPromocionesComponent implements OnInit {
               private router: Router,
               private validacionService: ValidacionService,
               private perfilService: PerfilService,
-              private platoService : PlatoService) { }
+              private platoService : PlatoService,
+              private loginService: LoginService) { }
 
   ngOnInit() {
 
@@ -104,7 +108,15 @@ export class ListaPromocionesComponent implements OnInit {
         this.restaurantelog = [x];
         this.valorRestaurante = true;
         this.validacionRestauranteExiste(this.valorRestaurante);
-        //console.log("Este restaurante", this.restaurantelog); 
+        this.restaurantelog.forEach(element => {
+          if (element.estado === 'verdadero') {
+            this.estadoRestaurante = true;
+            this.estadoRestauranteActual(this.estadoRestaurante); 
+          } else if (element.estado === 'falso') {
+            this.estadoRestaurante = false;
+            this.estadoRestauranteActual(this.estadoRestaurante); 
+          }
+        }); 
         break;   
       }else{
         console.log("No");
@@ -240,7 +252,16 @@ export class ListaPromocionesComponent implements OnInit {
   }
 
   enviarEmail(){
-    this.router.navigate(['/verificacionE']);
+    this.loginService.enviarVerificacionEmail();
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'mail enviado!',
+      text: "Revisa tu bandeja de entrada",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    // this.router.navigate(['/verificacionE']);
   }
 
   validacionRestauranteExiste(valor: boolean){
@@ -261,6 +282,14 @@ export class ListaPromocionesComponent implements OnInit {
 
   // Validacion si el documento que valide el nuevo restaurante existe
   validacionDocRestauranteExiste(valor: boolean){
+    if (valor){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  estadoRestauranteActual(valor: boolean){
     if (valor){
       return true;
     }else{

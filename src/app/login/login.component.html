@@ -25,9 +25,8 @@ login
             <button mat-raised-button class="iniciarS" (click)="login()"><span>&nbsp; Iniciar Sesión</span></button>
             <!-- <button mat-raised-button class="crear" (click)="irCrear()"><mat-icon svgIcon="cuenta-up"></mat-icon><span>&nbsp; ¿Aun no tienes una cuenta?</span></button> -->
             <br><br><br><br>
-            <button mat-raised-button class="social-g" (click)="loginGoogle()"><span>&nbsp; Google</span></button><br>
+            <button mat-raised-button class="iniciarG" (click)="loginGoogle()" ><span>&nbsp; Google</span></button><br>
             <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary"><span>&nbsp; Facebook</span></button><br>
-            <button mat-raised-button class="inicio" routerLink="/inicio"><span>&nbsp; Regresar</span></button>
         </mat-card-actions>
         <mat-divider></mat-divider>
         <mat-list-item>
@@ -145,7 +144,7 @@ login
             <br><br>
             <button mat-raised-button class="social-g" (click)="loginGoogle()"><span>&nbsp; Google</span></button><br>
             <button mat-raised-button class="social-f" (click)="loginFacebook()" color="primary">   <span>&nbsp; Facebook</span></button><br>
-            <button mat-raised-button class="inicio" routerLink="/inicio"><span>&nbsp; Regresar</span></button>
+            <button mat-raised-button class="inicio" (click)="irLogin()"><span>&nbsp; Regresar</span></button>
         </mat-card-actions>
         <mat-divider></mat-divider>
         <mat-list-item>

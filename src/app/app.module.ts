@@ -81,6 +81,8 @@ import { EditarMeriendaComponent } from './pages/platos/editar-merienda/editar-m
 import { CrearMeriendaComponent } from './pages/platos/crear-merienda/crear-merienda.component';
 import { EditMeriendaComponent } from './restaurantes/edit-merienda/edit-merienda.component';
 import { MaterialModule } from './material/material.module';
+import { AfiliadosComponent } from './usuarios/afiliados/afiliados.component';
+import { NoAfiliadosComponent } from './usuarios/no-afiliados/no-afiliados.component';
 
 @NgModule({
 
@@ -136,7 +138,9 @@ import { MaterialModule } from './material/material.module';
     CrearMeriendaComponent,
     ModalEditarMeriendaComponent,
     EditMeriendaComponent,
-    ModalMeriendaComponent
+    ModalMeriendaComponent,
+    AfiliadosComponent,
+    NoAfiliadosComponent
   ],
   imports: [
     BrowserModule,
