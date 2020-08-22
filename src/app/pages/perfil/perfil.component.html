@@ -14,8 +14,54 @@
                             <div class="card-body">
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
+                                        <div class="col-md-1"></div>
                                       <div class="col-md-4">
+                                        <div class="card card-profile">
+                                            <div class="card-header card-header-danger">
+                                                <h4 class="card-title">Actualiza tu información</h4>
+                                            </div>
+                                            <mat-form-field class="example-full-width">
+                                                <label for="Nombre">Nombre del Restaurante</label>
+                                                <input [disabled]="true" matInput type="text" [(ngModel)]="p.nombreRestaurante">
+                                                <!-- <h4>{{u.nombre}}</h4> -->
+                                            </mat-form-field>
+                                      
+                                            <mat-form-field class="example-full-width">
+                                              <label for="Nombre">Tipo de Restaurante</label>
+                                              <input [disabled]="true" matInput type="text" [(ngModel)]="p.tipoRestaurante">
+                                          </mat-form-field>
+                                          <mat-form-field class="example-full-width">
+                                            <label for="Nombre">Dirección</label>
+                                            <input [disabled]="true" matInput type="text" [(ngModel)]="p.direccionRestaurante">
+                                        </mat-form-field>
+                
+                                        <mat-form-field class="example-full-width">
+                                          <label for="Nombre">Capacidad</label>
+                                          <input [disabled]="true" matInput type="text" [(ngModel)]="p.capacidadRestaurante">
+                                      </mat-form-field>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <label for="Nombre">Horario de Apertura</label>
+                                                <input [disabled]="true" matInput type="text" [(ngModel)]="p.horaApertura">
+                                            </mat-form-field>                         
+                                          </div>
+                                          <div class="col-md-4">
+
+                                          </div>
+                                          <div class="col-md-4">
+                                            <mat-form-field class="example-full-width">
+                                                <label for="Nombre">Horario de Cierre</label>
+                                                <input [disabled]="true" matInput type="text" [(ngModel)]="p.horaCierre">
+                                            </mat-form-field>
+                                        </div>
                                       </div>
+                                        <app-editar-perfil></app-editar-perfil>
+
+                                        </div>
+                                      </div>  
+                                      <div class="col-md-1"></div>
+
                                       <div class="col-md-4">
                                         <div class="card card-profile">
                                             <div class="card-avatar">
@@ -42,7 +88,7 @@
                                                 <mat-icon>directions_run</mat-icon>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Capacidad &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <mat-icon>directions_run</mat-icon><br>
-                                                {{p.capacidadRestaurante}}
+                                                {{p.capacidadRestaurante}}&nbsp; Personas
                                               </h4>
                                               <h4 class="card-title">
                                                 <mat-icon>schedule</mat-icon>
@@ -53,7 +99,6 @@
                                               <hr>
                                               <mat-card-actions>
                                                 <button mat-button>
-                                                    <app-editar-perfil></app-editar-perfil>
                                                 </button>
                                                 <button mat-button color="info" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarRestaurante(p)"><mat-icon arial-label="deshabilitar">highlight_off</mat-icon>Deshabilitar</button>
                                                 <button mat-button color="warning" *ngIf="p.estado === 'falso'" (click)="habilitarRestaurante(p)"><mat-icon arial-label="hablitar">check_circle</mat-icon>Habilitar</button>
@@ -61,6 +106,9 @@
                                             </div>
                                           </div>
                                       </div>
+                                      <div class="col-md-2">
+                                          
+                                    </div>
                                     </div>
                                 </div>
                           

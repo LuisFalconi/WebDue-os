@@ -4,13 +4,9 @@
 }
 
 .container{
-    width: 80%;
-    margin-left: 25%;
+    width: 100%;
 }
 
-.example-full-width{
-    width: 300px;
-}
 
 button{
     margin: 5px;

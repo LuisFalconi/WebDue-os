@@ -1,4 +1,15 @@
-.dialog-content{
-    margin: 10px;
-    padding: 15px 180px 0 0;
+element.style {
+    transform: none;
+    padding-top: 24px;
+    width: 300px;
+    height: 300px;
+}
+
+mat-dialog-content{
+    width: 500px;
+    height: 500px;
+}
+mat-dialog-container {
+
+    border-radius: 80px;
 }

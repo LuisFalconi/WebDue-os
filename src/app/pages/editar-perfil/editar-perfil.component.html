@@ -5,11 +5,10 @@
         <mat-table [dataSource]= "dataSource" matSort >
             <ng-container matColumnDef="acciones">
                 <mat-header-cell *matHeaderCellDef>
-                    <h3>Actualizar Información</h3>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let row" style="padding-left: 40%;">
                   <div *ngIf="usuarioLog == row.userUID">
-                          <button mat-icon-button color="primary" (click)="editarRestaurante(row)">
+                          <button mat-raised-button color="warm" (click)="editarRestaurante(row)">Editar restaurante
                               <mat-icon arial-label="Actualizar">edit</mat-icon>
                           </button>
                   </div>
