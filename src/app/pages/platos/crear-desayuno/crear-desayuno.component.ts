@@ -46,7 +46,7 @@ export class CrearDesayunoComponent implements OnInit, OnDestroy {
   addMenu(menuDesayuno: PlatoDesayuno) {
     console.log('New menu', menuDesayuno);
     this.platoDesayuno.subirMenu(menuDesayuno);
-    this.router.navigate(['miMenu']);
+    this.router.navigate(['dueño/miMenu']);
   }
 
   cancelar(event: any){

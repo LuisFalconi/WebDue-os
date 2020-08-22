@@ -199,7 +199,6 @@ export class MiMenuComponent implements OnInit {
   this.platoMer$ = this.meriendaService.recuperarMenus(); // recuperamos esta data con ASYNC
   this.perfil$ = this.perfilService.recuperarDatos(); // recuperamos esta data con ASYNC
     
-
   }
 
   // Funcion que comprueba si exite informacion en la base

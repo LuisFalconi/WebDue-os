@@ -82,7 +82,7 @@ export class EditarMeriendaComponent implements OnInit, OnDestroy {
          //window.location.reload(true);
          Swal.fire('Eliminado!','Tu Menú ha sido eliminado','success')
            .then(() =>{
-             this.router.navigate(['/miMenu']);
+             this.router.navigate(['dueño/miMenu']);
            });
          }).catch((error =>{
            Swal.fire('Error!', error ,'error');

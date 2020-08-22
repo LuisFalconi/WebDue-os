@@ -47,7 +47,7 @@ export class CrearMeriendaComponent implements OnInit, OnDestroy {
  
    addMenu(menuMerienda: PlatoMerienda) {
      this.platoMerienda.subirMenu(menuMerienda);
-     this.router.navigate(['miMenu']);
+     this.router.navigate(['dueño/miMenu']);
    }
  
    cancelar(event: any){
