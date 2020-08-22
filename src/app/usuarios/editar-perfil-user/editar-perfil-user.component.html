@@ -1,0 +1,16 @@
+
+      <div sclass="example-container mat-elevation-z8">
+        <mat-table [dataSource]= "dataSource" matSort >
+            <ng-container matColumnDef="acciones">
+                <mat-header-cell *matHeaderCellDef>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" style="padding-left: 40%;">
+                          <button mat-raised-button color="info" (click)="editarUsuario(row)">Editar
+                              <mat-icon arial-label="Actualizar">edit</mat-icon>
+                          </button>  
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>

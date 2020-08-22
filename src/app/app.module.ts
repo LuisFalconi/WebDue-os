@@ -83,6 +83,9 @@ import { EditMeriendaComponent } from './restaurantes/edit-merienda/edit-meriend
 import { MaterialModule } from './material/material.module';
 import { AfiliadosComponent } from './usuarios/afiliados/afiliados.component';
 import { NoAfiliadosComponent } from './usuarios/no-afiliados/no-afiliados.component';
+import { EditarPerfilUserComponent } from './usuarios/editar-perfil-user/editar-perfil-user.component';
+import { ModalEditPerilUsuarioComponent } from './modal/modal-edit-peril-usuario/modal-edit-peril-usuario.component';
+import { EditPerfilUserComponent } from './usuarios/edit-perfil-user/edit-perfil-user.component';
 
 @NgModule({
 
@@ -140,7 +143,10 @@ import { NoAfiliadosComponent } from './usuarios/no-afiliados/no-afiliados.compo
     EditMeriendaComponent,
     ModalMeriendaComponent,
     AfiliadosComponent,
-    NoAfiliadosComponent
+    NoAfiliadosComponent,
+    EditarPerfilUserComponent,
+    ModalEditPerilUsuarioComponent,
+    EditPerfilUserComponent
   ],
   imports: [
     BrowserModule,
