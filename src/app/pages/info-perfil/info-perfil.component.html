@@ -37,9 +37,27 @@
 
                         <mat-form-field class="example-full-width">
                           <label for="Nombre">Descripción</label>
-                          <input [disabled]="true" matInput type="text" [(ngModel)]="u.numero">
+                          <input [disabled]="true" matInput type="text" [(ngModel)]="u.descripcion">
                           <!-- <h4>{{u.nombre}}</h4> -->
                       </mat-form-field>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <label for="Nombre">Facebook</label>
+                            <input [disabled]="true" matInput type="text" [(ngModel)]="u.socialF">
+                            <!-- <h4>{{u.nombre}}</h4> -->
+                        </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <label for="Nombre">Instagram</label>
+                            <input [disabled]="true" matInput type="text" [(ngModel)]="u.socialG">
+                            <!-- <h4>{{u.nombre}}</h4> -->
+                        </mat-form-field>
+                        </div>
+                      </div>
                             <app-editar-perfil-user></app-editar-perfil-user>
                             </div>
                             <div class="col-md-1">
@@ -61,8 +79,24 @@
                                               {{u.email}}
                                             </p><hr>
                                             <p class="card-description" *ngIf="u.numero">
-                                              {{u.numero}}
+                                              Telf. {{u.numero}}
                                             </p>
+                                            <p class="card-description" *ngIf="u.descripcion">
+                                              Sobre mi: {{u.descripcion}}
+                                            </p>
+                                            <div class="row">
+                                            <div class="col-md-4" *ngIf="u.socialF">
+                                              <button  mat-raised-button>
+                                                <a href="https://www.facebook.com/{{u.socialF}}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                              </button>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4" *ngIf="u.socialG">
+                                              <button  mat-raised-button>
+                                                <a href="https://www.instagram.com/{{u.socialG}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+                                              </button>                                    
+                                            </div>
+                                          </div>
                                             <!--<a href="#pablo" class="btn btn-primary btn-round">Follow</a>-->
                                           </div>
                                         </div>

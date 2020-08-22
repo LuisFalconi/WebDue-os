@@ -19,7 +19,11 @@ export class EditPerfilUserComponent implements OnInit {
     uid: new FormControl (''),
     nombre: new FormControl ('', [Validators.required]),  
     email: new FormControl('',  [Validators.required]),
-    numero: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[1-9]/)])
+    numero: new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.minLength(10)]),
+    descripcion: new FormControl(''),
+    socialF: new FormControl('',),
+    socialG: new FormControl('',)
+
   });
 
   ngOnInit() {
@@ -60,6 +64,9 @@ export class EditPerfilUserComponent implements OnInit {
       nombre: this.user.nombre, 
       email: this.user.email,
       numero: this.user.numero,
+      descripcion: this.user.descripcion,
+      socialF: this.user.socialF,
+      socialG: this.user.socialG
     });
   } 
 

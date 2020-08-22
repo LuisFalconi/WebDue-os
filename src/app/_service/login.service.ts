@@ -119,7 +119,10 @@ export class LoginService {
          numero: numero,
          nombre: nombre,
          estado: "verdadero",
-         rol: 'dueño'
+         rol: 'dueño',
+         descripcion: "",
+         socialF:"",
+         socialG:""
         });
         this.route.navigate(['dueño/perfil']);
 
@@ -156,7 +159,10 @@ export class LoginService {
           numero: data.numero,
           email: usuario.email,
           //estado: usuario.estado,
-          rol: usuario.rol
+          rol: usuario.rol,
+          descripcion: data.descripcion,
+          socialF: data.socialF,
+          socialG: data.socialG
         }
         return userRef.set(datos); // Esta insertando datos, por ellos se crear la variable para liberar recursos al final
       } else {
@@ -166,7 +172,10 @@ export class LoginService {
           numero: usuario.numero,
           nombre: usuario.nombre,
           estado: "verdadero",
-          rol: 'dueño'
+          rol: 'dueño',
+          descripcion: "",
+          socialF: "",
+          socialG: ""
         }
         return userRef.set(datos);
       }
@@ -192,7 +201,10 @@ export class LoginService {
           numero: usuario.phoneNumber,
           email: usuario.email,
           // estado: usuario.estado,
-          rol: data.rol
+          rol: data.rol,
+          descripcion: data.descripcion,
+          socialF: data.socialF,
+          socialG: data.socialG
         }
         return userRef.set(datos); // Esta insertando datos, por ellos se crear la variable para liberar recursos al final
       } else {
@@ -202,7 +214,10 @@ export class LoginService {
           numero: usuario.phoneNumber,
           nombre: usuario.displayName,
           estado: "verdadero",
-          rol: 'dueño'
+          rol: 'dueño',
+          descripcion: "",
+          socialF: "",
+          socialG: ""
         }
         return userRef.set(datos);
       }

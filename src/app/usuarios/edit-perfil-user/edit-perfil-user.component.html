@@ -19,13 +19,22 @@
         </mat-form-field> -->
 
         <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Numero" formControlName="numero" ></textarea>
-            <div *ngIf="editDesayunoForm.get('numero').errors && editDesayunoForm.get('numero').dirty" >
-                <p class="e" *ngIf="editDesayunoForm.get('numero').hasError('required')">El campo no puede estar vacio</p>
+            <input matInput placeholder="Número celular" formControlName="numero"  required maxlength="10">
+            <div *ngIf="editDesayunoForm.get('numero').errors" >
+                <p class="e" *ngIf="editDesayunoForm.get('numero').hasError('minlength')">Minimo 10 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('numero').hasError('pattern')">El campo debe contener números</p>
             </div>
         </mat-form-field>
-    
-    
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Descripcion" formControlName="descripcion" ></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Facebook* (user) " formControlName="socialF" >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Instagram* (user)" formControlName="socialG" >
+        </mat-form-field>
+       
         <mat-divider></mat-divider>
 
         <button mat-raised-button color="primary" type="submit" [disabled]="editDesayunoForm.invalid" [mat-dialog-close]="true">

@@ -7,4 +7,7 @@ export class Usuario {
     numero?: string;
     clave?: string;
     estado?: string;
+    descripcion: string;
+    socialF: string;
+    socialG: string;
 }
