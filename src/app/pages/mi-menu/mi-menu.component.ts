@@ -35,6 +35,8 @@ export class MiMenuComponent implements OnInit {
   menuLog : Plato[];
   restaurantelog : Perfil[];
 
+  
+
 
   usuarioDes: string;
 

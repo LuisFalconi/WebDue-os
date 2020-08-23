@@ -72,8 +72,8 @@
         </mat-form-field>
 
         <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
-        <p class="limite">Tamaño maximo 5 Mb</p>
-        <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar($event)" accept=".jpg, .png, .gif, .jpeg">
+        <p class="limite">Tamaño maximo 6 Mb</p>
+        <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar_foto($event)">
 
         <p>{{labelImage}}</p>
         <button mat-raised-button color="primary" type="submit" [disabled]="editResForm.invalid" [mat-dialog-close]="true">

@@ -1,5 +1,6 @@
 <div *ngFor="let p of perfil$ | async ">
     <div *ngIf="usuarioLog == p.userUID">
+        
         <div class="main-content">
             <div class="container-fluid">
                 <div class="row">
@@ -101,9 +102,6 @@
                                                 <button mat-button color="info" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarRestaurante(p)"><mat-icon arial-label="deshabilitar">highlight_off</mat-icon>Deshabilitar</button>
                                                 <button mat-button color="warning" *ngIf="p.estado === 'falso'" (click)="habilitarRestaurante(p)"><mat-icon arial-label="hablitar">check_circle</mat-icon>Habilitar</button>
 
-
-                                                
-                                            
                                             </mat-card-actions>
                                             </div>
                                           </div>
@@ -115,21 +113,94 @@
                                 </div>
                           
                             </div>
-                            <div class="row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4" *ngIf="p.estadoDocumento === 'Sin Documento'">
-                                    <h3>Debes subir un documento que prueba que tu restaurante es Real</h3>
-                                    <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Subir Documento</span></button>
-                                    <input id="input_subida" type="file"  accept=".docx, .pdf" style="display: none" (change)="subirDocumentoDeValidacion(p, $event)">
-                                    <p style="text-align: center;">{{labelFile}}</p>
-                                </div>
-                                <div class="col-md-4"></div>
+                            <div *ngIf="p.estadoDocumento === 'Sin Documento'">
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card">
+                                                            <div class="card-header card-header-info">
+                                                                <h4 class="card-title">Documento de Validación</h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                          
+                                                                <div class="card mb-3">
+                                                                    <div class="row no-gutters">
+                                                                      <div class="col-md-4">
+                                                                         <img src="../../../assets/img/mail.png" class="card-img" alt="about.id">
+                                                                      </div>
+                                                                      <div class="col-md-8">
+                                                                        <div class="card-body">
+                                                                            <div class="col-md-8" *ngIf="p.estadoDocumento === 'Sin Documento'">
+                                                                                <p>Debes Agregar un documento que pruebe que tu restaurante es Valido!</p>
+                                                                                <p>La direccion de tu restaurante debe ser exacta para que se vea reflejada en la app movil</p>
+                                                                                <p><b>Ejemplo:</b> Fotos de tu establecimiento por fuera, patente, o algun documentos que valide que eres dueño del restaurante</p>
+                                                                                <mat-divider></mat-divider><br>
+                                                                                <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Subir Documento</span></button>
+                                                                                <input id="input_subida" type="file"  accept=".docx, .pdf" style="display: none" (change)="subirDocumentoDeValidacion(p, $event)">
+                                                                                <p style="text-align: center;">{{labelFile}}</p>
+                                                                            </div>
+                                                                            <!-- <p class="card-text"><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#dataModal" (click)="enviarEmail()"><i class="fas fa-edit"></i>enviar mail</a></p> -->
+                                            
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                          
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                             </div>
+                            <div *ngIf="p.estadoDocumento === 'documento Rechazado'">
+                                <div class="main-content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header card-header-info">
+                                                        <h4 class="card-title">Documento de Validación</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                  
+                                                        <div class="card mb-3">
+                                                            <div class="row no-gutters">
+                                                              <div class="col-md-4">
+                                                                 <img src="../../../assets/img/mail.png" class="card-img" alt="about.id">
+                                                              </div>
+                                                              <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                        <h4>Tu documento ha sido rechado</h4>
+                                                                        <p>Debes Agregar un documento que pruebe que tu restaurante es Valido!</p>
+                                                                        <p>La direccion de tu restaurante debe ser exacta para que se vea reflejada en la app movil</p>
+                                                                        <p><b>Ejemplo:</b> Fotos de tu establecimiento por fuera, patente, o algun documentos que valide que eres dueño del restaurante</p>
+                                                                        <mat-divider></mat-divider>
+                                                                        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Subir Documento</span></button>
+                                                                        <input id="input_subida" type="file"  accept=".docx, .pdf" style="display: none" (change)="subirDocumentoDeValidacion(p, $event)">
+                                                                        <p style="text-align: center;">{{labelFile}}</p>
+                                                                    
+                                                                    <!-- <p class="card-text"><a href="#" class="btn btn-danger" data-toggle="modal" data-target="#dataModal" (click)="enviarEmail()"><i class="fas fa-edit"></i>enviar mail</a></p> -->
+                                    
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
+        
     </div>
     <!-- <div *ngIf="p.estado === 'verdadero'; else estadoFalso">
         <p>restaurante verdader</p>

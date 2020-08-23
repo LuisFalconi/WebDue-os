@@ -23,6 +23,7 @@ import { VerificacionRestaurantesComponent } from '../../usuarios/verificacion-r
 import { AfiliadosComponent } from '../../usuarios/afiliados/afiliados.component';
 import { NoAfiliadosComponent } from '../../usuarios/no-afiliados/no-afiliados.component';
 import { ListaUsuariosComponent } from '../../usuarios/lista-usuarios/lista-usuarios.component';
+import { ValidacionDocumentoComponent } from '../../pages/validacion-documento/validacion-documento.component';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -50,6 +51,7 @@ export const AdminLayoutRoutes: Routes = [
        { path: 'listaU',                    component: ListaUsuariosComponent},
        {path: 'listaR',                     component: ListaRestaurantesComponent},
        {path: 'verificacionR',              component: VerificacionRestaurantesComponent},
+       {path: 'verificacionDoc',              component: ValidacionDocumentoComponent},
        { path: 'verificacionE',      component: VerficacionEmailComponent},
 
        { path: '**',           redirectTo: 'perfil'}, 

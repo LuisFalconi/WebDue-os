@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Validacion } from '../../_model/validacion';
@@ -17,7 +18,7 @@ export class ValidacionComponent implements OnInit {
   imgSrc: string;
   isSubmitted: boolean = false;
   
-  constructor(private validacionService: ValidacionService) { }
+  constructor(private validacionService: ValidacionService, private route: Router) { }
 
   public newValForm = new FormGroup({
     id: new FormControl (''),
@@ -72,6 +73,10 @@ export class ValidacionComponent implements OnInit {
     console.log(this.isSubmitted);
     this.file_val = e.target.files[0];
     this.labelFile = e.target.files[0].name;    
+  }
+
+  ir(){
+    this.route.navigate(['dueño/restaurante']);
   }
 
   resetForm() {

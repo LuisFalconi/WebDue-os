@@ -87,6 +87,10 @@ import { ModalEditPerilUsuarioComponent } from './modal/modal-edit-peril-usuario
 import { EditPerfilUserComponent } from './usuarios/edit-perfil-user/edit-perfil-user.component';
 import { ListaUsuariosDeshabilitadosComponent } from './usuarios/lista-usuarios-deshabilitados/lista-usuarios-deshabilitados.component';
 import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
+import { ValidacionDocumentoComponent } from './pages/validacion-documento/validacion-documento.component';
+import { TemplateValidacionDocumentoComponent } from './pages/template-validacion-documento/template-validacion-documento.component';
+import { EditEstadoDocumentoModalComponent } from './modal/edit-estado-documento-modal/edit-estado-documento-modal.component';
+import { EditEstadoDocumentoComponent } from './restaurantes/edit-estado-documento/edit-estado-documento.component';
 
 @NgModule({
 
@@ -149,7 +153,11 @@ import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios
     EditarPerfilUserComponent,
     ModalEditPerilUsuarioComponent,
     EditPerfilUserComponent,
-    ListaUsuariosDeshabilitadosComponent
+    ListaUsuariosDeshabilitadosComponent,
+    ValidacionDocumentoComponent,
+    TemplateValidacionDocumentoComponent,
+    EditEstadoDocumentoModalComponent,
+    EditEstadoDocumentoComponent
   ],
   imports: [
     BrowserModule,
@@ -185,7 +193,8 @@ import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios
     ModalAlmuerzoComponent,
     ModalEditarAlmuerzoComponent,
     ModalMeriendaComponent,
-    ModalEditarMeriendaComponent
+    ModalEditarMeriendaComponent,
+    EditEstadoDocumentoModalComponent
   ],
   providers: [
     AngularFirestore,

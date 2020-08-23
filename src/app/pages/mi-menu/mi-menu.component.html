@@ -35,45 +35,51 @@
             </div>
 
                 <ng-template #validacionRestaurante>
-
-                    <div *ngIf="validacionDocRestauranteExiste(validacionR) == false; else verificacionRes">
-                        <div class="main-content">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header card-header-info">
-                                                <h4 class="card-title">Restaurante</h4>
-                                            </div>
-                                            <div class="card-body">
-                          
-                                                <div class="card mb-3">
-                                                    <div class="row no-gutters">
-                                                      <div class="col-md-4">
-                                                         <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
-                                                      </div>
-                                                      <div class="col-md-8">
-                                                        <div class="card-body">
-                                                            <h3>Un paso mas antes de agregar tu menu :) </h3>
-                                                            <hr>
-                                                                <app-validacion></app-validacion>
+                    <div *ngFor="let p of perfil$ | async">
+                        <div *ngIf="usuarioLog == p.userUID">
+                            <div *ngIf="p.estadoDocumento.toString() ==='Sin Documento' ;else verificacionRes">
+                                <div class="main-content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header card-header-info">
+                                                        <h4 class="card-title">Restaurante</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                  
+                                                        <div class="card mb-3">
+                                                            <div class="row no-gutters">
+                                                              <div class="col-md-4">
+                                                                 <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                                              </div>
+                                                              <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h3>Un paso mas antes de agregar tu menu :) </h3>
+                                                                    <hr>
+                                                                        <app-validacion></app-validacion>
+                                                                </div>
+                                                              </div>
+                                                            </div>
                                                         </div>
-                                                      </div>
+                                                  
                                                     </div>
                                                 </div>
-                                          
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
+
                     </div>
+                    
                     
                     <ng-template #verificacionRes>
                         <div *ngFor="let perfil of perfil$ | async ">
                             <div *ngIf="usuarioLog == perfil.userUID">
-                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'En revision'">
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento en Revision'">
                                     <div class="main-content">
                                         <div class="container-fluid">
                                             <div class="row">
@@ -93,7 +99,7 @@
                                                                     <div class="card-body">
                                                                         <h3>Tu restaurante esta siendo verificado por el Administrador</h3>
                                                                         <hr>
-                                                                        <mat-card-title>Estado:{{perfil.resVerificado}}</mat-card-title>
+                                                                        <mat-card-title>Estado:{{perfil.estadoDocumento}}</mat-card-title>
                                                                     </div>
                                                                   </div>
                                                                 </div>
@@ -105,7 +111,74 @@
                                         </div>
                                     </div>
                                 </ng-template>
-                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado'">
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Rechazado'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Restaurante</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h3>Tu restaurante ha sido Rechazado</h3>
+                                                                        <hr>
+                                                                        <mat-card-title>Estado:{{perfil.estadoDocumento}}</mat-card-title>
+                                                                        <app-validacion></app-validacion>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Aprobado' && perfil.resVerificado.toString() === 'En revision'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Restaurante</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/restaurante.png" class="card-img" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h3>Tu restaurante ha sido Aprobado</h3>
+                                                                        <hr>
+                                                                        <mat-card-title>Estado:{{perfil.estadoDocumento}}</mat-card-title>
+                                                                        <hr>
+                                                                        <p>En minutos tu Restaurante será Aprobado</p>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado' && perfil.estadoDocumento.toString() ==='documento Aprobado'">
                                     <div class="main-content">
                                         <div class="container-fluid">
                                             <div class="row">
@@ -258,7 +331,7 @@
                                     </div>
                                           
                                 </ng-template>
-                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado'">
+                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado' || perfil.estadoDocumento.toString() === 'documento Rechazado'">
                                     <div class="main-content">
                                         <div class="container-fluid">
                                             <div class="row">
@@ -277,11 +350,9 @@
                                                                   <div class="col-md-8">
                                                                     <div class="card-body">
                                                                       <div>
-                                                                        <h1>Tu restaurante no ha sido Aprobado :( </h1>
-                                                                        <p>La información de tu restaurante será eliminado por el administrador.</p>
+                                                                        <h1>Tu restaurante aun ha sido Aprobado :( </h1>
+                                                                        <!-- <p>La información de tu restaurante será eliminado por el administrador.</p> -->
                                                                         <br>
-                                                                        <app-validacion></app-validacion>         
-                                                                        <p>Si crees que es un error, puedes volver a cargar información real.</p>
                                                                     </div> 
                                                                     </div>
                                                                   </div>

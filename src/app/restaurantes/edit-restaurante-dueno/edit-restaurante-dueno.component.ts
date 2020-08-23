@@ -77,7 +77,7 @@ export class EditRestauranteDuenoComponent implements OnInit {
     });
   }
 
-  seleccionar(event: any): void{
+  seleccionar_foto(event: any): void{
   
 
     let typeImage = event.target.files[0].type;
