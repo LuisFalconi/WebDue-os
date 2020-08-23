@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PerfilService } from '../../_service/perfil.service';
 import { Perfil } from '../../_model/perfil';
@@ -18,21 +19,32 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListaRestaurantesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['nombreR', 'tipoR', 'capacidadR', 'verificado', 'acciones'];
+  displayedColumns: string[] = ['nombreR', 'tipoR', 'capacidadR', 'verificado', 'estado' ,'acciones'];
+  displayedColumns2: string[] = ['nombreR', 'tipoR', 'capacidadR', 'verificado', 'acciones'];
   dataSource = new MatTableDataSource();
+  dataSource2 = new MatTableDataSource();
+
+  resdesHabilitados :Perfil[] =[];
+  resHabilitados :Perfil[] =[];
+
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   
-  constructor(private perfilSvc: PerfilService, public dialog: MatDialog) { }
+  constructor(private perfilSvc: PerfilService, public dialog: MatDialog,
+            private route: Router) { }
 
   ngOnInit() {
-    this.perfilSvc.recuperarDatos().subscribe(perfiles => (this.dataSource.data = perfiles));
+    // this.perfilSvc.recuperarDatos().subscribe(perfiles => (this.dataSource.data = perfiles));
+    this.tabladesHabilitados();
+    this.tablaHabilitados();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource2.paginator = this.paginator;
+    this.dataSource2.sort = this.sort;
   }
 
   applicarFiltro(filterValue: string) {
@@ -68,6 +80,107 @@ export class ListaRestaurantesComponent implements OnInit, AfterViewInit {
     });
 
   }
+
+  tabladesHabilitados(){
+    this.resdesHabilitados=[];
+    this.perfilSvc.recuperarDatos()
+      .subscribe(
+        // afil['estado'] == 'falso'
+        data=>{
+          for(let key$ in data){
+            let desHabilitados = data[key$];
+
+            if(desHabilitados['estado'] === "falso"){
+              this.resdesHabilitados.push(desHabilitados);
+            }else{
+              console.log("no");
+            }
+
+          }
+          this.dataSource2.data = this.resdesHabilitados	;
+          this.dataSource2.paginator = this.paginator;      
+        },
+        error=>{
+          console.log(error);
+        }
+
+      );
+  }
+
+  tablaHabilitados(){
+    this.resHabilitados=[];
+    this.perfilSvc.recuperarDatos()
+      .subscribe(
+        // afil['estado'] == 'falso'
+        data=>{
+          for(let key$ in data){
+            let Habilitados = data[key$];
+
+            if(Habilitados['estado'] === "verdadero"){
+              this.resHabilitados.push(Habilitados);
+            }else{
+              console.log("no");
+            }
+
+          }
+          this.dataSource.data = this.resHabilitados;
+          this.dataSource.paginator = this.paginator;      
+        },
+        error=>{
+          console.log(error);
+        }
+
+      );
+  }
+
+  desHabilitarRestaurante(perfil: Perfil) {   
+     
+    Swal.fire({
+      title: 'Deseas deshabilitar este restaurante?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si!'
+    }).then(result => {
+      if (result.value) {
+        this.perfilSvc.deshabilitarRestaurante(perfil).then(() => {
+          Swal.fire('Deshabilitado!', 'El usuario ha sido deshabilitado.', 'success');
+          this.route.navigate(['admin/listaR']);
+          this.tablaHabilitados();
+          this.route.navigate(['dueño/listaU']);
+          this.route.navigate(['admin/listaR']);
+
+        }).catch((error) => {
+          Swal.fire('Error!', 'There was an error deleting this post', 'error');
+        });
+      }
+    });
+  }
+
+  HabilitarRestaurante(perfil: Perfil) {   
+     
+    Swal.fire({
+      title: 'Deseas Habilitar este restaurante?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si!'
+    }).then(result => {
+      if (result.value) {
+        this.perfilSvc.habilitarRestaurante(perfil).then(() => {
+          Swal.fire('Habilitado!', 'El usuario ha sido deshabilitado.', 'success');
+          this.route.navigate(['admin/listaR']);
+          this.tabladesHabilitados();
+        }).catch((error) => {
+          Swal.fire('Error!', 'There was an error deleting this post', 'error');
+        });
+      }
+    });
+  }
+
+  
 
 
   // Dialogo que valida si al abrir el Dialogo, me muestra el contenido

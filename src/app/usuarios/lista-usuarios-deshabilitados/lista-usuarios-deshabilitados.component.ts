@@ -10,11 +10,11 @@ import { UsuarioService } from '../../_service/usuario.service';
 
 
 @Component({
-  selector: 'app-lista-usuarios',
-  templateUrl: './lista-usuarios.component.html',
-  styleUrls: ['./lista-usuarios.component.css']
+  selector: 'app-lista-usuarios-deshabilitados',
+  templateUrl: './lista-usuarios-deshabilitados.component.html',
+  styleUrls: ['./lista-usuarios-deshabilitados.component.css']
 })
-export class ListaUsuariosComponent implements OnInit {
+export class ListaUsuariosDeshabilitadosComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'email', 'numero', 'rol','acciones'];
   dataSource = new MatTableDataSource();
@@ -22,6 +22,7 @@ export class ListaUsuariosComponent implements OnInit {
 
   usuarios$: Observable<Usuario[]>;
   userHabilitados :Usuario[] =[];
+  
 
 
 
@@ -29,15 +30,13 @@ export class ListaUsuariosComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private usuarioSvc: UsuarioService,
-                private route: Router) { }
+            private route: Router) { }
 
   ngOnInit(): void {
 
     
     this.tablaHabilitados();
-    // this.usuarioSvc.recuperarDatos().subscribe(usuarios => (this.dataSource.data = usuarios));
-
-    this.usuarios$ = this.usuarioSvc.recuperarDatos();
+    // this.usuarios$ = this.usuarioSvc.recuperarDatos();
   }
 
   ngAfterViewInit() {
@@ -58,8 +57,7 @@ export class ListaUsuariosComponent implements OnInit {
         data=>{
           for(let key$ in data){
             let habilitados = data[key$];
-
-            if(habilitados['estado'] == "verdadero"){
+            if(habilitados['estado'] == "falso"){
               this.userHabilitados.push(habilitados);
             }else{
               console.log("no");
@@ -76,10 +74,10 @@ export class ListaUsuariosComponent implements OnInit {
       );
   }
 
-  desHabilitarUsuario(usuario: Usuario) {   
+  habilitarUsuario(usuario: Usuario) {   
      
     Swal.fire({
-      title: 'Deseas deshabilitar este usuario?',
+      title: 'Deseas volver habilitar este usuario?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -87,10 +85,11 @@ export class ListaUsuariosComponent implements OnInit {
       confirmButtonText: 'Si!'
     }).then(result => {
       if (result.value) {
-        this.usuarioSvc.deshabilitarUsuario(usuario).then(() => {
-            this.route.navigate(['admin/listaU']);
-          Swal.fire('Deshabilitado!', 'El usuario ha sido deshabilitado.', 'success');
+        this.usuarioSvc.habilitarUsuario(usuario).then(() => {
+          Swal.fire('Habilitado!', 'el usuario ha sido Habilitado.', 'success');
           this.tablaHabilitados();
+          this.route.navigate(['admin/listaU']);
+
         }).catch((error) => {
           Swal.fire('Error!', 'There was an error deleting this post', 'error');
         });

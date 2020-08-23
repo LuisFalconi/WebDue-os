@@ -11,7 +11,6 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { RolGuardGuard } from '../../guards/rol-guard.guard';
 import { InfoPerfilComponent } from '../../pages/info-perfil/info-perfil.component';
-import { ListaUsuariosComponent } from '../../usuarios/lista-usuarios/lista-usuarios.component';
 import { VerficacionEmailComponent } from '../../pages/verficacion-email/verficacion-email.component';
 import { MenusComponent } from '../../pages/menus/menus.component';
 import { PromocionesComponent } from '../../pages/promociones/promociones.component';
@@ -23,6 +22,7 @@ import { ListaRestaurantesComponent } from '../../restaurantes/lista-restaurante
 import { VerificacionRestaurantesComponent } from '../../usuarios/verificacion-restaurantes/verificacion-restaurantes.component';
 import { AfiliadosComponent } from '../../usuarios/afiliados/afiliados.component';
 import { NoAfiliadosComponent } from '../../usuarios/no-afiliados/no-afiliados.component';
+import { ListaUsuariosComponent } from '../../usuarios/lista-usuarios/lista-usuarios.component';
 
 export const AdminLayoutRoutes: Routes = [
 

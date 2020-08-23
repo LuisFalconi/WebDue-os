@@ -63,7 +63,6 @@ import { EditRestauranteComponent } from './restaurantes/edit-restaurante/edit-r
 import { PromocionesComponent } from './pages/promociones/promociones.component';
 import { EditMenusComponent } from './restaurantes/edit-menus/edit-menus.component';
 import { ListaPromocionesComponent } from './pages/promociones/lista-promociones/lista-promociones.component';
-import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
 import { ValidacionComponent } from './pages/validacion/validacion.component';
 import { VerificacionRestaurantesComponent } from './usuarios/verificacion-restaurantes/verificacion-restaurantes.component';
 import { EditRestauranteDuenoComponent } from './restaurantes/edit-restaurante-dueno/edit-restaurante-dueno.component';
@@ -86,6 +85,8 @@ import { NoAfiliadosComponent } from './usuarios/no-afiliados/no-afiliados.compo
 import { EditarPerfilUserComponent } from './usuarios/editar-perfil-user/editar-perfil-user.component';
 import { ModalEditPerilUsuarioComponent } from './modal/modal-edit-peril-usuario/modal-edit-peril-usuario.component';
 import { EditPerfilUserComponent } from './usuarios/edit-perfil-user/edit-perfil-user.component';
+import { ListaUsuariosDeshabilitadosComponent } from './usuarios/lista-usuarios-deshabilitados/lista-usuarios-deshabilitados.component';
+import { ListaUsuariosComponent } from './usuarios/lista-usuarios/lista-usuarios.component';
 
 @NgModule({
 
@@ -117,6 +118,7 @@ import { EditPerfilUserComponent } from './usuarios/edit-perfil-user/edit-perfil
     EditMenuModalComponent,
     EditMenusComponent,
     ListaPromocionesComponent,
+    ListaUsuariosDeshabilitadosComponent,
     ListaUsuariosComponent,
     ValidacionComponent,
     VerificacionRestaurantesComponent,
@@ -146,7 +148,8 @@ import { EditPerfilUserComponent } from './usuarios/edit-perfil-user/edit-perfil
     NoAfiliadosComponent,
     EditarPerfilUserComponent,
     ModalEditPerilUsuarioComponent,
-    EditPerfilUserComponent
+    EditPerfilUserComponent,
+    ListaUsuariosDeshabilitadosComponent
   ],
   imports: [
     BrowserModule,
