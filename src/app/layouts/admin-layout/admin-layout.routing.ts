@@ -50,7 +50,7 @@ export const AdminLayoutRoutes: Routes = [
        { path: 'perfil',                    component: InfoPerfilComponent},
        { path: 'listaU',                    component: ListaUsuariosComponent},
        {path: 'listaR',                     component: ListaRestaurantesComponent},
-       {path: 'verificacionR',              component: VerificacionRestaurantesComponent},
+    //    {path: 'verificacionR',              component: VerificacionRestaurantesComponent},
        {path: 'verificacionDoc',              component: ValidacionDocumentoComponent},
        { path: 'verificacionE',      component: VerficacionEmailComponent},
 

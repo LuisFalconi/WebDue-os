@@ -7,20 +7,7 @@
             <input matInput placeholder="" formControlName="nombreRestaurante">
         </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-            <h2>Documento</h2>
-            <!-- <button formControlName="documentoRes">ss</button> -->
-            <a href="">
-                
-            </a>
-            <input matInput placeholder="" formControlName="documentoRes">
-            
-            <!-- {{"editResForm.value['documentoRes']"}} -->
-            <!-- <a [href]={{documentoRes}}>Descargar</a> -->
-            <!-- <a href="formControlName='documentoRes'">ddd</a> -->
-
-        </mat-form-field>
-<!-- 
+   <!-- 
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Estado del Restaurante" formControlName="resVerificado">
         </mat-form-field> -->
@@ -28,9 +15,10 @@
         <mat-form-field>
             <mat-label>Estado Documento</mat-label>
             <mat-select placeholder="Tags" formControlName="estadoDocumento">
+                <mat-option value="documento Aprobado">Aprobado</mat-option>
                 <mat-option value="documento en Revision">En Revisión</mat-option>
                 <mat-option value="documento Rechazado">Rechazado</mat-option>
-                <mat-option value="documento Aprobado">Aprobado</mat-option>
+                <mat-option value="Sin Documento">Sin Documento</mat-option>
             </mat-select>
         </mat-form-field>
 

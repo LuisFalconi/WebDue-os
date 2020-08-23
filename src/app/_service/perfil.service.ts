@@ -271,7 +271,8 @@ export class PerfilService {
         const promoObj = {
           documentoRes: this.UrlDoc,
           fileRefDoc: this.filePathDoc,
-          estadoDocumento: "documento en Revision"
+          estadoDocumento: "documento en Revision",
+          resVerificado: "En revision"
         };
       console.log("se actualiza??");
       return this.perfilCollection.doc(restaurante.id).update(promoObj); 

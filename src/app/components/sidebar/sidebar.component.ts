@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dueño/perfil', title: 'Perfil',  icon:'account_circle', class: '',rol:'dueño' },
   { path: '/admin/listaU', title: 'Usuarios',  icon:'person', class: '',rol:'admin' },
   { path: '/admin/listaR', title: 'Restaurantes',  icon:'restaurant', class: '',rol:'admin' },
-  { path: '/admin/verificacionR', title: 'Validación de Restaurantes',  icon:'assignment_turned_in', class: '',rol:'admin' },
+  // { path: '/admin/verificacionR', title: 'Validación de Restaurantes',  icon:'assignment_turned_in', class: '',rol:'admin' },
   { path: '/admin/verificacionDoc', title: 'Validación de Restaurantes',  icon:'assignment_turned_in', class: '',rol:'admin' },
   { path: '/admin/perfil', title: 'Contacto',  icon:'account_circle', class: '',rol:'admin' },
  // { path: '/sadmin/credenciales', title: 'Credenciales',  icon:'assignment_ind', class: '',rol:'super' },

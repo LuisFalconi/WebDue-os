@@ -21,7 +21,6 @@ export class EditEstadoDocumentoComponent implements OnInit {
   public editResForm = new FormGroup({
     id: new FormControl (''),
     nombreRestaurante: new FormControl ({value: '', disabled: true },Validators.required),  
-    documentoRes: new FormControl({value: '', disabled: true }, Validators.required),
     estadoDocumento: new FormControl ('', Validators.required)
   });
 
@@ -46,7 +45,6 @@ export class EditEstadoDocumentoComponent implements OnInit {
     this.editResForm.patchValue({
       id: this.perfil.id,
       nombreRestaurante: this.perfil.nombreRestaurante,
-      documentoRes: this.perfil.documentoRes, 
       estadoDocumento: this.perfil.estadoDocumento
       //fotoRes: this.perfil.imagenRes
     });
