@@ -103,19 +103,15 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
 
       // Esto funciona para verificar si un restaurant tiene un documento subido
     this.validacionService.listar().subscribe(data => {
-      console.log(data);
+      // console.log(data);
       for(let x of data){
         if(this.usuarioLog == x.userUID){
-          console.log("Si existe documento");
-          console.log(x.docValidacion);
           //this.restaurantelog = [x];
           this.validacionR = true;
           this.validacionDocRestauranteExiste(this.validacionR);
           //console.log("Este restaurante", this.restaurantelog); 
           break;   
         }else{
-          console.log("No existe documento");
-          console.log(x.userUID);
           
           this.validacionR = false;
           this.validacionDocRestauranteExiste(this.validacionR);
@@ -127,7 +123,6 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
   this.perfilService.listar().subscribe(data => {
     for(let x of data){
       if(this.usuarioLog == x.userUID){
-        console.log("Si");
         //console.log("Si");
         this.restaurantelog = [x];
         this.valorRestaurante = true;
@@ -135,7 +130,6 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
         //console.log("Este restaurante", this.restaurantelog); 
         break;   
       }else{
-        console.log("No");
         this.valorRestaurante = false;
         this.validacionRestauranteExiste(this.valorRestaurante);
       } 
@@ -148,7 +142,6 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
     this.perfilService.listar().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
         data.forEach((x: Perfil) =>{
             if(this.usuarioLog == x.userUID){
-              console.log("Si");
               //console.log("Si");
               this.loginuserlog = [x];
               this.dataSource = new MatTableDataSource(this.loginuserlog);
@@ -156,7 +149,6 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
               this.dataSource2 = new MatTableDataSource(this.loginuserlog); 
               this.dataSource3 = new MatTableDataSource(this.loginuserlog); 
             }else{
-              console.log("No");
               this.dataSource = new MatTableDataSource(this.loginuserlog);
             }       
         });
@@ -199,7 +191,6 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
   }
 
   editarRestaurante(perfil: Perfil) {
-    console.log('Edit posta', perfil);
     this.abrirEditorDialogo(perfil);
   }
 
@@ -254,7 +245,7 @@ export class EditarPerfilComponent implements OnInit, OnDestroy {
     };
     const dialogRef = this.dialog.open(ModalEditRestautanteComponent, config);
     dialogRef.afterClosed().subscribe(resultado => {
-      console.log(`Dialog result ${resultado}`);
+      // console.log(`Dialog result ${resultado}`);
     });
   }
 

@@ -1,8 +1,8 @@
 element.style {
     transform: none;
     padding-top: 24px;
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
 }
 
 mat-dialog-content{
@@ -10,6 +10,5 @@ mat-dialog-content{
     height: 500px;
 }
 mat-dialog-container {
-
-    border-radius: 40px;
+    border-radius: 80px;
 }

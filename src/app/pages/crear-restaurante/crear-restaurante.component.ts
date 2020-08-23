@@ -53,8 +53,8 @@ export class CrearRestauranteComponent implements OnInit, OnDestroy {
     nombreRestaurante: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),  
     tipoRestaurante: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     capacidadRestaurante: new FormControl('',  [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[1-9]/)] ),
-    horaApertura: new FormControl('',  [Validators.required, Validators.minLength(3), Validators.maxLength(20)] ),
-    horaCierre: new FormControl('',  [Validators.required, Validators.minLength(3), Validators.maxLength(20)] ),
+    horaApertura: new FormControl('',  [Validators.required,Validators.pattern("^([0]?[6-9]|1[0-1]):[0-5][0-9]$")] ),
+    horaCierre: new FormControl('',  [Validators.required, Validators.pattern("^([1]?[2-9]|2[0-3]):[0-5][0-9]$")]),
     direccionRestaurante: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)] ),
     imagePost: new FormControl('')
   });
@@ -177,19 +177,37 @@ export class CrearRestauranteComponent implements OnInit, OnDestroy {
     })
   }
 
-
    addPerfil(data: Perfil) {
      console.log('New perfil', data);
      this.perfilService.subirPerfilconImagen(data, this.file);
      Swal.fire('Agregado!','Tu Restaurante ha sido agregado','success')
-     this.router.navigate(['/perfil']);
+     this.router.navigate(['/dueño/miMenu']);
    }
 
 
   // Funcion para mostrar el nombre del archivo seleccionado
   seleccionar(e: any): void{
-    this.file = e.target.files[0];
-    this.labelFile = e.target.files[0].name;
+  
+
+    let typeImage = e.target.files[0].type;
+    let sizeFile = e.target.files[0].size;
+    console.log("tamaño de la imagene", sizeFile);
+    console.log("tipo de la imagene", typeImage);
+
+    if(typeImage === 'image/gif' || typeImage === 'image/jpeg' || typeImage === 'image/png' ){
+      
+      // Imagen minima de 5 Mb aproimadamente 5242880
+      if(sizeFile <= 5000000){
+        this.file = e.target.files[0];
+        this.labelFile = e.target.files[0].name;
+      }
+    }else{
+      Swal.fire({
+        icon: 'error',
+        showConfirmButton: false,
+        text: 'Archivo no permitido!',
+      });
+    }
   }
 
   seleccionar_promo(e: any): void{

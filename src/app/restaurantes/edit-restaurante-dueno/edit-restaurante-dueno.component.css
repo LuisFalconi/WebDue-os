@@ -15,11 +15,28 @@ button{
 p{
     color: red;
     font-size: 13px;
+    text-align: center;
     margin: 0%;
     padding: 0%;
 }
+.limite{
+    color: blueviolet;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-input:invalid+span:after {
+.am{
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+
+}
+
+.pm{
+    position: absolute; 
+}
+
+/* input:invalid+span:after {
     position: absolute;
     content: '✖';
     padding-left: 5px;
@@ -29,4 +46,4 @@ input:invalid+span:after {
     position: absolute;
     content: '✓';
     padding-left: 5px;
-  }
+  } */

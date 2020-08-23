@@ -35,23 +35,21 @@
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
-            <input matInput type="time" placeholder="Horario de apertura" formControlName="horaApertura">
+            <input matInput placeholder="Hora de Apertura* (hh:mm)" type="text"  formControlName="horaApertura" required>
             <div *ngIf="newPostForm.get('horaApertura').errors && newPostForm.get('horaApertura').dirty " >
-                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('required')">El campo no puede estar app-validacion</p>
-                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('minlength')">Minimo 3 caracteres</p>
-                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('maxlength')">Maximo 20 caracteres</p>
+                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('required')">El campo no puede estar vacio</p>
+                <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('pattern')">hora mínima de apertura: 06:00 - 11:59 </p>
                 <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
-            </div><span class="validity"></span>
+            </div>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput type="time" placeholder="Horario de cierre" formControlName="horaCierre">
+            <input matInput placeholder="Hora de Cierre (hh:mm)" type="text" formControlName="horaCierre" required>
             <div *ngIf="newPostForm.get('horaCierre').errors && newPostForm.get('horaCierre').dirty">
                 <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
-                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('minlength')">Minimo 3 caracteres</p>
-                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('maxlength')">Maximo 20 caracteres</p>
-                <!-- <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">Hora de Apertura: 12:00 - 23.59 PM</p> -->
-            </div><span class="validity"></span>
+                <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('pattern')">hora mínima de apertura: 12:00 - 23:59 </p>
+            </div>
+            
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
@@ -81,6 +79,7 @@
         <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
          -->
         <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+        <p class="limite">Tamaño maximo 5 Mb</p>
         <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
 
         <!-- <label class="custom-file">

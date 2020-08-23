@@ -35,23 +35,20 @@
         </mat-form-field>
     
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Hora de Apertura" type="time" min="00:01" max="11:59"  formControlName="horaApertura" required>
+            <input matInput placeholder="Hora de Apertura* (hh:mm)" type="text"  formControlName="horaApertura" required>
             <div *ngIf="editResForm.get('horaApertura').errors && editResForm.get('horaApertura').dirty " >
-                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('required')">El campo no puede estar app-validacion</p>
-                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('minlength')">Minimo 3 caracteres</p>
-                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('maxlength')">Maximo 20 caracteres</p>
+                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('required')">El campo no puede estar vacio</p>
+                <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">hora mínima de apertura: 06:00 - 11:59 </p>
                 <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
-            </div><span class="validity"></span>
+            </div>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Hora de Cierre" type="time" min="12:00" max="23:59" formControlName="horaCierre" required>
+            <input matInput placeholder="Hora de Cierre (hh:mm)" type="text" formControlName="horaCierre" required>
             <div *ngIf="editResForm.get('horaCierre').errors && editResForm.get('horaCierre').dirty">
                 <p class="e" *ngIf="editResForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
-                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('minlength')">Minimo 3 caracteres</p>
-                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('maxlength')">Maximo 20 caracteres</p>
-                <!-- <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">Hora de Apertura: 12:00 - 23.59 PM</p> -->
-            </div><span class="validity"></span>
+                <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">hora mínima de apertura: 12:00 - 23:59 </p>
+            </div>
             
         </mat-form-field>
     
@@ -75,7 +72,8 @@
         </mat-form-field>
 
         <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
-        <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar($event)">
+        <p class="limite">Tamaño maximo 5 Mb</p>
+        <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar($event)" accept=".jpg, .png, .gif, .jpeg">
 
         <p>{{labelImage}}</p>
         <button mat-raised-button color="primary" type="submit" [disabled]="editResForm.invalid" [mat-dialog-close]="true">
