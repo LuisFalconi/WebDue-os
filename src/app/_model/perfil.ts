@@ -9,6 +9,9 @@ export class Perfil{
     userUID?: string; // id del usuario logueado (el que actualiza el perfil) 
     imagenRes?: any;
     fileRef?: string;
+    documentoRes?: any;
+    estadoDocumento?: string;
+    fileRefDoc?: string;
     resVerificado?: string;
     latitud ?: number;
     longitud?: number;

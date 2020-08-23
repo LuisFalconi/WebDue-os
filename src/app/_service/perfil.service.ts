@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FileI } from '../_model/imagenes';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { FileD } from '../_model/documento';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class PerfilService {
    private perfilCollection: AngularFirestoreCollection<Perfil>;
    private filePath: any;
    private UrlImagen: Observable<string>;
+
+   private filePathDoc: any;
+   private UrlDoc: Observable<string>;
+
    usuarioLogeado: string;
    idPerfil: string;
    idRes: string;
@@ -134,28 +139,6 @@ export class PerfilService {
     this.obternerImagen(perfiles, image);
   }
 
-  // Logica para editar y guardar un restaurante
-  // private guardarRestaurantes(perfil: Perfil) {
-  //   let idPlato = this.afs.createId();
-  //   perfil.id = idPlato;
-  //   const ResObj = {
-  //     id: this.afs.createId(),
-  //     userUID: this.usuarioLogeado,
-  //     nombreRestaurante: perfil.nombreRestaurante,
-  //     fotoRestaurante: perfil.fotoRestaurante,
-  //     tipoRestaurante: perfil.tipoRestaurante,
-  //     capacidadRestaurante: perfil.capacidadRestaurante,
-  //     horarioRestaurante: perfil.horarioRestaurante,
-  //     direccionRestaurante: perfil.direccionRestaurante,
-  //     imagenRes: this.UrlImagen,
-  //     fileRef: this.filePath 
-  //   };
-  //       this.perfilCollection.add(ResObj);
-  //  }
-
-
-
-  // Registrar el perfil
   
   registrar(perfil: Perfil){
 
@@ -200,8 +183,13 @@ export class PerfilService {
      this.subirImagen(perfiles, image);
    }
 
+   subirPerfilconDocumento(perfiles: Perfil, doc?: FileD){
+    return this.subirDocument(perfiles, doc);
+  }
+
   private guardarRestaurante(perfil: Perfil) {
     //this.idRes =perfil.id;
+     
     let idExiste = perfil.id;
     if(idExiste){
       const perfilObj = {
@@ -240,7 +228,8 @@ export class PerfilService {
         resVerificado: "En revision",
         latitud: "",
         longitud: "",
-        estado: "verdadero"
+        estado: "verdadero",
+        estadoDocumento: "Sin Documento"
       });
     }
    }
@@ -260,13 +249,35 @@ export class PerfilService {
 
   habilitarRestaurante(restaurante: Perfil){
     let idRes = restaurante.id;
+    console.log("aaaa", idRes);
+    
       if(idRes){
         const promoObj = {
           //id: perfil.id,
           //userUID: this.usuarioLogeado,
           estado: "verdadero"
         };
+        console.log("paso por aqui cuando habilito??");
+        
       return this.perfilCollection.doc(restaurante.id).update(promoObj); 
+    }
+  }
+
+  subirDocumentoValidacion(restaurante: Perfil){
+    let idRes = restaurante.id;
+    console.log("llega aqui??");
+    console.log("idssss", restaurante.id); 
+      if(idRes){
+        const promoObj = {
+          documentoRes: this.UrlDoc,
+          fileRefDoc: this.filePathDoc,
+          estadoDocumento: "documento en Revision"
+        };
+      console.log("se actualiza??");
+      return this.perfilCollection.doc(restaurante.id).update(promoObj); 
+    }else{
+      console.log("n se acrtualiza");
+      
     }
   }
 
@@ -287,15 +298,15 @@ export class PerfilService {
       fileRef: "",
       resVerificado: "En revision",
       latitud: "",
-      longitud: ""
+      longitud: "",
+      estado: "verdadero",
+      estadoDocumento: "Sin Documento"
     });
     //   const postObj = {
        
     //  };
         //this.perfilCollection.add(postObj);
    }
-
-  
 
     private subirImagen(perfil: Perfil ,image?: FileI){
     if(image){
@@ -317,6 +328,28 @@ export class PerfilService {
       this.guardarRestauranteSinFoto(perfil);
     }
      
+   }
+
+   private subirDocument(perfil: Perfil ,doc?: FileD){
+     if(doc){
+      this.filePathDoc = `documentos/${doc.name}`;
+      const fileRef = this.storage.ref(this.filePathDoc);
+      const task = this.storage.upload(this.filePathDoc, doc);
+      task.snapshotChanges()
+       .pipe(
+         finalize(() => {
+          fileRef.getDownloadURL().subscribe(urlDocumento => {
+             this.UrlDoc = urlDocumento;
+             console.log('urldoc ', this.UrlDoc);
+             console.log("id del restaurante: ", perfil.id);
+             this.subirDocumentoValidacion(perfil);           
+           });
+        }) 
+       ).subscribe(); 
+     }else{
+       console.log("no hay documento");
+     }
+          
    }
 
 

@@ -8,6 +8,7 @@ import { Validacion } from '../../_model/validacion';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ValidacionService } from '../../_service/validacion.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-verificacion-restaurantes',
@@ -16,11 +17,19 @@ import { ValidacionService } from '../../_service/validacion.service';
 })
 export class VerificacionRestaurantesComponent implements OnInit{
 
+  displayedColumns: string[] = ['nombre', 'tipo', 'documento','acciones'];
+  dataSource = new MatTableDataSource();
+
+  
+
   documentosR: Observable<Validacion[]>;
 
   users: Usuario[];
   doc: Validacion[];
   perfil: Perfil[];
+
+  restaurante :Perfil[] =[];
+  verificacion :Validacion[] =[];
 
   panelOpenState = false;
 

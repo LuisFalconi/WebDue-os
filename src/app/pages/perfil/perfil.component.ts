@@ -10,6 +10,7 @@ import { ModalComponent } from '../../modal/modal/modal.component';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
@@ -35,12 +36,24 @@ export class PerfilComponent implements OnInit {
   editarMenu: boolean;
   resDeshabilitado: boolean;
 
+  file: any = null;
+  file_promo: any = null;
+  labelFile: string;
+  isSubmitted: boolean = false;
+
+  
+
   
   constructor(private afa: AngularFireAuth, private perfilService: PerfilService,
               private loginService: LoginService,
               private platoService: PlatoService,
               private dialog: MatDialog,
               private route: Router) { }
+
+    public newDocForm = new FormGroup({
+    id: new FormControl (''),
+    docPost: new FormControl('', Validators.required)
+  });
 
   ngOnInit() {
     let currenUser = this.afa.auth.currentUser;
@@ -49,6 +62,8 @@ export class PerfilComponent implements OnInit {
     // variable para validar si el correo del usuaro 
     this.emailVerificado = currenUser.emailVerified;
     this.editarMenu = false;
+
+    this.resetForm();
     //this.ultimaConexion = currenUser.metadata.lastSignInTime;
     //this.desde = currenUser.metadata.creationTime;
     // this.usuarioSocial = currenUser.displayName;
@@ -130,6 +145,8 @@ export class PerfilComponent implements OnInit {
     }
 
     habilitarRestaurante(res: Perfil){    
+      console.log("res", res);
+      
       Swal.fire({
         title: 'Desea habilitar su restaurante?',
         icon: 'warning',
@@ -166,6 +183,66 @@ export class PerfilComponent implements OnInit {
         });
       }
     })
+  }
+
+  subirDocumentoDeValidacion(res: Perfil, e: any){ 
+    
+    console.log("rssss", res.id);
+    this.file = e.target.files[0];
+    this.labelFile = e.target.files[0].name;
+    console.log("archivo", this.file);
+
+    Swal.fire({
+      title: 'Deseas subir este doocumento?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: "No!",
+      confirmButtonText: 'Si!'
+    }).then((result) => {
+      if (result.value) {  
+       
+        this.perfilService.subirPerfilconDocumento(res, this.file)
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'perfil subido',
+            showConfirmButton: false,
+            timer: 1000  
+          });
+        // this.resetForm()
+      }else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Cancelado',
+          showConfirmButton: false,
+          timer: 1000
+      });
+      // this.resetForm()
+    }
+  })
+}
+
+  seleccionar(e: any): void{
+    // this.isSubmitted = true;
+    this.file = e.target.files[0];
+    this.labelFile = e.target.files[0].name;
+    console.log("que???", this.file);
+  }
+
+
+
+  resetForm() {
+    this.newDocForm.reset();
+    this.newDocForm.setValue({
+      id: '',
+      docPost: ''
+    });
+    this.file = null;
+    this.labelFile = "";
+    this.isSubmitted = false;
   }
 
   enviarEmail(){

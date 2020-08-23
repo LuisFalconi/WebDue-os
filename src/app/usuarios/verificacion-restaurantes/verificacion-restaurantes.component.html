@@ -1,86 +1,72 @@
-<h1>Verificación de Restaurantes</h1>
-<p>Aqui puedes si los restaurantes rgistrados en la APP tienen documentos que validen si son reales</p>
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let users of users" hideToggle>
-      <mat-expansion-panel-header *ngIf="users.roles && users.roles.toString() === 'dueño'">
-        <mat-panel-title> <span> Usuario: {{users.nombre.toUpperCase()}}</span></mat-panel-title>
-        <mat-panel-description>
-            {{users.email}}
-            <mat-icon>menu_book</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-        <div *ngFor="let p of perfil">
-            <div *ngIf="p.userUID == users.uid && users.uid" >
-                <mat-list-item> Nombre del Restaurante: <span style="font-family: Arial, Helvetica, sans-serif;"></span> </mat-list-item>
-                <mat-list-item> Estado del Restaurante: {{p.resVerificado}}</mat-list-item>
-            </div>
-        </div>
-        <div *ngFor="let docu of doc">
-            <div *ngIf="docu.userUID == users.uid" >
-                <mat-list-item> <h3>Documento</h3> {{docu.fileRef}}</mat-list-item>
-                <mat-list-item>
-                <mat-divider></mat-divider><br>
-                    <a href="{{docu.docValidacion}}">
-                        <button mat-stroked-button color="primary">
-                            <mat-icon>save_alt</mat-icon><span>&nbsp; Descargar</span>
-                        </button>
-                    </a>
-                </mat-list-item>
-            </div>
-        </div>
-      </mat-expansion-panel>
-    <mat-divider></mat-divider>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-    </mat-expansion-panel>
-  </mat-accordion>
-<mat-divider></mat-divider>
-
-<div style="text-align: center;">
-    <p>Una vez realizada la verificación: </p>
-    <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>verified_user</mat-icon><span>&nbsp; Aprobar Restaurantes</span></button>
-    <input id="input_subida" style="display: none" [routerLink] = "['/listaR']">      
-</div>
-
-
-
-  <!-- <div *ngFor="let users of users">
-      <div *ngIf="users.roles.toString() === 'dueño'">
-        <mat-icon>fastfood</mat-icon>
-        <mat-selection-list>
-            <mat-list-item>
-                Usuario: {{users.email}}
-            </mat-list-item>
-        </mat-selection-list>
-        <ul>
-            <li>UserUID: {{users.uid}}</li>
-            <li>Rol: {{users.roles}}</li>
-            <div *ngFor="let p of perfil">
-                <div *ngIf="p.userUID == users.uid" >
-                 <li>Nombre del Restaurante: {{p.nombreRestaurante}}</li>
-                <li>Estado del Restaurante: {{p.resVerificado}}</li>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Usuarios</h4>
+                    </div>
+                    <div class="card-body">
+  
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                              </div>
+                              <div class="col-md-12">
+                                <div class="card-body">
+                                    <p>Aqui puedes si los restaurantes rgistrados en la APP tienen documentos que validen si son reales</p>
+                                    <mat-accordion class="example-headers-align">
+                                        <mat-expansion-panel *ngFor="let users of users" hideToggle>
+                                          <mat-expansion-panel-header *ngIf="users.roles && users.roles.toString() === 'dueño'">
+                                            <mat-panel-title> <span> Usuario: {{users.nombre.toUpperCase()}}</span></mat-panel-title>
+                                            <mat-panel-description>
+                                                {{users.email}}
+                                                <mat-icon>menu_book</mat-icon>
+                                            </mat-panel-description>
+                                          </mat-expansion-panel-header>
+                                            <div *ngFor="let p of perfil">
+                                                <div *ngIf="p.userUID == users.uid && users.uid" >
+                                                    <mat-list-item> Nombre del Restaurante: <span style="font-family: Arial, Helvetica, sans-serif;"></span> </mat-list-item>
+                                                    <mat-list-item> Estado del Restaurante: {{p.resVerificado}}</mat-list-item>
+                                                </div>
+                                            </div>
+                                            <div *ngFor="let docu of doc">
+                                                <div *ngIf="docu.userUID == users.uid" >
+                                                    <mat-list-item> <h3>Documento</h3> {{docu.fileRef}}</mat-list-item>
+                                                    <mat-list-item>
+                                                    <mat-divider></mat-divider><br>
+                                                        <a href="{{docu.docValidacion}}">
+                                                            <button mat-stroked-button color="primary">
+                                                                <mat-icon>save_alt</mat-icon><span>&nbsp; Descargar</span>
+                                                            </button>
+                                                        </a>
+                                                    </mat-list-item>
+                                                </div>
+                                            </div>
+                                          </mat-expansion-panel>
+                                        <mat-divider></mat-divider>
+                                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                                             (closed)="panelOpenState = false">
+                                        </mat-expansion-panel>
+                                      </mat-accordion>
+                                    <mat-divider></mat-divider>
+                                    
+                                    <div style="text-align: center;">
+                                        <p>Una vez realizada la verificación: </p>
+                                        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>verified_user</mat-icon><span>&nbsp; Aprobar Restaurantes</span></button>
+                                        <input id="input_subida" style="display: none" [routerLink] = "['/listaR']">      
+                                    </div>
+   
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                  
+                    </div>
                 </div>
             </div>
-            <div *ngFor="let docu of doc">
-                <div *ngIf="docu.userUID == users.uid">
-                    <li>Ver Documento</li>
-                    <li>Nombre Documento: {{docu.fileRef}}</li>
-                    <a href="{{docu.docValidacion}}">
-                        <button mat-stroked-button color="warn">
-                            <mat-icon>save_alt</mat-icon>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </ul>
+        </div>
     </div>
-  </div> -->
-
- 
-  <!-- <div >
-
   </div>
-  <div *ngFor="let documento of doc">
-    {{documento.docValidacion}}
-    {{documento.userUID}}
-  </div> -->
+  
+  

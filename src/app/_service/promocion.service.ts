@@ -172,10 +172,10 @@ export class PromocionService {
     }
   }
 
-
  private guardarPromo(promo: Promocion) {
   //this.idRes =perfil.id;
   let idExiste = promo.id;
+  console.log("sssss", idExiste);
   if(idExiste){
     const promoObj = {
       //id: perfil.id,
@@ -185,6 +185,8 @@ export class PromocionService {
     };
     return this.promocionCollection.doc(promo.id).update(promoObj);      
   }else{
+    console.log("ggggg");
+    
     let idPromo = this.afs.createId();
     promo.id = idPromo; 
     this.afs.collection('promociones').doc(idPromo).set({

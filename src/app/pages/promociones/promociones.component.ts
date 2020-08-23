@@ -40,6 +40,9 @@ export class PromocionesComponent implements OnInit {
   }
 
   addPromocion(data: Promocion) {
+    console.log("dda", data);
+    console.log("ftooooooo", this.file_promo);
+    
     Swal.fire({
       title: '¿Deseas agregar esta promoción ahora?',
       icon: 'info',
@@ -78,10 +81,12 @@ export class PromocionesComponent implements OnInit {
   }
 
   seleccionar_promo(e: any): void{
+
     this.isSubmitted = true;
     console.log(this.isSubmitted);
     this.file_promo = e.target.files[0];
-    this.labelFile = e.target.files[0].name;    
+    this.labelFile = e.target.files[0].name;
+        
   }
 
   // Aun no le hago uncionar la opcion para subir varias imagenes a la vez

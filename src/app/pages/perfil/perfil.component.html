@@ -100,7 +100,11 @@
                                                 </button>
                                                 <button mat-button color="info" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarRestaurante(p)"><mat-icon arial-label="deshabilitar">highlight_off</mat-icon>Deshabilitar</button>
                                                 <button mat-button color="warning" *ngIf="p.estado === 'falso'" (click)="habilitarRestaurante(p)"><mat-icon arial-label="hablitar">check_circle</mat-icon>Habilitar</button>
-                                                </mat-card-actions>
+
+
+                                                
+                                            
+                                            </mat-card-actions>
                                             </div>
                                           </div>
                                       </div>
@@ -110,6 +114,16 @@
                                     </div>
                                 </div>
                           
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4" *ngIf="p.estadoDocumento === 'Sin Documento'">
+                                    <h3>Debes subir un documento que prueba que tu restaurante es Real</h3>
+                                    <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Subir Documento</span></button>
+                                    <input id="input_subida" type="file"  accept=".docx, .pdf" style="display: none" (change)="subirDocumentoDeValidacion(p, $event)">
+                                    <p style="text-align: center;">{{labelFile}}</p>
+                                </div>
+                                <div class="col-md-4"></div>
                             </div>
                         </div>
                     </div>
@@ -233,3 +247,25 @@
             </div>
         </div>
     </div>     -->
+
+    <!-- <form [formGroup]="newDocForm" (ngSubmit)="subirDocumentoDeValidacion(newDocForm.value)" class="container">
+        
+        
+        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Docuemtno</span></button>
+        <input id="input_subida" type="file" accept=".docx, .pdf" style="display: none" (change)="seleccionar($event)">
+        <p>{{labelFile}}</p>
+
+
+        <div *ngIf="isSubmitted">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>done</mat-icon>
+                <span>Aceptar</span>
+            </button>
+        
+            <button mat-raised-button color="accent" type="button">
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+        
+    </form>  -->
