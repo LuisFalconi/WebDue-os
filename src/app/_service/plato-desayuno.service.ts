@@ -4,6 +4,7 @@ import { PlatoDesayuno } from '../_model/platoDesayuno';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginService } from './login.service';
+import { Ingredientes } from '../_model/ingredientes';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PlatoDesayunoService {
 
 
   private platoCollection: AngularFirestoreCollection<PlatoDesayuno>;
+  private ingCollection: AngularFirestoreCollection<Ingredientes>;
   private usuarioLogeado: string;
 
 
@@ -27,6 +29,7 @@ export class PlatoDesayunoService {
     });
 
     this.platoCollection = afs.collection<PlatoDesayuno>('platoDesayuno');
+    this.ingCollection = afs.collection<Ingredientes>('ingredientes');
 
    }
 
@@ -43,9 +46,25 @@ export class PlatoDesayunoService {
       );
   }
 
+  recuperarIngredientes(): Observable<PlatoDesayuno[]>{
+    return this.afs
+      .collection('platoDesayuno')
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a =>{
+          const data = a.payload.doc.data() as PlatoDesayuno;
+          const id = a.payload.doc.id;
+          return {id, ...data}; //SPREAD OPERATOR
+        }))
+      );
+  }
+
+  
+
   listar() {
     return this.afs.collection<PlatoDesayuno>('platoDesayuno').valueChanges();
   }
+
 
   modificar(platoDes: PlatoDesayuno){
     return this.afs.collection('platoDesayuno').doc(platoDes.id).set(Object.assign({}, platoDes));	
@@ -67,6 +86,10 @@ export class PlatoDesayunoService {
     this.guardarDesayuno(menusDes);
   }
 
+  subirIng(ingrediente: Ingredientes): void{
+    this.guardarIngrediente(ingrediente);
+  }
+
 
   private guardarDesayuno(platoDes: PlatoDesayuno) {
 
@@ -78,6 +101,7 @@ export class PlatoDesayunoService {
         userUID: this.usuarioLogeado,
         platoDesayuno: platoDes.platoDesayuno,
         detalleDesayuno: platoDes.detalleDesayuno,
+        ingredientes: platoDes.ingredientes,
         precioDesayuno: platoDes.precioDesayuno, 
       };
       return this.platoCollection.doc(platoDes.id).update(menuDesObj);      
@@ -89,7 +113,30 @@ export class PlatoDesayunoService {
         userUID: this.usuarioLogeado,
         platoDesayuno: platoDes.platoDesayuno,
         detalleDesayuno: platoDes.detalleDesayuno,
+        ingredientes: platoDes.ingredientes,
         precioDesayuno: platoDes.precioDesayuno, 
+      });
+    }
+  }
+
+  private guardarIngrediente(ing: Ingredientes) {
+
+    //this.idRes =perfil.id;
+    let idExiste = ing.uid;
+    if(idExiste){
+      const menuDesObj = {
+        //id: perfil.id,
+        userUID: this.usuarioLogeado,
+        ingredientes: ing.ingredientes
+      };
+      return this.ingCollection.doc(ing.uid).update(menuDesObj);      
+    }else{      
+      let idIng = this.afs.createId();
+      ing.uid = idIng;
+      this.afs.collection('ingredientes').doc(idIng).set({
+        id: ing.uid,
+        userUID: this.usuarioLogeado,
+        ingredientes: ing.ingredientes
       });
     }
   }

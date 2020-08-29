@@ -33,6 +33,8 @@ export class MiMenuComponent implements OnInit {
   platos : Plato[];
   usuarioLog: string;
   menuLog : Plato[];
+
+  ingredienteD: PlatoDesayuno;
   restaurantelog : Perfil[];
 
   
@@ -200,9 +202,22 @@ export class MiMenuComponent implements OnInit {
   this.platoAlm$ = this.almuerzoService.recuperarMenus(); // recuperamos esta data con ASYNC
   this.platoMer$ = this.meriendaService.recuperarMenus(); // recuperamos esta data con ASYNC
   this.perfil$ = this.perfilService.recuperarDatos(); // recuperamos esta data con ASYNC
+  
+  this.obtenerIngredientes();
+
+  
+}
+
+  obtenerIngredientes(){
+    let ingredientesArray = [];
+    this.platoDes$.subscribe(data =>{
+      data.map(ing =>{
+        ingredientesArray.push(ing['ingredientes'])
+      })
+    })
+    console.log("array??", ingredientesArray);
     
   }
-
   // Funcion que comprueba si exite informacion en la base
   validacion(valor: boolean){
     if (valor){

@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { PlatoDesayunoService } from '../../_service/plato-desayuno.service';
+import { Ingredientes } from '../../_model/ingredientes';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class EditDesayunoComponent implements OnInit {
     id: new FormControl (''),
     platoDesayuno: new FormControl ('', [Validators.required]),  
     detalleDesayuno: new FormControl('', [Validators.required]),
-    precioDesayuno: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[1-9]/)])
+    precioDesayuno: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[1-9]/)]),
+    // ingredientes: new FormControl('')
   });
 
   ngOnInit() {
@@ -60,6 +62,7 @@ export class EditDesayunoComponent implements OnInit {
       platoDesayuno: this.menu.platoDesayuno, 
       detalleDesayuno: this.menu.detalleDesayuno,
       precioDesayuno: this.menu.precioDesayuno,
+      // ingredientes: this.menu.ingredientes
     });
   } 
 }

@@ -27,6 +27,22 @@
                 <p class="e" *ngIf="editDesayunoForm.get('precioDesayuno').hasError('pattern')">El campo debe contener numeros</p>
             </div>
         </mat-form-field>
+
+        <!-- <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Detalle/Ingredientes" formControlName="ingredientes" ></textarea>
+            <div *ngIf="editDesayunoForm.get('ingredientes').errors && editDesayunoForm.get('ingredientes').dirty" >
+                <p class="e" *ngIf="editDesayunoForm.get('ingredientes').hasError('required')">El campo no puede estar vacio</p>
+            </div>
+        </mat-form-field> -->
+
+        <!-- <div class="form-group">
+            <div formArrayName="ingredientes">
+                <div *ngFor="let item of getIngredientes.controls; let pointIndex=index" [formGroupName]="pointIndex">
+                    <input formControlName="ingrediente"/> <button mat-raised-button color="info" (click)="removeIngrediente(pointIndex)">Eliminar</button>
+                </div>
+            </div>
+            <a type="button" color="primary" (click)="addIngredientes()">Agregar</a>
+        </div> -->
     
         <mat-divider></mat-divider>
 

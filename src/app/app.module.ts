@@ -91,6 +91,8 @@ import { ValidacionDocumentoComponent } from './pages/validacion-documento/valid
 import { TemplateValidacionDocumentoComponent } from './pages/template-validacion-documento/template-validacion-documento.component';
 import { EditEstadoDocumentoModalComponent } from './modal/edit-estado-documento-modal/edit-estado-documento-modal.component';
 import { EditEstadoDocumentoComponent } from './restaurantes/edit-estado-documento/edit-estado-documento.component';
+import { PlatosEspecialesComponent } from './pages/platos-especiales/platos-especiales.component';
+import { ListPlatosEspecialesComponent } from './pages/platosEspeciales/list-platos-especiales/list-platos-especiales.component';
 
 @NgModule({
 
@@ -157,7 +159,9 @@ import { EditEstadoDocumentoComponent } from './restaurantes/edit-estado-documen
     ValidacionDocumentoComponent,
     TemplateValidacionDocumentoComponent,
     EditEstadoDocumentoModalComponent,
-    EditEstadoDocumentoComponent
+    EditEstadoDocumentoComponent,
+    PlatosEspecialesComponent,
+    ListPlatosEspecialesComponent
   ],
   imports: [
     BrowserModule,

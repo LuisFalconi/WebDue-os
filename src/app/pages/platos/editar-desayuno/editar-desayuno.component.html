@@ -1,14 +1,8 @@
 <!-- <router-outlet></router-outlet> -->
-<div style="margin: 35px; padding: 40px;">
       <mat-table [dataSource]= "dataSource" matSort >
-
-        <ng-container matColumnDef="platoDes">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Desayuno</mat-header-cell> 
-            <mat-cell *matCellDef="let row"> {{row.platoDesayuno}}</mat-cell>
-        </ng-container>
           <ng-container matColumnDef="acciones">
               <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell> 
-              <mat-cell *matCellDef="let row">
+              <mat-cell *matCellDef="let row" style="padding-left: 4%;">
                    <div *ngIf="usuarioLog == row.userUID">   <!--Valido si el usuario logueado es el que edito el plato-->
                         <button mat-icon-button color="primary" (click)="editarDesayuno(row)">
                             <mat-icon arial-label="Actualizar">edit</mat-icon>
@@ -25,4 +19,3 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>   
-</div>

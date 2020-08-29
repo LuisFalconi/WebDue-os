@@ -1,0 +1,24 @@
+<div style="padding-bottom: 63px;" >
+    <form [formGroup]="newPromoForm" (ngSubmit)="addPromocion(newPromoForm.value)" class="container">
+        
+        
+        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon> <span>Agregar Plato Especial</span></button>
+        <input id="input_subida" type="file"  accept=".png, .jpg, .jpeg" style="display: none" (change)="seleccionar_promo($event)">
+        <p style="text-align: center; color: red;">Tamaño máximo permitido 100 KB</p>
+        <p style="text-align: center">{{labelFile}}</p>
+        <div *ngIf="isSubmitted">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>done</mat-icon>
+                <span>Aceptar</span>
+            </button>
+        
+            <button mat-raised-button color="accent" type="button">
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+        
+    </form>  
+</div>
+
+

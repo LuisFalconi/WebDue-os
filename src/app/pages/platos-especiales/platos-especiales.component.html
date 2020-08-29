@@ -1,0 +1,71 @@
+
+              <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Platos Habilitados">
+                  <div class="row" style="text-align: center;">
+                    <!-- <div class="col-md-4">                                   
+                    </div> -->
+                    <div class="col-md-12">   
+                      <div class="card-body">
+           
+                        <div class="row" *ngIf="platoEspecial$ | async as plato">
+                          <div *ngFor="let p of plato; let i = index">
+                            <div *ngIf="usuarioLog === p.userUID && p.userUID && p.estado == 'verdadero'">
+                              <a>
+                                <div class="card" class="img-contenedor">
+                                  <img class="card-img-top text-center" [src]="p.fotosPlato" alt="Card image cap">
+                                  <div class="card-body cardTitle">
+                                    <div style="text-align: center;">
+                                      <button mat-button color="warm" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarPromo(p)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Deshabilitar</button>
+                                      <button mat-button color="warm" *ngIf="p.estado === 'verdadero'" (click)="eliminarPromo(p)"><mat-icon arial-label="Eliminar">delete</mat-icon>Eliminar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                            <hr>
+                          </div>
+
+                        </div>
+                        <div style="text-align: center;">
+                        <app-list-platos-especiales></app-list-platos-especiales>
+
+                        </div>
+            
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-4"></div> -->
+                  </div>
+                </mat-tab>
+                <mat-tab label="Platos Deshabilitaos">
+                  <div class="row" style="text-align: center;">
+                    <!-- <div class="col-md-4">                                   
+                    </div> -->
+                    <div class="col-md-12">   
+                      <div class="card-body">
+           
+                        <div class="row" *ngIf="platoEspecial$ | async as promocion">
+                          <div *ngFor="let promo of promocion; let i = index">
+                            <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado =='falso'">
+                              <a>
+                                <div class="card" class="img-contenedor">
+                                  <img class="card-img-top text-center" [src]="promo.fotosPlato" alt="Card image cap">
+                                  <div class="card-body cardTitle">
+                                    <div style="text-align: center;">
+                                      <button mat-button color="info" *ngIf="promo.estado === 'falso'" (click)="habilitarPromo(promo)"><mat-icon arial-label="habilitar">check_circle</mat-icon>Habilitar</button>
+                                      <button mat-button color="warm" *ngIf="promo.estado === 'falso'" (click)="eliminarPromo(promo)"><mat-icon arial-label="Eliminar">delete</mat-icon>Eliminar</button>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                            <hr>
+                          </div>
+            
+                        </div>                        
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-4"></div> -->
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
