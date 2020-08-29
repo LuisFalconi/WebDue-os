@@ -18,13 +18,20 @@
                                         <div class="col-md-1"></div>
                                       <div class="col-md-4">
                                         <div class="card card-profile">
-                                            <div class="card-header card-header-danger">
+                                            <img src="" class="card-img" alt="">
+                                            
+                                                <!-- {{mapa()}}
+                                             -->
+
+
+                                            <!-- <div class="card-header card-header-danger">
                                                 <h4 class="card-title">Actualiza tu información</h4>
                                             </div>
+                                            <br>
                                             <mat-form-field class="example-full-width">
                                                 <label for="Nombre">Nombre del Restaurante</label>
                                                 <input [disabled]="true" matInput type="text" [(ngModel)]="p.nombreRestaurante">
-                                                <!-- <h4>{{u.nombre}}</h4> -->
+                                                
                                             </mat-form-field>
                                       
                                             <mat-form-field class="example-full-width">
@@ -55,12 +62,13 @@
                                             </mat-form-field>
                                         </div>
                                       </div>
-                                        <app-editar-perfil></app-editar-perfil>
+                                        <app-editar-perfil></app-editar-perfil> -->
 
-                                        </div>
+                                        </div> 
                                       </div>  
-                                      <div class="col-md-1"></div>
-
+                                      <div class="col-md-1">
+                                      <!-- <button mat-button (click)="verCoordenadas()"><mat-icon>explore</mat-icon></button> -->
+                                      </div>
                                       <div class="col-md-4">
                                         <div class="card card-profile">
                                             <div class="card-avatar">
@@ -97,19 +105,17 @@
                                               </h4>
                                               <hr>
                                               <mat-card-actions>
-                                                <button mat-button>
-                                                </button>
                                                 <button mat-button color="info" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarRestaurante(p)"><mat-icon arial-label="deshabilitar">highlight_off</mat-icon>Deshabilitar</button>
                                                 <button mat-button color="warning" *ngIf="p.estado === 'falso'" (click)="habilitarRestaurante(p)"><mat-icon arial-label="hablitar">check_circle</mat-icon>Habilitar</button>
-
                                             </mat-card-actions>
                                             </div>
                                           </div>
                                       </div>
                                       <div class="col-md-2">
-                                          
                                     </div>
                                     </div>
+                                    <br>
+                                    <app-editar-perfil></app-editar-perfil>
                                 </div>
                           
                             </div>
@@ -207,6 +213,7 @@
     </div> -->
 </div>
 
+
 <ng-template #estadoFalso>
     <p>Restaurante falso</p>
 </ng-template>
@@ -286,6 +293,8 @@
 </ng-template>
     
 </div>
+
+
 <!-- <mat-divider></mat-divider> -->
 <!-- 
 <h2>Restaurante Deshabilitado</h2>
@@ -340,3 +349,4 @@
         </div>
         
     </form>  -->
+    <div id="map"></div>

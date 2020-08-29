@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import * as L from 'leaflet';
+import { CoordenadasService } from '../../_service/coordenadas.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -37,18 +40,25 @@ export class PerfilComponent implements OnInit {
   resDeshabilitado: boolean;
 
   file: any = null;
+  private map
+  marker: any;
   file_promo: any = null;
   labelFile: string;
   isSubmitted: boolean = false;
 
-  
 
-  
+  latitud: any;
+  longitud: any;
+
+
+
+
   constructor(private afa: AngularFireAuth, private perfilService: PerfilService,
               private loginService: LoginService,
               private platoService: PlatoService,
               private dialog: MatDialog,
-              private route: Router) { }
+              private route: Router,
+              private coordenadasSvc: CoordenadasService) { }
 
     public newDocForm = new FormGroup({
     id: new FormControl (''),
@@ -56,10 +66,15 @@ export class PerfilComponent implements OnInit {
   });
 
   ngOnInit() {
+
+
+
+
+
     let currenUser = this.afa.auth.currentUser;
     this.usuario = currenUser.phoneNumber;
     this.usuarioLog = currenUser.uid;
-    // variable para validar si el correo del usuaro 
+    // variable para validar si el correo del usuaro
     this.emailVerificado = currenUser.emailVerified;
     this.editarMenu = false;
 
@@ -68,7 +83,7 @@ export class PerfilComponent implements OnInit {
     //this.desde = currenUser.metadata.creationTime;
     // this.usuarioSocial = currenUser.displayName;
     // this.fotoSocial = currenUser.photoURL;
-    
+
     // Programacion reactiva: Me permite mostrar los datos de la tabla del usuario logueado para que el pueda editar
     this.perfilService.listar().subscribe(data => {
       for(let x of data){
@@ -77,22 +92,67 @@ export class PerfilComponent implements OnInit {
           this.valor = true;
           this.validacion(this.valor);
           console.log("Existe informacion del restaurante", this.validacion(this.valor));
-          console.log("Este restaurante", this.restaurantelog); 
-          break;   
+          console.log("Este restaurante", this.restaurantelog);
+          break;
         }else{
           this.valor = false;
           console.log("No exite informacion del restaurante", this.validacion(this.valor));
-        } 
+        }
       }
   });
-   
+
     this.perfilService.listar().subscribe(data=>{
       this.perfil = data;
-      //console.log(this.perfil);     
+      //console.log(this.perfil);
     });
 
     this.perfil$ = this.perfilService.recuperarDatos();
+
+    this.mapa();
+
   }
+
+  mapa(){
+    this.map = L.map('map', {
+      center: [ -0.2104022, -78.4910514 ],
+      zoom: 16
+    });
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
+    this.verCoordenadas();
+  }
+
+    marcador(lat : number, lng : number){
+    this.marker = L.marker([lat, lng], {draggable:false});
+    this.marker.addTo(this.map).bindPopup('Mi restaurante');
+  }
+
+  verCoordenadas(){
+    this.coordenadasSvc.listar().subscribe( data =>{
+
+      for(let element of data){
+        if(element['userUID'] ===  this.usuarioLog){
+          this.latitud = element['lat'];
+          this.longitud = element['lng'];
+          
+
+          var lat = parseFloat(this.latitud);
+          var lon = parseFloat(this.longitud);
+          
+          this.marcador(lat, lon); // Aqui agrego el pop-up con las coordenadas de la base de datos
+
+        }
+        break;
+      }
+    })
+
+  }
+
 
   // Metodo para validar si existe informacion del restaurante
   // y mostrar la opcion para cargar promociones
@@ -104,7 +164,7 @@ export class PerfilComponent implements OnInit {
       }
     }
 
-    deshabilitarRestaurante(res: Perfil){    
+    deshabilitarRestaurante(res: Perfil){
       Swal.fire({
         title: 'Deseas deshabilitar tu restaurante?',
         icon: 'warning',
@@ -114,7 +174,7 @@ export class PerfilComponent implements OnInit {
         cancelButtonText: "No!",
         confirmButtonText: 'Si!'
       }).then((result) => {
-        if (result.value) {       
+        if (result.value) {
           this.perfilService.deshabilitarRestaurante(res).then(() =>{
             //this.timer();
             // Controlo el Ng model para que aparezca el restaurante Deshabilitad
@@ -144,9 +204,9 @@ export class PerfilComponent implements OnInit {
       })
     }
 
-    habilitarRestaurante(res: Perfil){    
+    habilitarRestaurante(res: Perfil){
       console.log("res", res);
-      
+
       Swal.fire({
         title: 'Desea habilitar su restaurante?',
         icon: 'warning',
@@ -156,7 +216,7 @@ export class PerfilComponent implements OnInit {
         cancelButtonText: "No!",
         confirmButtonText: 'Si!'
       }).then((result) => {
-        if (result.value) {       
+        if (result.value) {
           this.perfilService.habilitarRestaurante(res).then(() =>{
             //this.timer();
             //window.location.reload(true);
@@ -185,8 +245,8 @@ export class PerfilComponent implements OnInit {
     })
   }
 
-  subirDocumentoDeValidacion(res: Perfil, e: any){ 
-    
+  subirDocumentoDeValidacion(res: Perfil, e: any){
+
     console.log("rssss", res.id);
     this.file = e.target.files[0];
     this.labelFile = e.target.files[0].name;
@@ -201,15 +261,15 @@ export class PerfilComponent implements OnInit {
       cancelButtonText: "No!",
       confirmButtonText: 'Si!'
     }).then((result) => {
-      if (result.value) {  
-       
+      if (result.value) {
+
         this.perfilService.subirPerfilconDocumento(res, this.file)
           Swal.fire({
             position: 'top-end',
             icon: 'success',
             title: 'perfil subido',
             showConfirmButton: false,
-            timer: 1000  
+            timer: 1000
           });
         // this.resetForm()
       }else {
@@ -256,11 +316,11 @@ export class PerfilComponent implements OnInit {
       timer: 1500
     });
   }
-  
+
     onNewPost() {
       this.openDialog();
     }
-  
+
     openDialog(): void {
       const dialogRef = this.dialog.open(ModalComponent, {panelClass: 'myapp-no-padding-dialog'});
       dialogRef.afterClosed().subscribe(result => {

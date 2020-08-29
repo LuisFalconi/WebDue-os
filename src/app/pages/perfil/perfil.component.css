@@ -10,6 +10,14 @@
     background-size: contain;
 }
 
+#map {
+    position: static;
+    left: 65px;
+    bottom: 1025px;
+    height: 75%;
+    width: 40%;
+  }
+
 .file_p{
     margin-bottom: 0px;
     margin-top: -15px;

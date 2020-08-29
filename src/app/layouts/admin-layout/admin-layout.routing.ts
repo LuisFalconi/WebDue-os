@@ -24,6 +24,7 @@ import { AfiliadosComponent } from '../../usuarios/afiliados/afiliados.component
 import { NoAfiliadosComponent } from '../../usuarios/no-afiliados/no-afiliados.component';
 import { ListaUsuariosComponent } from '../../usuarios/lista-usuarios/lista-usuarios.component';
 import { ValidacionDocumentoComponent } from '../../pages/validacion-documento/validacion-documento.component';
+import { MapaComponent } from '../../pages/mapa/mapa.component';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -38,6 +39,7 @@ export const AdminLayoutRoutes: Routes = [
             {path: 'afiliados', component: AfiliadosComponent},
             {path: 'noAfiliados', component: NoAfiliadosComponent},
             { path: 'verificacionE',      component: VerficacionEmailComponent},
+            { path: 'mapa',      component: MapaComponent},
             {path: 'not-403', component: Not403Component},
             { path: 'perfil', component: InfoPerfilComponent},
             { path: '**',           redirectTo: 'perfil'}, 

@@ -93,6 +93,7 @@ import { EditEstadoDocumentoModalComponent } from './modal/edit-estado-documento
 import { EditEstadoDocumentoComponent } from './restaurantes/edit-estado-documento/edit-estado-documento.component';
 import { PlatosEspecialesComponent } from './pages/platos-especiales/platos-especiales.component';
 import { ListPlatosEspecialesComponent } from './pages/platosEspeciales/list-platos-especiales/list-platos-especiales.component';
+import { MapaComponent } from './pages/mapa/mapa.component';
 
 @NgModule({
 
@@ -161,7 +162,8 @@ import { ListPlatosEspecialesComponent } from './pages/platosEspeciales/list-pla
     EditEstadoDocumentoModalComponent,
     EditEstadoDocumentoComponent,
     PlatosEspecialesComponent,
-    ListPlatosEspecialesComponent
+    ListPlatosEspecialesComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,
