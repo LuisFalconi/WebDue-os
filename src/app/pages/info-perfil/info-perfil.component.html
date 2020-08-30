@@ -75,27 +75,22 @@
                                             </a>
                                           </div>
                                           <div class="card-body">
-                                            <h6 class="card-category text-gray">Dueño de Restaurante</h6>
+                                            <h6 class="card-category text-gray">Dueño del Restaurante</h6>
                                             <h4 class="card-title">{{u.nombre}}</h4>
                                             <p class="card-description">
                                               {{u.email}}
                                             </p><hr>
-                                            <p class="card-description" *ngIf="u.numero">
-                                              Telf. {{u.numero}}
-                                            </p>
-                                            <p class="card-description" *ngIf="u.descripcion">
-                                              Sobre mi: {{u.descripcion}}
-                                            </p>
+      
                                             <div class="row">
                                             <div class="col-md-4" *ngIf="u.socialF">
                                               <button  mat-raised-button>
-                                                <a href="https://www.facebook.com/{{u.socialF}}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                                <a href="https://www.facebook.com{{u.socialF}}" target="_blank" rel="noopener noreferrer">Facebook</a>
                                               </button>
                                             </div>
                                             <div class="col-md-2"></div>
                                             <div class="col-md-4" *ngIf="u.socialG">
                                               <button  mat-raised-button>
-                                                <a href="https://www.instagram.com/{{u.socialG}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+                                                <a href="https://www.instagram.com{{u.socialG}}" target="_blank" rel="noopener noreferrer">Instagram</a>
                                               </button>                                    
                                             </div>
                                           </div>
