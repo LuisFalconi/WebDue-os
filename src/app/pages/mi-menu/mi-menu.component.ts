@@ -1,4 +1,3 @@
-import { PlatoMerienda } from './../../_model/platoMerienda';
 import { ModalAlmuerzoComponent } from './../../modal/modal-almuerzo/modal-almuerzo.component';
 import { PlatoAlmuerzo } from './../../_model/platoAlmuerzo';
 import { PlatoDesayuno } from './../../_model/platoDesayuno';
@@ -18,6 +17,7 @@ import { PlatoAlmuerzoService } from '../../_service/plato-almuerzo.service';
 import { PlatoMeriendaService } from '../../_service/plato-merienda.service';
 import { ModalMeriendaComponent } from '../../modal/modal-merienda/modal-merienda.component';
 import { ValidacionService } from '../../_service/validacion.service';
+import { PlatoEspecial } from '../../_model/platoEspecial';
 
 @Component({
   selector: 'app-mi-menu',
@@ -60,7 +60,7 @@ export class MiMenuComponent implements OnInit {
   plato$: Observable<Plato[]>;
   platoDes$: Observable<PlatoDesayuno[]>;
   platoAlm$: Observable<PlatoAlmuerzo[]>;
-  platoMer$: Observable<PlatoMerienda[]>;
+  platoMer$: Observable<PlatoEspecial[]>;
   perfil$: Observable<Perfil[]>;
 
   emailVerificado: boolean;

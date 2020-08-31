@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { PlatoMerienda } from '../_model/platoMerienda';
 import { LoginService } from './login.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PlatoEspecial } from '../_model/platoEspecial';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class PlatoMeriendaService {
 
   
-  private platoCollection: AngularFirestoreCollection<PlatoMerienda>;
+  private platoCollection: AngularFirestoreCollection<PlatoEspecial>;
   private usuarioLogeado: string;
 
 
@@ -26,17 +26,17 @@ export class PlatoMeriendaService {
       }
     });
 
-    this.platoCollection = afs.collection<PlatoMerienda>('platoMerienda');
+    this.platoCollection = afs.collection<PlatoEspecial>('platoEspecial');
 
    }
 
-   recuperarMenus(): Observable<PlatoMerienda[]>{
+   recuperarMenus(): Observable<PlatoEspecial[]>{
     return this.afs
-      .collection('platoMerienda')
+      .collection('platoEspecial')
       .snapshotChanges()
       .pipe(
         map(actions => actions.map(a =>{
-          const data = a.payload.doc.data() as PlatoMerienda;
+          const data = a.payload.doc.data() as PlatoEspecial;
           const id = a.payload.doc.id;
           return {id, ...data}; //SPREAD OPERATOR
         }))
@@ -44,51 +44,53 @@ export class PlatoMeriendaService {
   }
 
   listar() {
-    return this.afs.collection<PlatoMerienda>('platoMerienda').valueChanges();
+    return this.afs.collection<PlatoEspecial>('platoEspecial').valueChanges();
   }
 
-  modificar(platoDes:PlatoMerienda ){
-    return this.afs.collection('platoMerienda').doc(platoDes.id).set(Object.assign({}, platoDes));	
+  modificar(platoDes:PlatoEspecial ){
+    return this.afs.collection('platoEspecial').doc(platoDes.id).set(Object.assign({}, platoDes));	
   }
 
   leer(documentId: string){
-    return this.afs.collection<PlatoMerienda>('platoMerienda').doc(documentId).valueChanges(); 
+    return this.afs.collection<PlatoEspecial>('platoEspecial').doc(documentId).valueChanges(); 
   }
 
-  eliminar(plato: PlatoMerienda){
-  return this.afs.collection('platoMerienda').doc(plato.id).delete();
+  eliminar(plato: PlatoEspecial){
+  return this.afs.collection('platoEspecial').doc(plato.id).delete();
   }
 
-  editarMenu(platoDes: PlatoMerienda){
+  editarMenu(platoDes: PlatoEspecial){
     return this.platoCollection.doc(platoDes.id).update(platoDes);
   }
 
-  subirMenu(menusMer: PlatoMerienda): void{
+  subirMenu(menusMer: PlatoEspecial): void{
     this.guardarMerienda(menusMer);
   }
 
-  private guardarMerienda(platoDes: PlatoMerienda) {
+  private guardarMerienda(platoDes: PlatoEspecial) {
 
     //this.idRes =perfil.id;
     let idExiste = platoDes.id;
+    console.log("id", idExiste);
+    
     if(idExiste){
       const menuDesObj = {
-        //id: perfil.id,
+        id: idExiste,
         userUID: this.usuarioLogeado,
-        platoMerienda: platoDes.platoMerienda,
-        detalleMerienda: platoDes.detalleMerienda,
-        precioMerienda: platoDes.precioMerienda, 
+        platoEspecial: platoDes.platoEspecial,
+        precioEspecial: platoDes.precioEspecial, 
+        ingredientes: platoDes.ingredientes
       };
       return this.platoCollection.doc(platoDes.id).update(menuDesObj);      
     }else{      
       let idPlato = this.afs.createId();
       platoDes.id = idPlato;
-      this.afs.collection('platoMerienda').doc(idPlato).set({
+      this.afs.collection('platoEspecial').doc(idPlato).set({
         id: platoDes.id,
         userUID: this.usuarioLogeado,
-        platoMerienda: platoDes.platoMerienda,
-        detalleMerienda: platoDes.detalleMerienda,
-        precioMerienda: platoDes.precioMerienda, 
+        platoEspecial: platoDes.platoEspecial,
+        precioEspecial: platoDes.precioEspecial, 
+        ingredientes: platoDes.ingredientes
       });
     }
   }

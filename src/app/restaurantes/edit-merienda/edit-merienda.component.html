@@ -1,7 +1,6 @@
 <div class="restaurante-container">
-    <form [formGroup]="editDesayunoForm" (ngSubmit)="editMenu(editDesayunoForm.value)" class="container">
-        <!-- De esta manera uso el input -->
-        <!-- {{perfil | json}} -->
+    <!-- <form [formGroup]="editDesayunoForm" (ngSubmit)="editMenu(editDesayunoForm.value)" class="container">
+
         <h3>Merienda</h3>
 
         <mat-form-field class="example-full-width">
@@ -40,5 +39,57 @@
             <span>Cancelar</span>
         </button>
      
+    </form> -->
+
+    <form [formGroup]="miform" (ngSubmit)="editMenu(miform.value)" class="container">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Plato Especial</mat-label>
+            <textarea matInput placeholder="Detalles" formControlName="platoEspecial" ></textarea>
+            <div *ngIf="miform.get('platoEspecial').errors && miform.get('platoEspecial').dirty" >
+                <p class="e" *ngIf="miform.get('platoEspecial').hasError('required')">El campo no puede estar vacio</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+                <input matInput placeholder="Precio" formControlName="precioEspecial" type="number" autocomplete="off" >
+                <div *ngIf="miform.get('precioEspecial').errors && miform.get('precioEspecial').dirty " >
+                    <p class="e" *ngIf="miform.get('precioEspecial').hasError('required')">El campo no debe estar vacio</p>
+                    <p class="e" *ngIf="miform.get('precioEspecial').hasError('minlength')">Minimo 1 caracteres</p>
+                    <p class="e" *ngIf="miform.get('precioEspecial').hasError('maxlength')">Maximo 3 caracteres</p>
+                    <p class="e" *ngIf="miform.get('precioEspecial').hasError('pattern')">El campo debe contener numeros</p>
+                </div>
+            </mat-form-field>
+            <!-- <div class="col-md-12" style="text-align: center;">
+                {{getIngredientes()}}
+                <div *ngFor="let ing of getIngredientes(); let i=index">
+                    <mat-label> - {{[i]}}</mat-label>
+                </div>
+            </div> -->
+            <p></p>
+            
+    
+        <div class="form-group">
+            <div formArrayName="ingredientes" >
+                
+                <div *ngFor="let item of getIngredientes.controls; let pointIndex=index" [formGroupName]="pointIndex" >
+                    <input formControlName="ingrediente"/> <button mat-raised-button color="info" (click)="removeIngrediente(pointIndex)">Eliminar</button>
+                </div>
+                <a type="button" color="primary" (click)="addIngredientes()">Agregar</a>
+            </div>
+        </div>  
+
+        <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true" [disabled]="miform.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+    
+        <button mat-raised-button color="accent" type="button"  [mat-dialog-close]="true" (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+        <!-- <button type="submit" class="btn btn-danger">Submit</button> -->
     </form>
 </div>
+
+

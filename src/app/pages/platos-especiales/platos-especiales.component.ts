@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { PlatoEspecial } from '../../_model/platoEspecial';
+import { PlatoEspecial } from '../../_model/platoEspecial1';
 import { Perfil } from '../../_model/perfil';
 import { Plato } from '../../_model/plato';
 import { PromocionService } from '../../_service/promocion.service';

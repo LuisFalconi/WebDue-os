@@ -97,12 +97,12 @@ export class PlatoDesayunoService {
     let idExiste = platoDes.id;
     if(idExiste){
       const menuDesObj = {
-        //id: perfil.id,
+        id: idExiste,
         userUID: this.usuarioLogeado,
         platoDesayuno: platoDes.platoDesayuno,
         detalleDesayuno: platoDes.detalleDesayuno,
+        precioDesayuno: platoDes.precioDesayuno,
         ingredientes: platoDes.ingredientes,
-        precioDesayuno: platoDes.precioDesayuno, 
       };
       return this.platoCollection.doc(platoDes.id).update(menuDesObj);      
     }else{      
@@ -113,8 +113,9 @@ export class PlatoDesayunoService {
         userUID: this.usuarioLogeado,
         platoDesayuno: platoDes.platoDesayuno,
         detalleDesayuno: platoDes.detalleDesayuno,
-        ingredientes: platoDes.ingredientes,
         precioDesayuno: platoDes.precioDesayuno, 
+        ingredientes: platoDes.ingredientes,
+
       });
     }
   }

@@ -1,8 +1,8 @@
-import { PlatoMerienda } from './../../_model/platoMerienda';
 import { PlatoMeriendaService } from './../../_service/plato-merienda.service';
 import { Component, OnInit, Input } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray, Form } from '@angular/forms';
+import { PlatoEspecial } from '../../_model/platoEspecial';
 
 @Component({
   selector: 'app-edit-merienda',
@@ -10,9 +10,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./edit-merienda.component.css']
 })
 export class EditMeriendaComponent implements OnInit {
-  @Input() menu: PlatoMerienda;
+  @Input() menu: PlatoEspecial;
 
-  constructor(private meriendaService: PlatoMeriendaService) { }
+  miform: FormGroup;
+  
+
+  constructor(private meriendaService: PlatoMeriendaService, private fb: FormBuilder) { }
 
   public editDesayunoForm = new FormGroup({
     id: new FormControl (''),
@@ -22,19 +25,30 @@ export class EditMeriendaComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.iniciarForm();
+
+    this.miform = this.fb.group({
+      id: ['', [Validators.required]],
+      platoEspecial: ['', [Validators.required]],
+      precioEspecial: ['',  [Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern(/^[1-9]/)]],
+      ingredientes: this.fb.array([this.fb.group({ingrediente: ['']})])
+    })
+
+    // this.iniciarForm();
+    this.iniciarForm2();
+    
   }
 
-  editMenu(menu: PlatoMerienda){
-
-    if(this.editDesayunoForm.invalid){
+  editMenu(menu: PlatoEspecial){
+    console.log("ss", menu);
+    
+    if(this.miform.invalid){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Error al editar el Menú!',
       }); 
     }else{
-        this.meriendaService.editarMenu(menu);
+        this.meriendaService.subirMenu(menu);
         Swal.fire({
           icon: 'success',
           showConfirmButton: false,
@@ -56,9 +70,46 @@ export class EditMeriendaComponent implements OnInit {
   private iniciarForm():void{
     this.editDesayunoForm.patchValue({
       id: this.menu.id,
-      platoMerienda: this.menu.platoMerienda, 
-      detalleMerienda: this.menu.detalleMerienda,
-      precioMerienda: this.menu.precioMerienda,
+      platoMerienda: this.menu.platoEspecial, 
+      detalleMerienda: this.menu.precioEspecial,
+      precioMerienda: this.menu.ingredientes,
     });
   } 
+
+  private iniciarForm2():void{
+    this.miform.patchValue({
+      id: this.menu.id,
+      platoEspecial: this.menu.platoEspecial, 
+      precioEspecial: this.menu.precioEspecial,
+      ingredientes: this.menu.ingredientes      
+    });
+
+    console.log("que es esto", this.menu.ingredientes);
+
+  }
+  
+  // getI(i){
+  //   return this.getIngredientes()[i].value.ingrediente;
+  // }
+
+  get getIngredientes(){
+    
+    return this.miform.get('ingredientes') as FormArray;
+
+  }
+
+  // get getIngredientes2(index: number){
+     
+  //   return  (<FormArray>this.miform.get('ingredientes')).controls;
+  // }
+
+  addIngredientes(ingrediente: string){
+    const control = <FormArray>this.miform.controls['ingredientes'];
+    control.push(this.fb.group({ingrediente: []}));
+  }
+
+  removeIngrediente(index: number){
+    const control = <FormArray>this.miform.controls['ingredientes'];
+    control.removeAt(index);
+  }
 }

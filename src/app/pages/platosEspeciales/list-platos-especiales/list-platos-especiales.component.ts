@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { PlatoEspecialService } from '../../../_service/plato-especial.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlatoEspecial } from '../../../_model/platoEspecial';
+import { PlatoEspecial } from '../../../_model/platoEspecial1';
 
 
 @Component({

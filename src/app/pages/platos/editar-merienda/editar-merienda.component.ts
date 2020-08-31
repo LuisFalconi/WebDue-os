@@ -7,8 +7,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { takeUntil } from 'rxjs/operators';
 import { ModalEditarMeriendaComponent } from '../../../modal/modal-editar-merienda/modal-editar-merienda.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { PlatoMerienda } from '../../../_model/platoMerienda';
 import { MatDialog } from '@angular/material/dialog';
+import { PlatoEspecial } from '../../../_model/platoEspecial';
 
 
 @Component({
@@ -19,13 +19,13 @@ import { MatDialog } from '@angular/material/dialog';
 export class EditarMeriendaComponent implements OnInit, OnDestroy {
 
  //VARIABLES
- dataSource: MatTableDataSource<PlatoMerienda>;
+ dataSource: MatTableDataSource<PlatoEspecial>;
  displayedColumns = ['acciones']; // Datos que se va amostrar en la tabla
  
  usuarioLog: string;// Validar usuario logueado
- usuarioLogeado: PlatoMerienda[]; // usario logueado dueño del plato
- menuDesayuno : PlatoMerienda[];
- platoDes$: Observable<PlatoMerienda[]>;
+ usuarioLogeado: PlatoEspecial[]; // usario logueado dueño del plato
+ menuDesayuno : PlatoEspecial[];
+ platoDes$: Observable<PlatoEspecial[]>;
  private ngUnsubscribe: Subject<void> = new Subject();// Se crear la variable para liberar recursos
 
  
@@ -45,7 +45,7 @@ export class EditarMeriendaComponent implements OnInit, OnDestroy {
 
       // Programacion reactiva:s
       this.meriendaService.listar().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
-       data.forEach((menus: PlatoMerienda) =>{
+       data.forEach((menus: PlatoEspecial) =>{
          if(this.usuarioLog == menus.userUID){
            // console.log("usuario logado", this.usuarioLog);
            // console.log("menu logado", menus.userUID);
@@ -65,7 +65,7 @@ export class EditarMeriendaComponent implements OnInit, OnDestroy {
    this.platoDes$ = this.meriendaService.recuperarMenus(); // recuperamos esta data con ASYNC
  }
 
- eliminar(platoDes: PlatoMerienda){
+ eliminar(platoDes: PlatoEspecial){
    Swal.fire({
      title: 'Deseas eliminar tu menú?',
      text: "No podras revertir esto!",
@@ -94,13 +94,13 @@ export class EditarMeriendaComponent implements OnInit, OnDestroy {
  }
 
 
- editarMerienda(platoDes: PlatoMerienda) {
+ editarMerienda(platoDes: PlatoEspecial) {
    this.openEditDialgo(platoDes);
  }
 
 
 
- openEditDialgo(platoDes?: PlatoMerienda): void {
+ openEditDialgo(platoDes?: PlatoEspecial): void {
    const config ={
      data:{
        contenido: platoDes,
