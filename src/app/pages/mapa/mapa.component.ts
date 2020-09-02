@@ -3,6 +3,11 @@ import { coor } from '../../_model/coordenadas';
 import * as L from 'leaflet';
 import { CoordenadasService } from '../../_service/coordenadas.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-mapa',
@@ -15,27 +20,42 @@ export class MapaComponent implements OnInit {
   marker: any;
   latitud: any;
   longitud: any;
+  usuarioLog: string;
 
-  constructor(private coordenadasService : CoordenadasService, private db: AngularFirestore) { }
+  valor: boolean;
+
+  constructor(private coordenadasService : CoordenadasService, private coordenadasService2 : CoordenadasService, private db: AngularFirestore,
+    private afa: AngularFireAuth, private router: Router) { }
 
   ngOnInit(): void {
 
-    const container = document.getElementById('mapa')
-    if(container){
-      this.map = L.map('mapa', {
-        center: [ -0.2104022, -78.4910514 ],
-        zoom: 17
-      });
-  
-      const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 17,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      });
-  
-      tiles.addTo(this.map);
-      this.registrar();
-    }
+    let currenUser = this.afa.auth.currentUser;
+    this.usuarioLog = currenUser.uid;
+
+    this.esteMapa();
+
   }
+
+  esteMapa(){
+
+    const container = document.getElementById('mapa')
+    if(container) {
+    // code to render map here...
+    this.map = L.map('mapa', {
+      center: [ -0.2104022, -78.4910514 ],
+      zoom: 17
+    });
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 17,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
+    this.registrar();
+    }
+    
+  }  
 
   marcador(lat : number, lng : number){
     this.marker = L.marker([lat, lng], {draggable:true});
@@ -71,14 +91,21 @@ export class MapaComponent implements OnInit {
     this.marcador(-0.2104022, -78.4910514 )
   }
 
-  guardarDireccion(){
-    
-  }
+  
 
   prueba(){
 
-    let cords = new coor();
+    // this.coordenadasService2.listar().subscribe(data =>{
 
+    //   for (let x of data){
+    //     if(x['userUID'] === this.usuarioLog){
+    //       console.log("elimino esto", x);
+          
+    //       this.coordenadasService.eliminar(x);
+    //     }
+    //     break;
+    //   }
+    // });  
     let x = this.marker.getLatLng()
     console.log("aa", x['lat']);
     this.latitud = x['lat'];
@@ -89,10 +116,68 @@ export class MapaComponent implements OnInit {
 
     console.log(lati, long);
 
+    this.coordenadasService.guardarcoordenadas(lati, long); 
 
-    this.coordenadasService.guardarcoordenadas(lati, long);
-
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'coordenada actulizada',
+      showConfirmButton: false,
+      timer: 1000
+    }).then(() =>{
+      this.router.navigate(["dueño/restaurante"]);
+    });
     
   }
+
+  verCoordenadas(){
+    this.coordenadasService2.listar().subscribe(data =>{
+       for(let y of data){
+         if(y.userUID === this.usuarioLog){
+          // console.log("se", element);
+          let x = this.marker.getLatLng()
+     console.log("aa", x['lat']);
+     this.latitud = x['lat'];
+     this.longitud = x['lng'];
+ 
+     var lati = parseFloat(this.longitud);
+     var long = parseFloat(this.latitud);
+ 
+     console.log(lati, long); 
+          this.coordenadasService.actualizarC(y,lati,long )
+
+         }
+         break;
+         
+       } 
+
+       Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'coordenada actulizada',
+        showConfirmButton: false,
+        timer: 1000
+      }).then(() =>{
+        this.router.navigate(["dueño/restaurante"]);
+      });
+
+      window.location.reload();
+
+      // data.forEach(element => {
+      //   if(element.userUID == this.usuarioLog){
+         
+      //   }
+
+      // });
+    })
+
+  }
+
+  // actualizarDireccion(){
+
+    
+
+  //}
+
 
 }

@@ -1,7 +1,15 @@
-<div *ngFor="let p of perfil$ | async ">
+
+
+
+  <div id="map"></div>  
+
+<div *ngFor="let p of perfil$ | async">
+  
+    
     <div *ngIf="usuarioLog == p.userUID">
         
         <div class="main-content">
+            
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
@@ -11,14 +19,16 @@
                                     &nbsp;&nbsp;&nbsp;
                                     <span style="color: red" *ngIf="p.estado === 'falso'" >Restaurante Deshabilitado</span>
                                 </h4>
+                                
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-1"></div>
                                       <div class="col-md-4">
                                         <div class="card card-profile">
                                             <img src="" class="card-img" alt="">
+                                            
                                             
                                                 <!-- {{mapa()}}
                                              -->
@@ -211,6 +221,7 @@
     <!-- <div *ngIf="p.estado === 'verdadero'; else estadoFalso">
         <p>restaurante verdader</p>
     </div> -->
+    
 </div>
 
 
@@ -291,8 +302,15 @@
     </div>
 
 </ng-template>
+
     
 </div>
+
+  
+
+
+
+
 
 
 <!-- <mat-divider></mat-divider> -->
@@ -349,4 +367,3 @@
         </div>
         
     </form>  -->
-    <div id="map"></div>

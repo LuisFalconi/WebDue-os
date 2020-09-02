@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { coor } from '../_model/coordenadas';
 import { LoginService } from './login.service';
 
@@ -8,6 +8,8 @@ import { LoginService } from './login.service';
 })
 export class CoordenadasService {
   usuarioLogeado: string;
+  private coordenadaCollection: AngularFirestoreCollection<coor>;
+
 
   constructor(private firestore: AngularFirestore, private loginSvc: LoginService) { 
 
@@ -18,6 +20,9 @@ export class CoordenadasService {
         this.usuarioLogeado = data.uid;
       }
     });
+
+    this.coordenadaCollection = firestore.collection<coor>('coordenadas');
+
   }
 
   listar(){    
@@ -42,15 +47,38 @@ export class CoordenadasService {
 
   guardarcoordenadas(lat: number, lng: number) {
 
+      
       let coordenadas = new coor();
-      console.log("Estoy guardando coordenadas");
-      let idCoordenadas = this.firestore.createId();
-      coordenadas.id = idCoordenadas; 
-      this.firestore.collection('coordenadas').doc(idCoordenadas).set({
+
+        console.log("Estoy guardando coordenadas");
+        let idCoordenadas = this.firestore.createId();
+        coordenadas.id = idCoordenadas; 
+        this.firestore.collection('coordenadas').doc(idCoordenadas).set({
         id: coordenadas.id,
         userUID: this.usuarioLogeado,
         lng: lat,
         lat: lng
       });
+      
     }
+
+    actualizarC(c: coor, lat: number, lng: number){
+      let idRes = c.id;
+        if(idRes){
+          const promoObj = {
+            //id: perfil.id,
+            //userUID: this.usuarioLogeado,
+            lng: lat,
+            lat: lng
+          };
+        return this.coordenadaCollection.doc(c.id).update(promoObj); 
+          
+      }
+    }
+
+
+
+    
+
+    
 }

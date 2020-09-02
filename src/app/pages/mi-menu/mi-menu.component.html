@@ -193,10 +193,17 @@
                                                                       </div>
                                                                       <div class="col-md-6">
                                                                         <div class="card-body">
-                                                                            <button *ngIf="validacionDes(valorD) === false" mat-stroked-button (click)="nuevoDesayuno()">
-                                                                                <mat-icon>note_add</mat-icon>&nbsp; Agregar Desayuno
-                                                                            </button>&nbsp;&nbsp;&nbsp;
-                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2"></div>
+                                                                                <div class="col-md-6">
+                                                                                    <button  mat-stroked-button (click)="nuevoDesayuno()">
+                                                                                        <mat-icon>note_add</mat-icon>&nbsp; Agregar Desayuno
+                                                                                    </button>&nbsp;&nbsp;&nbsp;
+                                                                                </div>
+                                                                                <div class="col-md-2"></div>
+                                                                            </div>
+                                                                            <hr><br>
+                                                                            
                                                                             <div class="row">
                                                                                 <div class="col-md-10">
                                                                                     <ng-template [ngIf]="validacionDes(valorD) === true">

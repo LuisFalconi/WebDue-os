@@ -1,7 +1,6 @@
 <div class="restaurante-container">
     <form [formGroup]="editResForm" (ngSubmit)="editPerfil(editResForm.value)" class="container" >
-        <!-- De esta manera uso el input -->
-        <!-- {{perfil | json}} -->
+
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Nombre del Restaurante" formControlName="nombreRestaurante">
             <div *ngIf="editResForm.get('nombreRestaurante').errors && editResForm.get('nombreRestaurante').dirty " >
@@ -10,16 +9,7 @@
                 <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
             </div>
         </mat-form-field>
-    
-        <!-- <mat-form-field class="example-full-width">
-            <input matInput placeholder="Tipo de Restaurante" formControlName="tipoRestaurante">
-            <div *ngIf="editResForm.get('tipoRestaurante').errors && editResForm.get('tipoRestaurante').dirty " >
-                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
-                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
-                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('email')">Debe ser un email valido</p> PRUEBA DE EMAIL
-                <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('maxlength')">Maximo 20 caracteres</p>
-            </div>
-        </mat-form-field> -->
+
         <mat-form-field class="example-full-width">
             <mat-label>Tipo Restaurante</mat-label>
             <mat-select placeholder="Tags" formControlName="tipoRestaurante">

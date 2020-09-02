@@ -50,6 +50,8 @@ export class PerfilComponent implements OnInit {
   latitud: any;
   longitud: any;
 
+  mapaExiste: boolean;
+
 
 
 
@@ -66,6 +68,8 @@ export class PerfilComponent implements OnInit {
   });
 
   ngOnInit() {
+
+    this.mapaExiste = false;
 
 
 
@@ -107,24 +111,36 @@ export class PerfilComponent implements OnInit {
     });
 
     this.perfil$ = this.perfilService.recuperarDatos();
-
+    
     this.mapa();
 
   }
 
   mapa(){
-    this.map = L.map('map', {
-      center: [ -0.2104022, -78.4910514 ],
-      zoom: 16
-    });
+    
+    const container = document.getElementById('map')
+    alert(container)
+  
+    if(container) {
+        // code to render map here...
+        this.map = L.map('map', {
+          center: [ -0.2104022, -78.4910514 ],
+          zoom: 16,
+            invalidateSize: true
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        });
+
+        const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 17,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     });
 
     tiles.addTo(this.map);
     this.verCoordenadas();
+    }else{
+      alert("nulo")
+    }
+
   }
 
     marcador(lat : number, lng : number){
@@ -145,7 +161,6 @@ export class PerfilComponent implements OnInit {
           var lon = parseFloat(this.longitud);
           
           this.marcador(lat, lon); // Aqui agrego el pop-up con las coordenadas de la base de datos
-
         }
         break;
       }
