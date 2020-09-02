@@ -107,7 +107,7 @@ export class LoginService {
     return (this.afa.auth.currentUser).sendEmailVerification();
   }
 
-  registrarUsuario(usuario: string, clave: string, nombre: string, numero:string, rol:string) {
+  registrarUsuario(usuario: string, clave: string, nombre: string, numero:string, roles:string) {
     return this.afa.auth.createUserWithEmailAndPassword(usuario, clave).then( res =>{
       //this.enviarVerificacionEmail();
       const uid = res.user.uid;
@@ -119,7 +119,7 @@ export class LoginService {
          numero: numero,
          nombre: nombre,
          estado: "verdadero",
-         rol: 'dueño',
+         roles: 'dueño',
          descripcion: "",
          socialF:"",
          socialG:""
@@ -159,7 +159,7 @@ export class LoginService {
           numero: data.numero,
           email: usuario.email,
           //estado: usuario.estado,
-          rol: usuario.rol,
+          roles: usuario.roles,
           descripcion: data.descripcion,
           socialF: data.socialF,
           socialG: data.socialG
@@ -172,7 +172,7 @@ export class LoginService {
           numero: usuario.numero,
           nombre: usuario.nombre,
           estado: "verdadero",
-          rol: 'dueño',
+          roles: 'dueño',
           descripcion: "",
           socialF: "",
           socialG: ""
@@ -201,7 +201,7 @@ export class LoginService {
           numero: '',
           email: usuario.email,
           // estado: usuario.estado,
-          rol: 'dueño',
+          roles: 'dueño',
           descripcion: data.descripcion,
           socialF: data.socialF,
           socialG: data.socialG
@@ -214,7 +214,7 @@ export class LoginService {
           numero: '',
           email: usuario.email,
           estado: "verdadero",
-          rol: 'dueño',
+          roles: 'dueño',
           descripcion: "",
           socialF: "",
           socialG: ""

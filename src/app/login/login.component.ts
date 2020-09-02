@@ -158,8 +158,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   agregarUsuario(data: Usuario) {
     console.log('New usuario', data);
-    this.LoginService.registrarUsuario(data.email, data.clave, data.nombre, data.numero, data.rol).then(login =>{
-      //console.log(login);
+    this.LoginService.registrarUsuario(data.email, data.clave, data.nombre, data.numero, data.roles).then(login =>{
+      console.log(login);
     }).catch(err =>{
       console.log(err);
       
@@ -266,7 +266,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   recuperarRol(){
     this.usuario$ = this.LoginService.recuperarUsuarios();
 
-    console.log("que es esto", this.usuario$);
+    console.log("que es estoooo", this.usuario$);
 
     this.usuario$.subscribe(data =>{
       for(let rol of data){
@@ -274,10 +274,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(rol.email);
         if(rol.email === this.usuario){
           console.log("este usuario", rol.email);
-          console.log("rol???", rol.rol);
+          console.log("rol???", rol.roles);
         }else{
-          console.log("no es");
-          
+          console.log("no es");       
         }
         break;
       }
@@ -285,11 +284,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onLoginRedirect(){
-    console.log('onLoginRedirect');
+    console.log('onLoginRedirect', this.onLoginRedirect);
     const rol = localStorage.getItem('rol');
-    if(rol==='dueño'){
-      this.route.navigate(['dueño/dashboard']);
-    }else if(rol==='admin'){
+    console.log("que rol viene aqui??", rol);
+    
+    if(rol ==='dueño'){
+      this.route.navigate(['dueño/perfil']);
+    }else if(rol ==='admin'){
       this.route.navigate(['admin/perfil']);
     }
 
@@ -299,21 +300,31 @@ export class LoginComponent implements OnInit, OnDestroy {
   getTipoUser(){
     let long=0;
     this.LoginService.listar().subscribe(x =>{
-      console.log("ssss", x);
+      console.log("sssassdss", x);
       x.forEach(element => {
         long++;
+        console.log("long", long);
+        console.log("1", element['email']);
+          console.log("2", this.usuario);
+        
         if(element['email'] == this.usuario){
-          console.log(element['rol']);  
-          localStorage.setItem('rol', element['rol']);
+          console.log("1", element['email']);
+          console.log("2", this.usuario);
+          
+          console.log("que rol es??", element['roles']);  
+          localStorage.setItem('rol', element['roles']);
+          console.log("que rol asigna??", localStorage.setItem('rol', element['roles']));
+          
           this.onLoginRedirect();
         }
 
       });
-      if(x.length==long){
-        let msg='No tiene Acceso al sistema';
-        console.log("no tiene acceso");
-            
-      }
+      console.log("length??", x.length);
+      
+      // if(x.length==long){
+      //   let msg='No tiene Acceso al sistema';
+      //   console.log("no tiene acceso");     
+      // }
     })
   }
 
