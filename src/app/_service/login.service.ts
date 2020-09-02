@@ -198,10 +198,10 @@ export class LoginService {
         const datos: Usuario = {
           uid: usuario.uid,
           nombre: usuario.displayName,
-          numero: usuario.phoneNumber,
+          numero: '',
           email: usuario.email,
           // estado: usuario.estado,
-          rol: data.rol,
+          rol: 'dueño',
           descripcion: data.descripcion,
           socialF: data.socialF,
           socialG: data.socialG
@@ -210,9 +210,9 @@ export class LoginService {
       } else {
         const datos: Usuario = {
           uid: usuario.uid,
-          email: usuario.email,
-          numero: usuario.phoneNumber,
           nombre: usuario.displayName,
+          numero: '',
+          email: usuario.email,
           estado: "verdadero",
           rol: 'dueño',
           descripcion: "",

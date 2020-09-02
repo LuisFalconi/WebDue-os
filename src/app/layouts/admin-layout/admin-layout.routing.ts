@@ -29,7 +29,7 @@ import { MapaComponent } from '../../pages/mapa/mapa.component';
 export const AdminLayoutRoutes: Routes = [
 
     {
-        path: 'dueño', canActivate:[RolGuardGuard],  data:{role:'dueño'},
+        path: 'dueño',canActivate:[RolGuardGuard], data:{role:'dueño'},
         children: [ 
          //  { path: 'dashboard',                component: DashboardComponent},
             {path: 'restaurante', component: PerfilComponent},
@@ -45,7 +45,7 @@ export const AdminLayoutRoutes: Routes = [
             { path: '**',           redirectTo: 'perfil'}, 
         ]
 },
-
+// canActivate:[RolGuardGuard]
 {
     path: 'admin', canActivate:[RolGuardGuard], data:{role:'admin'},
     children: [ 
@@ -56,7 +56,7 @@ export const AdminLayoutRoutes: Routes = [
        {path: 'verificacionDoc',              component: ValidacionDocumentoComponent},
        { path: 'verificacionE',      component: VerficacionEmailComponent},
 
-       { path: '**',           redirectTo: 'perfil'}, 
+    //    { path: '**',           redirectTo: 'perfil'}, 
 
     ]
 },   

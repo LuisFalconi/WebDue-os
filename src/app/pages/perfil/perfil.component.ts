@@ -118,11 +118,7 @@ export class PerfilComponent implements OnInit {
 
   mapa(){
     
-    const container = document.getElementById('map')
-    alert(container)
-  
-    if(container) {
-        // code to render map here...
+       // code to render map here...
         this.map = L.map('map', {
           center: [ -0.2104022, -78.4910514 ],
           zoom: 16,
@@ -137,10 +133,6 @@ export class PerfilComponent implements OnInit {
 
     tiles.addTo(this.map);
     this.verCoordenadas();
-    }else{
-      alert("nulo")
-    }
-
   }
 
     marcador(lat : number, lng : number){

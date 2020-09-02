@@ -70,9 +70,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.rol=localStorage.getItem('rol');
+
+    console.log("y esto ??????????", this.rol);
     if(this.rol === 'dueño'){
         console.log("dueño");
-    }else{
+    }else if(this.rol === 'admin'){
       console.log("admin");
     }
 

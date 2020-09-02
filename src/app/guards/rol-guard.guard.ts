@@ -9,18 +9,22 @@ export class RolGuardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean  {
+      
       const rol = localStorage.getItem('rol');
-      console.log('Usuario rol: '+ rol)
+      // const rol2 = localStorage.getItem('rol');
+
+      // Existe un error al ingresar con un rol admin y despues con un rol dueño   (NOTA: Comparar el rol desde la propia base de datos)
+      console.log('Usuario rol: ' +  rol);
       console.log("que es esto", next.data.role);
       
       if (rol === next.data.role){
-        console.log('entro');
+        console.log('entro'); 
         return true;
-      }else{
-        if(rol === 'dueño'){
+      }else if(rol){
+        if(rol.toString() === 'dueño'){
           console.log('dueño');
         }
-        if(rol === 'admin'){
+        if(rol.toString() === 'admin'){
           console.log('admin');
         }
       }
