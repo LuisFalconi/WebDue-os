@@ -16,6 +16,9 @@ export class Perfil{
     latitud ?: number;
     longitud?: number;
     estado?: string;
+    aux?: number;
+    calificacion?: number;
+    promedio?: number;
     // auxialiar: 
     // suma :
 }

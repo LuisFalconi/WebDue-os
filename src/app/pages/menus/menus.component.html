@@ -1,35 +1,53 @@
 <router-outlet></router-outlet>
+
 <div style="margin: 45px; padding: 10px;">
   <mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let r of restaurante" hideToggle>
+    <mat-expansion-panel
+      *ngFor="let r of restaurante"
+      hideToggle="hideToggle"
+    >
       <mat-expansion-panel-header *ngIf="r.resVerificado && r.resVerificado.toString() === 'Aprobado'">
         <mat-panel-title>{{r.nombreRestaurante}}</mat-panel-title>
+
         <mat-panel-description>
-            {{r.tipoRestaurante}}
-            <mat-icon>menu_book</mat-icon>
+          {{r.tipoRestaurante}}
+
+          <mat-icon>menu_book</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-        <div *ngFor="let m of menu">
-            <div *ngIf="m.userUID == r.userUID" >
-              <h3>Desayuno</h3>
-                <mat-list-item> {{m.platoDesayuno}}</mat-list-item>
-                <mat-list-item> {{m.detalleDesayuno}}</mat-list-item>
-                <mat-list-item>{{m.precioDesayuno}} &nbsp; $</mat-list-item>
-              <h3>Almuerzo</h3>
-                <mat-list-item> {{m.entradaAlmuerzo}}</mat-list-item>
-                <mat-list-item>{{m.segundoAlmuerzo}}</mat-list-item>
-                <mat-list-item> {{m.jugoAlmuerzo}}</mat-list-item>
-                <mat-list-item> {{m.precioAlmuerzo}} &nbsp; $ </mat-list-item>
-            </div>
+
+      <div *ngFor="let m of menu">
+        <div *ngIf="m.userUID == r.userUID">
+          <h3>Desayuno</h3>
+
+          <mat-list-item>{{m.platoDesayuno}}</mat-list-item>
+
+          <mat-list-item>{{m.detalleDesayuno}}</mat-list-item>
+
+          <mat-list-item>{{m.precioDesayuno}} &nbsp; $</mat-list-item>
+
+          <h3>Almuerzo</h3>
+
+          <mat-list-item>{{m.entradaAlmuerzo}}</mat-list-item>
+
+          <mat-list-item>{{m.segundoAlmuerzo}}</mat-list-item>
+
+          <mat-list-item>{{m.jugoAlmuerzo}}</mat-list-item>
+
+          <mat-list-item>{{m.precioAlmuerzo}} &nbsp; $</mat-list-item>
         </div>
-      </mat-expansion-panel>
-    <mat-divider></mat-divider>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
+      </div>
     </mat-expansion-panel>
+
+    <mat-divider></mat-divider>
+
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    ></mat-expansion-panel>
   </mat-accordion>
-<!--      
-      <mat-accordion class="example-headers-align">
+
+  <!-- <mat-accordion class="example-headers-align">
         <mat-expansion-panel *ngFor="let u of usuario" hideToggle>
           <mat-expansion-panel-header *ngIf="u.roles && u.roles.toString() === 'dueño'">
             <mat-panel-title>{{u.roles}}</mat-panel-title>
@@ -58,12 +76,9 @@
                              (closed)="panelOpenState = false">
         </mat-expansion-panel>
       </mat-accordion> -->
- 
 </div>
 
-
-
- <!-- <p>Desayuno del Día</p>
+<!-- <p>Desayuno del Día</p>
       <mat-table [dataSource]= "dataSource" matSort >
         <div>
             <ng-container matColumnDef="platoDes">
@@ -141,5 +156,4 @@
           <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
       </mat-table>
       
-      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
- -->
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10,25,100]"></mat-paginator> -->

@@ -229,7 +229,10 @@ export class PerfilService {
         latitud: "",
         longitud: "",
         estado: "verdadero",
-        estadoDocumento: "Sin Documento"
+        estadoDocumento: "Sin Documento",
+        aux: 1,
+        calificacion: 5,
+        promedio: 5
       });
     }
    }
