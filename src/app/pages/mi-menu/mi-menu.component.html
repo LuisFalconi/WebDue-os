@@ -189,110 +189,81 @@
                                                             <mat-tab label="Desayuno">
                                                                 <div class="card mb-3">
                                                                     <div class="row no-gutters">
-                                                                      <div class="col-md-4">
-                                                                      </div>
-                                                                      <div class="col-md-6">
+                                                                      <div class="col-md-12">
                                                                         <div class="card-body">
                                                                             <div class="row">
-                                                                                <div class="col-md-2"></div>
-                                                                                <div class="col-md-6">
+                                                                                <div class="col-md-4">
                                                                                     <button  mat-stroked-button (click)="nuevoDesayuno()">
                                                                                         <mat-icon>note_add</mat-icon>&nbsp; Agregar Desayuno
                                                                                     </button>&nbsp;&nbsp;&nbsp;
                                                                                 </div>
-                                                                                <div class="col-md-2"></div>
                                                                             </div>
-                                                                            <hr><br>
-                                                                            
-                                                                            <div class="row">
-                                                                                <div class="col-md-10">
+                                                                            <hr>
+                                                                        
                                                                                     <ng-template [ngIf]="validacionDes(valorD) === true">
-                                                                                        <div  *ngFor="let platoD of platoDes$ | async ">
-                                                                                            <div *ngIf="usuarioLog == platoD.userUID">
-                                                                                                <!-- <mat-card class="example-card" >
-                                                                                                    <mat-card-header>
-                                                                                                        <div mat-card-avatar class="example-header-image"></div>
-                                                                                                        <mat-card-title *ngIf="platoD.platoDesayuno">Desayuno</mat-card-title>
-                                                                                                        <mat-card-subtitle>Tipo Desayuno: {{platoD.platoDesayuno}}</mat-card-subtitle>
-                                                                                                        <mat-card-subtitle>Detalles / Ingredientes: {{platoD.detalleDesayuno}}</mat-card-subtitle>
-                                                                                                        <mat-card-subtitle>Precio : {{platoD.precioDesayuno}} $</mat-card-subtitle>
-                                        
-                                                                                                    </mat-card-header>
-                                                                                                    <div class="col-md-12" style="text-align: center;">
-                                                                                                        <p>Ingredientes</p>
-                                                                                                        <div *ngFor="let ing of platoD.ingredientes; let i=index">
-                                                                                                            <mat-label> - {{ing['ingrediente']}}</mat-label>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                    
-                                                                                                        <mat-card-actions>
-                                                                                                            <button mat-button>
-                                                                                                                <app-editar-desayuno></app-editar-desayuno>
-                                                                                                            </button>
-                                                                                                        </mat-card-actions>
-                                                                                                </mat-card> -->
-                                                                                                 <div class="col-md-1"></div>   
-                                                                                                <div>
-                                                                                                    <div class="card card-profile">
-                                                                                                        <div class="card-avatar">
-                                                                                                          <a>
-                                                                                                            <img class="img" src="../../../assets/img/desayuno.jpg"/>
-                                                                                                          </a>
-                                                                                                        </div>
-                                                                                                        <div class="card-body">
-                                                                                                          <h4 class="card-category">Desayuno del día</h4><hr>
-                                                                                                          <mat-icon>fastfood</mat-icon>
-                                                                                                            &nbsp;&nbsp; Tipo  &nbsp;&nbsp;
-                                                                                                            <mat-icon>fastfood</mat-icon><br>
-                                                                                                          <h4 class="card-title">{{platoD.platoDesayuno}}</h4>
-                                                                                                          <h4 class="card-title">
-                                                                                                            <mat-icon>local_dining</mat-icon>
-                                                                                                            &nbsp;&nbsp; Detalle Desayuno &nbsp;&nbsp;
-                                                                                                            <mat-icon>local_dining</mat-icon><br>
-                                                                                                            {{platoD.detalleDesayuno}}
-                                                                                                          </h4>
-                                                                                                          <h4 class="card-title">
-                                                                                                            <mat-icon>attach_money</mat-icon>
-                                                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Precio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                            <mat-icon>attach_money</mat-icon><br>
-                                                                                                            {{platoD.precioDesayuno}} &nbsp;$
-                                                                                                          </h4>
-
-                                                                                                
-                                                                                                          <h4 class="card-title">
-                                                                                                            <mat-icon>menu_book</mat-icon>
-                                                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ingredientes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                            <mat-icon>menu_book</mat-icon><br>
-                                                                                                            <div class="col-md-12" style="text-align: center;">
-                                                                                                                <div *ngFor="let ing of platoD.ingredientes; let i=index">
-                                                                                                                    <mat-label> - {{ing['ingrediente']}}</mat-label>
-                                                                                                                </div>
+                                                                                        <div class="row">
+                                                                                            <div  *ngFor="let platoD of platoDes$ | async ">
+                                                                                                <div class="col-md-12 mx-auto" *ngIf="usuarioLog == platoD.userUID">
+                                                                                                        <div class="card card-profile">
+                                                                                                            <div class="card-avatar">
+                                                                                                              <a>
+                                                                                                                <img class="img" src="../../../assets/img/desayuno.jpg"/>
+                                                                                                              </a>
                                                                                                             </div>
-                                                                                                          </h4>
-                                                                                                          <hr>
-                                                                                                          <mat-card-actions>
-                                                                                                            <button mat-button>
-                                                                                                                <app-editar-desayuno></app-editar-desayuno>
-
-                                                                                                            </button>
-                                                                                                            
-                                                                                                        </mat-card-actions>
-                                                                                                        </div>
-                                                                                                      </div>
+                                                                                                            <div class="card-body">
+                                                                                                              <h4 class="card-category">Desayuno del día</h4><hr>
+                                                                                                              <mat-icon>fastfood</mat-icon>
+                                                                                                                &nbsp;&nbsp; Tipo  &nbsp;&nbsp;
+                                                                                                                <mat-icon>fastfood</mat-icon><br>
+                                                                                                              <h4 class="card-title">{{platoD.platoDesayuno}}</h4>
+                                                                                                              <h4 class="card-title">
+                                                                                                                <mat-icon>local_dining</mat-icon>
+                                                                                                                &nbsp;&nbsp; Detalle Desayuno &nbsp;&nbsp;
+                                                                                                                <mat-icon>local_dining</mat-icon><br>
+                                                                                                                {{platoD.detalleDesayuno}}
+                                                                                                              </h4>
+                                                                                                              <h4 class="card-title">
+                                                                                                                <mat-icon>attach_money</mat-icon>
+                                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Precio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                <mat-icon>attach_money</mat-icon><br>
+                                                                                                                {{platoD.precioDesayuno}} &nbsp;$
+                                                                                                              </h4>
+    
+                                                                                                    
+                                                                                                              <h4 class="card-title">
+                                                                                                                <mat-icon>menu_book</mat-icon>
+                                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ingredientes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                <mat-icon>menu_book</mat-icon><br>
+                                                                                                                <div class="col-md-12" style="text-align: center;">
+                                                                                                                    <div *ngFor="let ing of platoD.ingredientes; let i=index">
+                                                                                                                        <mat-label> - {{ing['ingrediente']}}</mat-label>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                              </h4>
+                                                                                                              <hr>
+                                                                                                              <mat-card-actions>
+                                                                                                                <button mat-button>
+                                                                                                                    <app-editar-desayuno></app-editar-desayuno>
+    
+                                                                                                                </button>
+                                                                                                                
+                                                                                                            </mat-card-actions>
+                                                                                                            </div>
+                                                                                                          </div>
+                                                                                                   
+    
+    
                                                                                                 </div>
-                                                                                                <div class="col-md-4"></div>   
-
-
-                                                                                            </div>
-                                                                                            
+                                                                                                
+                                                                                            </div> 
                                                                                         </div>
+                                                                                        
                                                                                     </ng-template>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
                                                                       </div>
+                                                                     
                                                                     </div>
-                                                                </div>*
+                                                                </div>
                                                             </mat-tab>
                                                             <mat-tab label="Almuerzo">
                                                                 <div class="card mb-3">
@@ -444,23 +415,7 @@
                                                                     </div>
                                                                 </div>
                                                             </mat-tab>
-                                                            <!-- <mat-tab label="Plato Especial">
-                                                                <div class="card mb-3">
-                                                                    <div class="row no-gutters">
-                                                                      <div class="col-md-2">
-                                                                      </div>
-                                                                      <div class="col-md-8">
-                                                                        <div class="card-body">
-                                                                            
-                                                                            <app-platos-especiales></app-platos-especiales>
-                                                                    
-                                                                        </div>
-                                                                        <div class="col-md-2">
-                                                                        </div>
-                                                                      </div>
-                                                                    </div>
-                                                                </div>
-                                                            </mat-tab> -->
+
                                                           </mat-tab-group>
                                                        </div>
                                                 </div>
