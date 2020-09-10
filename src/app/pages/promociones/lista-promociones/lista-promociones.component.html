@@ -233,18 +233,11 @@
                                 <h4 class="card-title ">Promociones</h4>
                               </div>
                               <mat-tab-group mat-align-tabs="center">
-                                <mat-tab label="Promociones Habilitadas">
-                                  <div class="row" style="text-align: center;">
-                                    <div class="col-md-4">                                   
-                                    </div>
-                                    <div class="col-md-4">   
-                                      <div class="card-body">
-                           
+                                <mat-tab label="Promociones Habilitadas"><br>
                                         <div class="row" *ngIf="promociones$ | async as promocion">
                                           <div *ngFor="let promo of promocion; let i = index">
-                                            <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado == 'verdadero'">
-                                              <a>
-                                                <div class="card" class="img-contenedor">
+                                            <div class="col-md-8 mx-auto" *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado == 'verdadero'">
+                                                <div>
                                                   <img class="card-img-top text-center" [src]="promo.fotosPromocion" alt="Card image cap">
                                                   <div class="card-body cardTitle">
                                                     <div style="text-align: center;">
@@ -253,32 +246,22 @@
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </a>
                                             </div>
+                                            
                                             <hr>
                                           </div>
               
                                         </div>
                                         <div style="text-align: center;">
                                         <app-promociones></app-promociones>
-      
-                                        </div>
-                            
-                                      </div>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                  </div>
+                                        </div>                            
                                 </mat-tab>
                                 <mat-tab label="Promoción Deshabilitada">
+                                  <br>
                                   <div class="row" style="text-align: center;">
-                                    <div class="col-md-4">                                   
-                                    </div>
-                                    <div class="col-md-4">   
-                                      <div class="card-body">
-                           
                                         <div class="row" *ngIf="promociones$ | async as promocion">
                                           <div *ngFor="let promo of promocion; let i = index">
-                                            <div *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado =='falso'">
+                                            <div class="col-md-8 mx-auto my-1 " *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado =='falso'">
                                               <a>
                                                 <div class="card" class="img-contenedor">
                                                   <img class="card-img-top text-center" [src]="promo.fotosPromocion" alt="Card image cap">
@@ -296,9 +279,7 @@
                                           </div>
                             
                                         </div>                        
-                                      </div>
-                                    </div>
-                                    <div class="col-md-4"></div>
+                                     
                                   </div>
                                 </mat-tab>
                               </mat-tab-group>

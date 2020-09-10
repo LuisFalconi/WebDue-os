@@ -97,13 +97,12 @@ export class ListaRestaurantesComponent implements OnInit, AfterViewInit {
             }
 
           }
-          this.dataSource2.data = this.resdesHabilitados	;
+          this.dataSource2.data = this.resdesHabilitados;
           this.dataSource2.paginator = this.paginator;      
         },
         error=>{
           console.log(error);
         }
-
       );
   }
 
